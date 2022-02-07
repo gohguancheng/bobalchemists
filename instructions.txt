@@ -10,7 +10,7 @@
 1. Access App with Create-React-App
 a. Use a new terminal window to load App on Browser
 - cd into client folder -> make sure you're in '.........../root/client' (i.e. the dir where your package.json resides)
-- npx install (only once during first set up to ensure modules are synced)
+- npx install (only once during first set up to ensure modules are synced, add node_modules to gitignore after for faster git pushes)
 - npm start (while in ....../root/client)
 
 --------------------------------------------------------
