@@ -1,9 +1,17 @@
+*** GITHUB SET UP ***
+1. Do not fork repo - else your updates may be mixed into your own repo, clone directly from the repo under guanch92
+2. Clone the repo to your local repo via terminal
+3. create a branch of whatever feature you wish to work on (see below COLLABORATION 1)
+4. pull from devt branch to get latest version of the files (see below COLLABORATION 2c)
+5. work in your specific feature branch, push only to feature branch via terminal, until ready to merge into devt branch (see below COLLABORATION 3)
+6. do merging edits via pull requests on github browser (see below COLLABORATION 4)
+
 *** START FRONT END DEVELOPMENT ***
 1. Access App with Create-React-App
-a. Use terminal to load App on Browser
-- cd repo -> make sure you're in '.........../root/client'
-- npx install (only once during first set up)
-- npm start 
+a. Use a new terminal window to load App on Browser
+- cd into client folder -> make sure you're in '.........../root/client' (i.e. the dir where your package.json resides)
+- npx install (only once during first set up to ensure modules are synced)
+- npm start (while in ....../root/client)
 
 --------------------------------------------------------
 
