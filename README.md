@@ -4,13 +4,13 @@
 
 ### 3rd Project created during General Assembly Software Engineering Immersive Bootcamp
 
-###### *MERN Stack:* <br />
+#### *MERN Stack:* <br />
 - *MongoDB (database)* <br />
 - *ExpressJS(NodeJS server-side framework)* <br />
 - *ReactJS (front end JS library)* <br />
 - *NodeJS (run-time server environment -used to run express)* <br /> 
-###### *Frontend Build Tool: Create-React-App* <br /> 
-###### *Styling Framework: Tailwind CSS*
+#### *Frontend Build Tool: Create-React-App* <br /> 
+#### *Styling Framework: Tailwind CSS*
 
 ## The App
 
