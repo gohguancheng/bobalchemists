@@ -6,9 +6,9 @@
 
 ###### *MERN Stack:* <br />
 - *MongoDB (database)* <br />
-- *ExpressJS(NodeJS web framework)* <br />
+- *ExpressJS(NodeJS server-side framework)* <br />
 - *ReactJS (front end JS library)* <br />
-- *NodeJS (JS run-time environment -used to run express)* <br /> 
+- *NodeJS (run-time server environment -used to run express)* <br /> 
 ###### *Frontend Build Tool: Create-React-App* <br /> 
 ###### *Styling Framework: Tailwind CSS*
 
