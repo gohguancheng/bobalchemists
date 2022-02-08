@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-    outline: 0.01vmin solid black;
+    outline: 0.01vmin dotted grey;
 }
 
 body {
