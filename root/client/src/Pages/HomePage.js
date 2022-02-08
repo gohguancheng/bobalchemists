@@ -1,9 +1,10 @@
 import React from 'react';
-import { TestHeader } from '../components/HomePage/TestHeader';
+import ContentContainer from '../components/HomePage/ContentContainer';
 
 const HomePage = () => {
-  return <div>
-      <TestHeader />
+  return <div className='w-screen'>
+      <ContentContainer />
   </div>;
 };
-    export default HomePage;
+
+export default HomePage;
