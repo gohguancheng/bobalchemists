@@ -6,6 +6,8 @@
 5. work in your specific feature branch, push only to feature branch via terminal, until ready to merge into devt branch (see below COLLABORATION 3)
 6. do merging edits via pull requests on github browser (see below COLLABORATION 4)
 
+--------------------------------------------------------
+
 *** START FRONT END DEVELOPMENT ***
 1. Access App with Create-React-App
 a. Use a new terminal window to load App on Browser
@@ -51,3 +53,5 @@ a. Merge only on github, not on terminal
     -> Create pull request & edit carefully
     -> Merge pull request 
     -> Confirm merge
+
+--------------------------------------------------------
