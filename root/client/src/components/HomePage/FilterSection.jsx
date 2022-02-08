@@ -8,7 +8,7 @@ const FilterSection = ({ subsection }) => {
   const ingredientsDisplay = ingredientsArray.map(e=><ToggleButton label={e} />)
 
   return (<div className='my-2'>
-    <div className='my-2 text-xl font-bold'>{nameOfSubsection}</div>
+    <div className='my-1 text-lg font-bold'>{nameOfSubsection}</div>
     <div>{ingredientsDisplay}</div>
   </div>)
 };
