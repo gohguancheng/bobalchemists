@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Card = ({ info }) => {
   const ingredients = info.ingredients.map(e=> {return <span key={e}>{e}</span>})
   return (
