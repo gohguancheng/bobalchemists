@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import Button from "../components/Reusables/Button";
 
 const ShowPage = () => {
@@ -24,8 +24,8 @@ const ShowPage = () => {
             <p>Toppings:</p>
           </div>
           <div>
-            <p>👍 Likes</p>
-            <p>Creator:</p>
+            <p className="w-1/3 inline-block">👍 Likes</p>
+            <p className="w-1/3 inline-block">Creator:</p>
             <Button color="primary">Edit</Button>
             <Button color="danger">Delete</Button>
           </div>
