@@ -1,75 +1,75 @@
 import React from "react";
 
-const callouts = [
-  {
-    name: "Desk and Office",
-    description: "Work from home accessories",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg",
-    imageAlt:
-      "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
-    href: "#",
-  },
-  {
-    name: "Self-Improvement",
-    description: "Journals and note-taking",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg",
-    imageAlt:
-      "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
-    href: "#",
-  },
-  {
-    name: "Travel",
-    description: "Daily commute essentials",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg",
-    imageAlt: "Collection of four insulated travel bottles on wooden shelf.",
-    href: "#",
-  },
-];
+// Got Card component from https://kimia-ui.vercel.app/components/card
+
+const style = {
+  card: `relative flex flex-col border-2 border-gray-200 rounded-lg`,
+  cardBody: `block flex-grow flex-shrink p-5`,
+  cardTitle: `font-medium text-gray-700 mb-3`,
+  cardText: `text-gray-500`,
+};
+
+const inlineStyle = {
+  boxShadow: "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
+};
+
+function Card({ children }) {
+  return (
+    <div className={style.card} style={inlineStyle}>
+      {children}
+    </div>
+  );
+}
+
+function CardBody({ children }) {
+  return <div className={style.cardBody}>{children}</div>;
+}
+
+function CardTitle({ children }) {
+  return <div className={style.cardTitle}>{children}</div>;
+}
 
 const AvailableIngredients = () => {
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
-      {/* <h1>Available ingredients</h1>
-      <div>
-        <img
-          alt="ingredient"
-          src="https://img.lovepik.com/element/40108/6382.png_300.png"
-        />
-        <p>Milk tea</p>
-      </div> */}
-      <div className="bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
-            <h2 className="text-2xl font-extrabold text-gray-900">
-              Collections
-            </h2>
-
-            <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
-              {callouts.map((callout) => (
-                <div key={callout.name} className="group relative w-full">
-                  <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                    <img
-                      src={callout.imageSrc}
-                      alt={callout.imageAlt}
-                      className="w-full h-full object-center object-cover"
-                    />
-                  </div>
-                  <h3 className="mt-6 text-sm text-gray-500">
-                    <a href={callout.href}>
-                      <span className="absolute inset-0" />
-                      {callout.name}
-                    </a>
-                  </h3>
-                  <p className="text-base font-semibold text-gray-900">
-                    {callout.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+      <h1 className="text-2xl">Available ingredients</h1>
+      <h1 className="font-bold">Base</h1>
+      <div className="flex flex-wrap">
+        <div className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3">
+          <Card>
+            <img
+              className="max-w-full h-auto md:h-48"
+              src="https://drive.google.com/uc?export=view&id=1KULwHaygOZFVPkRnzVkYj4zItod4AZhn"
+              alt="ingredient"
+            />
+            <CardBody>
+              <CardTitle className="text-lg">Milk Tea</CardTitle>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3">
+          <Card>
+            <img
+              className="max-w-full h-auto md:h-48"
+              src=""
+              alt="ingredient"
+            />
+            <CardBody>
+              <CardTitle className="text-lg">Ovaltine</CardTitle>
+            </CardBody>
+          </Card>
+        </div>
+        <div className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3">
+          <Card>
+            <img
+              className="max-w-full h-auto md:h-48"
+              src=""
+              alt="ingredient"
+            />
+            <CardBody>
+              <CardTitle className="text-lg">Chocolate milk</CardTitle>
+            </CardBody>
+          </Card>
         </div>
       </div>
     </div>

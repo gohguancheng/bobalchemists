@@ -1,5 +1,6 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState, useEffect } from "react";
 import Button from "../Reusables/Button";
+import AvailableIngredients from "./AvailableIngredients";
 
 // https://kimia-ui.vercel.app/components/field
 
@@ -138,15 +139,27 @@ const ErrorIcon = () => (
   </svg>
 );
 
+const handleShow = (type) => {
+  // filter allIngredients
+  // display them as cards
+};
+
 const IngredientSelection = () => {
+  //   const [allIngredients, setAllIngredients] = useState([]);
+
+  //   useEffect(() => {}, []);
+
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
+      <h1 className="text-2xl">Create your Bubble Tea</h1>
       <Field label="Name" name="name" placeholder="name" dot />
       <Field label="Description" name="description" type="textarea" />
       <h1>Selected ingredients</h1>
       <div className="container mx-auto">
         <p>Base:</p>
-        <Button color="success">+</Button>
+        <Button color="success" onClick={(base) => handleShow(base)}>
+          +
+        </Button>
         <p>Flavouring:</p>
         <Button color="success">+</Button>
         <p>Toppings:</p>
