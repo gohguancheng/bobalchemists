@@ -11,12 +11,33 @@ const flavour_seed = require("../models/Ingredients/flavour_seed");
 const Toppings = require("../models/Ingredients/toppings");
 const toppings_seed = require("../models/Ingredients/toppings_seed");
 
-
 Router.get("/base/seed", async(req, res) => {
     try{
         const newBase = await Base.create(base_seed);
-        res.redirect("/base/");
+        res.redirect("/");
     }catch(error){
         console.log("at /base/seed", error);
     }
-})
+});
+
+Router.get("/flavours/seed", async(req, res) => {
+    try{
+        const newFlavours = await Flavour.create(flavour_seed);
+        res.redirect("/");
+    }catch(error){
+        console.log("at /flavours/seed", error);
+    }
+});
+
+Router.get("/toppings/seed", async(req, res) => {
+    try{
+        const newFlavours = await Toppings.create(toppings_seed);
+        res.redirect("/");
+    }catch(error){
+        console.log("at /toppings/seed", error);
+    }
+});
+
+
+
+module.exports = Router;
