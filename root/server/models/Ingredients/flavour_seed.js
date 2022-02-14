@@ -24,3 +24,5 @@ const flavour_seed = [
         img: "",
     }
 ]
+
+module.exports = flavour_seed;
