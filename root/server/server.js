@@ -20,6 +20,8 @@ const session = require("express-session");
 const registrationController = require('./controller/User.controller.js');
 const sessionController = require('./controller/Sessions.controller.js');
 
+const ingredientsController = require('./controller/Ingredients.controller');
+
 //connect to mongoDB
 mongoose.connect(mongoURI, {useNewUrlParser: true,});
 mongoose.connection.once("open", () => {
@@ -44,12 +46,14 @@ app.use(session({
 app.use('/api/registration/', registrationController);
 app.use('/api/sessions/', sessionController);
 
+app.use('/api/ingredients/', ingredientsController);
+
 
 //for build
-app.get("/*", (req, res) => {
+/* app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build", "index.html"));
 });
-
+ */
 app.listen(PORT, () => {
   console.log("listening on port: " + PORT);
 });
