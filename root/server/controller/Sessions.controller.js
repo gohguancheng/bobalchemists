@@ -5,6 +5,19 @@ const sessions = express.Router();
 const User = require("../models/userData.js");
 
 // ROUTES (api/sessions/)
+// get 'api/sessions/authcheck'
+sessions.get("/authcheck", async (req, res) => {
+  if(!req.session.currentUser) {
+    res.status(200).json({
+      isAuthenticated: false,
+    });
+  } else {
+    res.status(200).json({
+      isAuthenticated: false,
+    });
+  }
+});
+
 // post 'api/sessions/login' index ---> checks login credentials
 sessions.post("/login", async (req, res) => {
   try {
@@ -13,7 +26,6 @@ sessions.post("/login", async (req, res) => {
     if (!foundUser) {
       res.status(200).json({
         message: "Sorry, no user found",
-        isAuthenticated: false,
         status: "Login Failure",
       });
     } else {
@@ -23,6 +35,7 @@ sessions.post("/login", async (req, res) => {
           message: "Login successful",
           isAuthenticated: true,
           status: "Login Success",
+          session: req.session,
         });
       } else {
         res.status(200).json({
@@ -40,12 +53,15 @@ sessions.post("/login", async (req, res) => {
 // get 'api/sessions/logout'
 sessions.get("/logout", async (req, res) => {
   req.session.destroy(() => {
-    res.status(200).json({
-      message: "Logout successful",
-      isAuthenticated: false,
-      status: "Logout Success",
-    });
+    res.status(200).json();
   });
 });
 
 module.exports = sessions;
+
+// {
+//   message: "Logout successful",
+//   isAuthenticated: false,
+//   status: "Logout Success",
+//   session: req.session,
+// }
