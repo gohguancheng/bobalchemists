@@ -7,7 +7,8 @@ const teaCardInfo_Schema = new mongoose.Schema({
     base: [{type: Schema.Types.ObjectId, ref: 'Bases'}],
     flavour:[{type: Schema.Types.ObjectId, ref: 'Flavours'}],
     toppings:[{type: Schema.Types.ObjectId, ref: 'Toppings'}],
-    dateCreated: {type: Date, min: '2000-01-01'},
+    likes: {type: Number, min: 0},
+    dateCreated: {type: Date, min: '2000-01-01', default: Date.now()},
 });
 
 module.exports = mongoose.model("TeaCards", teaCardInfo_Schema);
