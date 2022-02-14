@@ -10,7 +10,7 @@ const db = mongoose.connection;
 
 //.env import and configuration
 require("dotenv").config({path: "../.env"});
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGODB_URI;
 
 //import express-session

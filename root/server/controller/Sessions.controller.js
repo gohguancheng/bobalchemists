@@ -2,30 +2,14 @@
 const bcrypt = require("bcrypt");
 const express = require("express");
 const sessions = express.Router();
-const User = require('../models/userData.js');
+const User = require("../models/userData.js");
 
 // ROUTES (api/sessions/)
-// get 'api/sessions/login' index
-sessions.get("/login", async (req, res) => {
-    res.send("WELCOME TO LOGIN!")
-  try {
-    const foundUser = await User.findOne({ username: req.body.username });
-    if (!foundUser) {
-      res.status(200).json({
-        message: "Sorry, no user found",
-        isAuthenticated: false,
-        status: "Login Failure",
-      });
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
 // post 'api/sessions/login' index ---> checks login credentials
 sessions.post("/login", async (req, res) => {
   try {
     const foundUser = await User.findOne({ username: req.body.username });
+    // console.log(req.body.username);
     if (!foundUser) {
       res.status(200).json({
         message: "Sorry, no user found",

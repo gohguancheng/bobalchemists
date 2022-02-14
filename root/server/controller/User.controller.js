@@ -23,7 +23,6 @@ router.post('/newUser/', async (req, res) => {
   } catch (error) {
   console.log(error);
   }
-  res.send();
 });
 
 module.exports = router;
