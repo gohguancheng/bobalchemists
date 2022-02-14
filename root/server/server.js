@@ -31,6 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //route middleware
+const userController = require('./controller/User.controller.js');
+app.use('/users/', userController);
 
 
 //for build
