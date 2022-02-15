@@ -50,6 +50,7 @@ const AvailableIngredients = (props) => {
                 <img
                   className="max-w-full h-auto md:h-48"
                   src={element.img}
+                  // src="https://i.imgur.com/cBqnwy8.png"
                   alt="ingredient"
                 />
                 <CardBody>
