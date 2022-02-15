@@ -16,9 +16,9 @@ const CreatePage = () => {
   useEffect(async () => {
     await axios
       .all([
-        axios.get("api/ingredients/base"),
-        axios.get("api/ingredients/flavours"),
-        axios.get("api/ingredients/toppings"),
+        axios.get("/api/ingredients/base"),
+        axios.get("/api/ingredients/flavours"),
+        axios.get("/api/ingredients/toppings"),
       ])
       .then((resArr) => {
         console.log("resArr", resArr);
@@ -36,13 +36,17 @@ const CreatePage = () => {
     category: category,
     chosenIngredients: chosenIngredients,
   };
+  console.log("CreatePage.js - allData", allData);
 
   return (
     <div className="flex">
       <CreatedImage />
       <div className="container w-3/4 h-screen flex">
-        <IngredientSelection allData={allData}/>
-        <AvailableIngredients />
+        <IngredientSelection allData={allData} setCategory={setCategory} />
+        <AvailableIngredients
+          allData={allData}
+          setChosenIngredients={setChosenIngredients}
+        />
       </div>
     </div>
   );

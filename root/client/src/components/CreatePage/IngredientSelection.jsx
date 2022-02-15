@@ -48,7 +48,7 @@ const IngredientSelection = (props) => {
           </div>
           <div className="container mx-auto">
             <label>Base:</label>
-            <PlusButton />
+            <PlusButton setCategory={props.setCategory} />
             <br />
             <label>Flavouring:</label>
             <PlusButton />
