@@ -1,3 +1,4 @@
+// this file is for testing stuff
 const mongoose = require("mongoose");
 const express = require("express");
 const Router = express.Router();
@@ -18,7 +19,7 @@ const PopulateTest = mongoose.model("Populate_test", populateSchema);
 const populate_seed = [
     {
         name: "a bunch of bases",
-        getChosenBases: ["620b29891d0ef89dbe4554ed", "620b2683d4912d8146ccc251"]
+        getChosenBases: ["620b29891d0ef89dbe4554f4", "620b2683d4912d8146ccc251"]
     }
 ]
 
@@ -38,7 +39,7 @@ Router.get("/", async(req, res )=>{
 
 Router.get("/populate", async(req, res)=>{
     try{
-        const populateBase = await PopulateTest.findOne().populate("getChosenBases");
+        const populateBase = await PopulateTest.findOne().populate("getChosenBases","name");
         console.log("populated", populateBase.getChosenBases);
         res.status(200).json({
             status:"ok",

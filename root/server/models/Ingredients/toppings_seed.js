@@ -43,7 +43,7 @@ const toppings_seed = [
         img: "https://i.imgur.com/3XfRy3P.png"
     },
     {
-        /* _id: mongoose.Types.ObjectId("620b50b59c2072e4dc9ba035"), */
+        _id: mongoose.Types.ObjectId("620b50b59c2072e4dc9ba035"),
         name: "Pudding",
         toppingsType: "Jelly",
         color: "#000000",

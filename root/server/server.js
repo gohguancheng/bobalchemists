@@ -21,6 +21,7 @@ const registrationController = require('./controller/User.controller.js');
 const sessionController = require('./controller/Sessions.controller.js');
 
 const ingredientsController = require('./controller/Ingredients.controller');
+const teaCardsInfoController = require('./controller/Cards.controller')
 
 //connect to mongoDB
 mongoose.connect(mongoURI, {useNewUrlParser: true,});
@@ -47,6 +48,7 @@ app.use('/api/registration/', registrationController);
 app.use('/api/sessions/', sessionController);
 
 app.use('/api/ingredients/', ingredientsController);
+app.use('/api/teacardsinfo/', teaCardsInfoController);
 
 //test
 const populateTestController = require("./models/populate_test");
