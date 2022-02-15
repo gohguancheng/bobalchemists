@@ -6,11 +6,10 @@ import axios from "axios";
 
 const CreatePage = () => {
   // Create states
-  const [allBases, setAllBases] = useState([]);
-  const [allFlavourings, setAllFlavourings] = useState([]);
-  const [allToppings, setAllToppings] = useState([]);
-  const [category, setCategory] = useState("");
+  const [ ingredientsList, setIngredientsList ] = useState({});
+  const [category, setCategory] = useState("Bases");
   const [chosenIngredients, setChosenIngredients] = useState({});
+  console.log("chosen: ", chosenIngredients);
 
   // Make API calls
   useEffect(async () => {
@@ -20,32 +19,26 @@ const CreatePage = () => {
         axios.get("/api/ingredients/flavours"),
         axios.get("/api/ingredients/toppings"),
       ])
-      .then((resArr) => {
-        console.log("resArr", resArr);
-        setAllBases(resArr[0]);
-        setAllFlavourings(resArr[1]);
-        setAllToppings(resArr[2]);
+      .then(([{ data: baseData },{ data: flavouringData },{ data: toppingsData }]) => {
+        const fetched = {
+          Bases: baseData.data,
+          Flavourings: flavouringData.data,
+          Toppings: toppingsData.data
+        }
+        setIngredientsList({...ingredientsList, ...fetched});
       });
   }, []);
-
-  // Put all states in one object
-  const allData = {
-    allBases: allBases,
-    allFlavourings: allFlavourings,
-    allToppings: allToppings,
-    category: category,
-    chosenIngredients: chosenIngredients,
-  };
-  console.log("CreatePage.js - allData", allData);
 
   return (
     <div className="flex">
       <CreatedImage />
       <div className="container w-3/4 h-screen flex">
-        <IngredientSelection allData={allData} setCategory={setCategory} />
-        <AvailableIngredients
-          allData={allData}
+        <IngredientSelection category={category} setCategory={setCategory} chosenIngredients={chosenIngredients} />
+        <AvailableIngredients 
+          ingredientsList = {ingredientsList}
+          chosenIngredients={chosenIngredients}
           setChosenIngredients={setChosenIngredients}
+          category = {category}
         />
       </div>
     </div>
