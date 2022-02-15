@@ -139,9 +139,10 @@ const ErrorIcon = () => (
   </svg>
 );
 
-const handleShow = (type) => {
-  // filter allIngredients
-  // display them as cards
+const handleSubmit = (e) => {
+  console.log("form submitted");
+  console.log("e.target", e.target);
+  e.preventDefault();
 };
 
 const IngredientSelection = () => {
@@ -170,7 +171,7 @@ const IngredientSelection = () => {
         <h1 class="block w-full text-center text-grey-darkest mb-6">
           Create a Bubble Tea
         </h1>
-        <form class="mb-4" action="/" method="post">
+        <form class="mb-4" action="/" method="post" onSubmit={handleSubmit}>
           <div class="flex flex-col mb-4">
             <label
               class="mb-2 uppercase font-bold text-lg text-grey-darkest"
@@ -207,9 +208,7 @@ const IngredientSelection = () => {
           </button> */}
           <div className="container mx-auto">
             <label>Base:</label>
-            <Button color="success" onClick={(base) => handleShow(base)}>
-              +
-            </Button>
+            <Button color="success">+</Button>
             <br />
             <label>Flavouring:</label>
             <Button color="success">+</Button>
@@ -218,7 +217,7 @@ const IngredientSelection = () => {
             <Button color="success">+</Button>
             <br />
           </div>
-          <Button color="primary">Create Bubble Tea</Button>
+          <input type="submit" value="Create bubble tea" />
         </form>
       </div>
     </div>
