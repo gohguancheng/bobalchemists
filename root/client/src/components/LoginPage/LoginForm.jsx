@@ -8,8 +8,6 @@ const LoginForm = ({ setSession, setAccessSignUp }) => {
   const [loginResult, setLoginResult] = useState(null);
   const navigate = useNavigate();
 
-  console.log("loginResult: ", loginResult);
-
   async function loginUser(credentials) {
     return axios
       .post("/api/sessions/login", credentials, {

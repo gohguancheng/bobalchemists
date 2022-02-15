@@ -10,10 +10,12 @@ sessions.get("/authcheck", async (req, res) => {
   if(!req.session.currentUser) {
     res.status(200).json({
       isAuthenticated: false,
+      session: req.session
     });
   } else {
     res.status(200).json({
       isAuthenticated: false,
+      session: req.session
     });
   }
 });
@@ -22,7 +24,6 @@ sessions.get("/authcheck", async (req, res) => {
 sessions.post("/login", async (req, res) => {
   try {
     const foundUser = await User.findOne({ username: req.body.username });
-    // console.log(req.body.username);
     if (!foundUser) {
       res.status(200).json({
         message: "Sorry, no user found",
@@ -58,10 +59,3 @@ sessions.get("/logout", async (req, res) => {
 });
 
 module.exports = sessions;
-
-// {
-//   message: "Logout successful",
-//   isAuthenticated: false,
-//   status: "Logout Success",
-//   session: req.session,
-// }

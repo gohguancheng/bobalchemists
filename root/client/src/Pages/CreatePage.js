@@ -6,11 +6,11 @@ import axios from "axios";
 
 const CreatePage = () => {
   // Create states
-  const [ ingredientsList, setIngredientsList ] = useState({});
+  const [ingredientsList, setIngredientsList] = useState({});
   const [category, setCategory] = useState("Bases");
   const [chosenIngredients, setChosenIngredients] = useState({
-    Bases: {},
-    Flavourings: {},
+    Bases: null,
+    Flavourings: null,
     Toppings: [],
   });
   // console.log("list: ", ingredientsList);
@@ -23,26 +23,36 @@ const CreatePage = () => {
         axios.get("/api/ingredients/flavours"),
         axios.get("/api/ingredients/toppings"),
       ])
-      .then(([{ data: baseData },{ data: flavouringData },{ data: toppingsData }]) => {
-        const fetched = {
-          Bases: baseData.data,
-          Flavourings: flavouringData.data,
-          Toppings: toppingsData.data
+      .then(
+        ([
+          { data: baseData },
+          { data: flavouringData },
+          { data: toppingsData },
+        ]) => {
+          const fetched = {
+            Bases: baseData.data,
+            Flavourings: flavouringData.data,
+            Toppings: toppingsData.data,
+          };
+          setIngredientsList({ ...ingredientsList, ...fetched });
         }
-        setIngredientsList({...ingredientsList, ...fetched});
-      });
+      );
   }, []);
 
   return (
     <div className="flex">
       <CreatedImage />
       <div className="container w-3/4 h-screen flex">
-        <IngredientSelection category={category} setCategory={setCategory} chosenIngredients={chosenIngredients} />
-        <AvailableIngredients 
-          ingredientsList = {ingredientsList}
+        <IngredientSelection
+          category={category}
+          setCategory={setCategory}
+          chosenIngredients={chosenIngredients}
+        />
+        <AvailableIngredients
+          ingredientsList={ingredientsList}
           chosenIngredients={chosenIngredients}
           setChosenIngredients={setChosenIngredients}
-          category = {category}
+          category={category}
         />
       </div>
     </div>
