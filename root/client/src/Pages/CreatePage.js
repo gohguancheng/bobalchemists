@@ -40,7 +40,7 @@ const CreatePage = () => {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex bg-lighterpink font-normal">
       <CreatedImage />
       <div className="container w-3/4 h-screen flex">
         <IngredientSelection
