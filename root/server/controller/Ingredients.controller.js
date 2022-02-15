@@ -16,7 +16,7 @@ const toppings_seed = require("../models/Ingredients/toppings_seed");
 Router.get("/base/seed", async(req, res) => {
     try{
         await Bases.deleteMany({})
-        const newBase = await Base.create(base_seed);
+        const newBase = await Bases.create(base_seed);
         res.status(200).json({
             status:"ok",
             message:"base seeded",
@@ -102,7 +102,7 @@ Router.get("/toppings", async(req, res) => {
 // get "/api/ingredients/"
 Router.get("/", async(req, res) =>{
     try{
-        const allBase = await Base.find({});
+        const allBase = await Bases.find({});
         const allFlavours = await Flavours.find({});
         const allToppings = await Toppings.find({});
         
