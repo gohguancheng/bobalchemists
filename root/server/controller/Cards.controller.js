@@ -41,4 +41,30 @@ Router.get("/", async(req, res)=>{
     }
 })
 
+//get "api/teacardsinfo/card/:id"
+Router.get("/show/:id", async(req, res)=>{
+    try{
+        const { id } = req.params;
+        const populatedOneCard = 
+            await TeaCardsInfo.findById(id)
+                                .populate("createdBy", "username")
+                                .populate("base", ["name","img"] )
+                                .populate("flavour", ["name","img"] )
+                                .populate("toppings", ["name","img"] );
+        res.status(200).json({
+            status:"ok",
+            message: "populated one teaCard",
+            data: populatedOneCard,
+        })
+    }catch(error){
+        console.log("at show/:id", error);
+    }
+})
+
+//post "api/teacardsinfo/newCard"
+/* Routes.post("/newCard", ) */
+
+//delete "api/teacardsinfo/delete"
+
+
 module.exports = Router;
