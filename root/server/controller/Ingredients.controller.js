@@ -60,7 +60,7 @@ Router.get("/toppings/seed", async(req, res) => {
 // get "/api/ingredients/base"
 Router.get("/base", async(req, res) => {
     try{
-        const allBase = await Base.find({});
+        const allBase = await Bases.find({});
         res.status(200).json({
             status:"ok",
             message:"base data gotten",
