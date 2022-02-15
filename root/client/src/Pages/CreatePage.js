@@ -8,8 +8,12 @@ const CreatePage = () => {
   // Create states
   const [ ingredientsList, setIngredientsList ] = useState({});
   const [category, setCategory] = useState("Bases");
-  const [chosenIngredients, setChosenIngredients] = useState({});
-  console.log("chosen: ", chosenIngredients);
+  const [chosenIngredients, setChosenIngredients] = useState({
+    Bases: {},
+    Flavourings: {},
+    Toppings: [],
+  });
+  // console.log("list: ", ingredientsList);
 
   // Make API calls
   useEffect(async () => {
