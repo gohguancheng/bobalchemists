@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import ToggleButton from "../Reusables/ToggleButton";
 
 const FilterSection = ({ subsection }) => {
-  const [baseSelection, setBaseSelection] = useState([]);
+  const [filterOptions, setFilterOptions] = useState([]);
 
-  console.log("selected: ", baseSelection);
+  console.log("selected: ", filterOptions);
+
+  
 
   const nameOfSubsection = Object.keys(subsection)[0];
   const ingredientsArray = subsection[nameOfSubsection];
@@ -12,8 +14,8 @@ const FilterSection = ({ subsection }) => {
     <ToggleButton
       key={e}
       label={e}
-      selection={baseSelection}
-      setSelection={setBaseSelection}
+      selection={filterOptions}
+      setSelection={setFilterOptions}
     />
   ));
 

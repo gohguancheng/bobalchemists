@@ -139,9 +139,10 @@ const ErrorIcon = () => (
   </svg>
 );
 
-const handleShow = (type) => {
-  // filter allIngredients
-  // display them as cards
+const handleSubmit = (e) => {
+  console.log("form submitted");
+  console.log("e.target", e.target);
+  e.preventDefault();
 };
 
 const IngredientSelection = () => {
@@ -151,7 +152,7 @@ const IngredientSelection = () => {
 
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
-      <h1 className="text-2xl">Create your Bubble Tea</h1>
+      {/* <h1 className="text-2xl">Create your Bubble Tea</h1>
       <Field label="Name" name="name" placeholder="name" dot />
       <Field label="Description" name="description" type="textarea" />
       <h1>Selected ingredients</h1>
@@ -165,7 +166,60 @@ const IngredientSelection = () => {
         <p>Toppings:</p>
         <Button color="success">+</Button>
       </div>
-      <Button color="primary">Create Bubble Tea</Button>
+      <Button color="primary">Create Bubble Tea</Button> */}
+      <div class="w-full bg-white rounded shadow-lg p-8 m-4">
+        <h1 class="block w-full text-center text-grey-darkest mb-6">
+          Create a Bubble Tea
+        </h1>
+        <form class="mb-4" action="/" method="post" onSubmit={handleSubmit}>
+          <div class="flex flex-col mb-4">
+            <label
+              class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+              for="name"
+            >
+              Name
+            </label>
+            <input
+              class="border py-2 px-3 text-grey-darkest"
+              type="text"
+              name="name"
+              id="name"
+            />
+          </div>
+          <div class="flex flex-col mb-4">
+            <label
+              class="mb-2 uppercase font-bold text-lg text-grey-darkest"
+              for="description"
+            >
+              Description
+            </label>
+            <textarea
+              class="border py-2 px-3 text-grey-darkest"
+              name="description"
+              id="description"
+              rows="3"
+            />
+          </div>
+          {/* <button
+            class="block bg-teal hover:bg-teal-dark text-white uppercase text-lg mx-auto p-4 rounded"
+            type="submit"
+          >
+            Create Bubble Tea
+          </button> */}
+          <div className="container mx-auto">
+            <label>Base:</label>
+            <Button color="success">+</Button>
+            <br />
+            <label>Flavouring:</label>
+            <Button color="success">+</Button>
+            <br />
+            <label>Toppings:</label>
+            <Button color="success">+</Button>
+            <br />
+          </div>
+          <input type="submit" value="Create bubble tea" />
+        </form>
+      </div>
     </div>
   );
 };
