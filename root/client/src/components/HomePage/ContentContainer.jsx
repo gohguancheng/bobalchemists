@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FiltersContainer from "./FiltersContainer";
 import Gallery from "./Gallery";
+import Logo from "../Reusables/Logo";
 
 const ContentContainer = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -16,8 +17,8 @@ const ContentContainer = () => {
       <div className="col-start-2 col-end-5 row-start-1 row-end-2 flex flex-col">
         <div className="basis-5/6 flex justify-center items-center">
           <h1 className="h-max w-max shrink text-5xl font-black font-logo">
-            {" "}
-            BOBAlchemist{" "}
+            <Logo />
+            BOBAlchemist
           </h1>
         </div>
         <span className="basis-1/6 flex flex-row items-center">
