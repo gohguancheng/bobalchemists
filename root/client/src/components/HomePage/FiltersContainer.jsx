@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import FilterSection from "./FilterSection";
-import { ingredientList } from "./sideBarFilterData.js"
+const categoryList = ["Bases","Toppings","Flavours"];
 
-const FiltersContainer = () => {
-  const filterContainerDisplay = ingredientList.map(e=><FilterSection key={Object.keys(e)[0]} subsection={e} />);
+const FiltersContainer = (  {selectedFilters, setSelectedFilters} ) => {
+  
+  const filterContainerDisplay = categoryList.map(e=><FilterSection key={e} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} category={e} />);
 
   return <div className='flex flex-col pl-8'>
-      <div className="text-xl font-bold" > Ingredients Filter: </div>
+      <div className="text-lg font-bold" > Ingredients Filter: </div>
       {filterContainerDisplay}
   </div>;
 };
