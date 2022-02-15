@@ -11,6 +11,8 @@ const flavour_seed = require("../models/Ingredients/flavour_seed");
 const Toppings = require("../models/Ingredients/toppings");
 const toppings_seed = require("../models/Ingredients/toppings_seed");
 
+//ROUTES ('api/ingredients/')
+// get "/api/ingredients/base/seed/"
 Router.get("/base/seed", async(req, res) => {
     try{
         await Base.deleteMany({})
@@ -25,6 +27,7 @@ Router.get("/base/seed", async(req, res) => {
     }
 });
 
+// get "/api/ingredients/flavours/seed"
 Router.get("/flavours/seed", async(req, res) => {
     try{
         await Flavours.deleteMany({})
@@ -39,6 +42,7 @@ Router.get("/flavours/seed", async(req, res) => {
     }
 });
 
+// get "/api/ingredients/toppings/seed"
 Router.get("/toppings/seed", async(req, res) => {
     try{
         await Toppings.deleteMany({})
@@ -53,6 +57,7 @@ Router.get("/toppings/seed", async(req, res) => {
     }
 });
 
+// get "/api/ingredients/toppings/seed"
 Router.get("/base", async(req, res) => {
     try{
         const allBase = await Base.find({});
