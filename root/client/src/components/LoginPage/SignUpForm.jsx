@@ -54,12 +54,12 @@ const SignUpForm = ({ setAccessSignUp }) => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <img
-            className="mx-auto h-12 w-auto"
+            className="mx-auto h-24 w-auto"
             src="https://cdn.pixabay.com/photo/2021/02/11/19/03/bubble-tea-6006193_960_720.png"
             alt="Icon"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Please enter new user credentials.
+            SIGN UP
           </h2>
         </div>
         {/* Start of Form */}
@@ -95,7 +95,7 @@ const SignUpForm = ({ setAccessSignUp }) => {
               />
             </div>
           </div>
-          <div>
+          <div className="text-xs font-semibold">
             {signupResult
               ? `Sign Up: ${signupResult.status}.`
               : nameAvailable
