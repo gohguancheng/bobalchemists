@@ -35,6 +35,7 @@ const AvailableIngredients = ({
   chosenIngredients,
   setChosenIngredients,
 }) => {
+
   const handleCardClick = (event, name, id) => {
     //for Bases and Flavourings
     if (category !== "Toppings") {

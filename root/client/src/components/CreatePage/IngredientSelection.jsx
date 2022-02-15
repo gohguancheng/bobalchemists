@@ -8,7 +8,8 @@ const IngredientSelection = ( { setCategory, chosenIngredients }) => {
   const [nameInput, setNameInput] = useState();
   const [descriptionInput, setDescriptionInput] = useState();
   const [formData, setFormData] = useState({});
-
+  const [readyToSubmit, setReadyToSubmit] = useState(false);
+  console.log("ready: ", readyToSubmit);
   console.log(formData);
 
   useEffect(()=>{
@@ -24,6 +25,13 @@ const IngredientSelection = ( { setCategory, chosenIngredients }) => {
     setFormData({...formData, ...updates});
   }, [nameInput, descriptionInput, chosenIngredients])
 
+  useEffect(()=>{
+    if ( (formData.base !== undefined) && (formData.flavour !== undefined) && (formData.name)) {
+      setReadyToSubmit(true);
+    } else {
+      setReadyToSubmit(false);
+    }
+  },[formData])
 
   const postCreation = async (credentials) => {
     //console.log(credentials);
@@ -87,11 +95,13 @@ const IngredientSelection = ( { setCategory, chosenIngredients }) => {
             <PlusButton id={"Toppings"} setCategory={setCategory} />
             <br />
           </div>
-          <input
+          { readyToSubmit ?
+          (<input
             type="submit"
             value="Create bubble tea"
             className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
-          />
+          />) : null
+          }
         </form>
       </div>
     </div>
