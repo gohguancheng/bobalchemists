@@ -6,35 +6,34 @@ const flavour_seed = [
         name: "Caramel",
         flavourType: "Others",
         color: "#bc8e06",
-        img: "",
+        img: "https://i.imgur.com/gVmvLQg.png",
     },
     {
         _id: mongoose.Types.ObjectId("620b2afdb98e26a5d939f8d5"),
         name: "Brown Sugar",
         flavourType: "Others",
         color: "#b09735",
-        img: "",
+        img: "https://i.imgur.com/OZOZzKz.png",
     },
     {
         _id: mongoose.Types.ObjectId("620b2afdb98e26a5d939f8d6"),
         name: "Hazelnut",
         flavourType: "Nuts",
         color: "#996b0b",
-        img: "",
+        img: "https://i.imgur.com/jTMNKFv.png",
     },
     {
         _id: mongoose.Types.ObjectId("620b2afdb98e26a5d939f8d7"),
-        name: "Blueberry",
+        name: "Durian",
         flavourType: "Fruits",
         color: "#170b81",
-        img: "",
+        img: "https://i.imgur.com/TXT4bTJ.png",
     },
     {
         _id: mongoose.Types.ObjectId("620b2afdb98e26a5d939f8d8"),
         name: "No Flavouring",
         flavourType: "Others",
         color: "#000000",
-        img: "",
     }
 ]
 

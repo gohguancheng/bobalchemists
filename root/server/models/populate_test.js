@@ -12,6 +12,9 @@ const populateSchema = new mongoose.Schema({
 
 const PopulateTest = mongoose.model("Populate_test", populateSchema);
 
+/* ["milk tea", "ovaltine", "chocolate milk", "coffee", "matcha" ] },
+{ toppings: [ "tapioca boba", "brown sugar boba",  "pudding", "herbal jelly", "red bean" ] },
+{ flavourings: [ "caramel", "earl grey", "brown sugar", "durian", "hazelnut" ] },] */
 const populate_seed = [
     {
         name: "a bunch of bases",
