@@ -47,8 +47,12 @@ router.post("/newUser", async (req, res) => {
 // post '/api/registration/seed' index ---> route to create seed users
 router.post("/seed", async(req, res) => {
   try{
-      await User.deleteMany({})
-      const newUsers = await User.create(seedUsers);
+      await User.deleteMany({});
+      const seeds = seedUsers.map((e) => {
+        return {...e, password: bcrypt.hashSync(e.password, bcrypt.genSaltSync(10))}
+       });
+      console.log(seeds);
+      const newUsers = await User.create(seeds);
       res.status(200).json({
           status:"ok",
           message:"users seeded",
@@ -60,3 +64,4 @@ router.post("/seed", async(req, res) => {
 });
 
 module.exports = router;
+
