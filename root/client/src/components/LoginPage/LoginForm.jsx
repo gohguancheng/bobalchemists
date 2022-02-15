@@ -31,7 +31,7 @@ const LoginForm = ({ setSession, setAccessSignUp }) => {
 
   loginResult?.isAuthenticated ? navigate("/") : null;
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-lighterpink text-gray-700 font-normal">
       <div className="max-w-md w-full space-y-8">
         <div>
           <img
@@ -39,7 +39,7 @@ const LoginForm = ({ setSession, setAccessSignUp }) => {
             src="https://cdn.pixabay.com/photo/2021/02/11/19/03/bubble-tea-6006193_960_720.png"
             alt="Icon"
           />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-700">
             LOG IN
           </h2>
           Please log in to make your own BBT creations.

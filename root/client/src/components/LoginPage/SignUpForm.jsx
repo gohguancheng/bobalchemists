@@ -10,21 +10,25 @@ const SignUpForm = ({ setAccessSignUp }) => {
   const navigate = useNavigate();
 
   async function submitCredentials(credentials) {
-    return axios.post("/api/registration/newUser", credentials, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    }).then(({data}) => data);
-  }
-
-  async function checkName(credentials) {
-      return axios.post("/api/registration/check", credentials, {
+    return axios
+      .post("/api/registration/newUser", credentials, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",
         },
-      }).then(({data}) => data);
+      })
+      .then(({ data }) => data);
+  }
+
+  async function checkName(credentials) {
+    return axios
+      .post("/api/registration/check", credentials, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      })
+      .then(({ data }) => data);
   }
 
   useEffect(async () => {
@@ -37,7 +41,7 @@ const SignUpForm = ({ setAccessSignUp }) => {
     e.preventDefault();
     const credentials = { username: usernameInput, password: passwordInput };
     const response = await submitCredentials(credentials);
-    setSignupResult(response)
+    setSignupResult(response);
   };
 
   if (signupResult?.status === "success") {
@@ -46,7 +50,7 @@ const SignUpForm = ({ setAccessSignUp }) => {
   }
 
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-lighterpink font-normal">
       <div className="max-w-md w-full space-y-8">
         <div>
           <img
@@ -94,9 +98,9 @@ const SignUpForm = ({ setAccessSignUp }) => {
           <div className="text-xs font-semibold">
             {signupResult
               ? `Sign Up: ${signupResult.status}.`
-              : (nameAvailable
+              : nameAvailable
               ? `Click 'Sign Up' to submit credentials to create account`
-              : `username is not available`)}
+              : `username is not available`}
           </div>
           {/* <div className="flex items-center justify-between">
                 <div className="flex items-center">

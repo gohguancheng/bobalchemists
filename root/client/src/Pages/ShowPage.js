@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../components/Reusables/Button";
 import CreatedImage from "../components/CreatePage/CreatedImage";
+import axios from "axios";
 
 const ShowPage = () => {
+  const [card, setCard] = useState({});
+
+  useEffect(async () => {
+    await axios.get("/api/teacardsinfo").then((res) => {
+      console.log("res", res);
+      // setCard();
+    });
+  }, []);
+
   return (
-    <div className="flex">
+    <div className="flex bg-lighterpink text-gray-700">
       <CreatedImage />
       <div className="container inline-block w-2/3 h-screen font-normal">
         <div className="container mx-auto w-5/6 h-screen p-20 text-center justify-around">
