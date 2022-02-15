@@ -1,25 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ToggleButton from "../Reusables/ToggleButton";
+const axios = require("axios").default;
+const ingredientURL = {
+  Bases: "/api/ingredients/base",
+  Toppings: "/api/ingredients/toppings",
+  Flavours: "/api/ingredients/flavours",
+};
 
-const FilterSection = ({ subsection }) => {
-  const [baseSelection, setBaseSelection] = useState([]);
+const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
+  const [options, setOptions] = useState([]);
 
-  console.log("selected: ", baseSelection);
+  const getIngredientData = async (path) => {
+    return axios.get(path).then(({ data }) => data);
+  };
 
-  const nameOfSubsection = Object.keys(subsection)[0];
-  const ingredientsArray = subsection[nameOfSubsection];
-  const ingredientsDisplay = ingredientsArray.map((e) => (
+  useEffect(async () => {
+    const response = await getIngredientData(ingredientURL[category]);
+    const dataName = response.data.map((e) => e.name);
+    setOptions(dataName);
+  }, []);
+
+  const ingredientsDisplay = options.map((e) => (
     <ToggleButton
       key={e}
       label={e}
-      selection={baseSelection}
-      setSelection={setBaseSelection}
+      selection={selectedFilters}
+      setSelection={setSelectedFilters}
+      category={category}
     />
   ));
 
   return (
     <div className="my-2">
-      <div className="my-1 text-lg font-bold">{nameOfSubsection}</div>
+      <div className="my-1 text-lg font-bold">{category}</div>
       <div>{ingredientsDisplay}</div>
     </div>
   );

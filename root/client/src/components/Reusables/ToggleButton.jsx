@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-const ToggleButton = ({ label, selection, setSelection }) => {
+const ToggleButton = ({ label, selection, setSelection, category }) => {
   const handleChange = (event) => {
     const isSelected = event.target.checked;
     const labelToFilter = event.target.name;

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FiltersContainer from './FiltersContainer';
 import Gallery from './Gallery';
 
 const ContentContainer = () => {
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  console.log("selectedOptions: ",selectedFilters);
   return <div className='h-full w-full grid grid-rows-5 grid-cols-5'>
     <div className='col-start-1 col-end-2 row-start-1 row-end-6'>
-      <FiltersContainer />
+      <FiltersContainer selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
     </div>
     <div className='col-start-2 col-end-5 row-start-1 row-end-2 flex flex-col'>
       <div className="basis-5/6 flex justify-center items-center">

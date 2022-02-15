@@ -1,3 +1,4 @@
+const axios = require('axios').default;
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Reusables/Navbar";
@@ -14,7 +15,7 @@ function App() {
   const [ session, setSession ] = useState({});
 
   useEffect(() => {
-    const response = (async () => fetch('/api/sessions/authcheck').then(data => data.json()))();
+    const response = (async () => axios.get('/api/sessions/authcheck').then(({data}) => data))();
     // console.log("useEffect!")
     if (response.currentUser !== undefined) {
       setSession({...session, ...response});
