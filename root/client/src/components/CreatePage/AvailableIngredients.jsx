@@ -29,48 +29,37 @@ function CardTitle({ children }) {
   return <div className={style.cardTitle}>{children}</div>;
 }
 
-const AvailableIngredients = () => {
+const AvailableIngredients = (props) => {
+  const allBases = props.allData.allBases.data?.data;
+  console.log("allBases", allBases);
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <h1 className="text-2xl">Available ingredients</h1>
       <h1 className="font-bold">Base</h1>
       <div className="flex flex-wrap">
-        <div className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3">
-          <Card>
-            <img
-              className="max-w-full h-auto md:h-48"
-              src="https://drive.google.com/uc?export=view&id=1KULwHaygOZFVPkRnzVkYj4zItod4AZhn"
-              alt="ingredient"
-            />
-            <CardBody>
-              <CardTitle className="text-lg">Milk Tea</CardTitle>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3">
-          <Card>
-            <img
-              className="max-w-full h-auto md:h-48"
-              src=""
-              alt="ingredient"
-            />
-            <CardBody>
-              <CardTitle className="text-lg">Ovaltine</CardTitle>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3">
-          <Card>
-            <img
-              className="max-w-full h-auto md:h-48"
-              src=""
-              alt="ingredient"
-            />
-            <CardBody>
-              <CardTitle className="text-lg">Chocolate milk</CardTitle>
-            </CardBody>
-          </Card>
-        </div>
+        {allBases?.map((element, id) => {
+          return (
+            <div
+              className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3"
+              key={id}
+              onClick={() => {
+                console.log("clicked");
+              }}
+            >
+              <Card>
+                <img
+                  className="max-w-full h-auto md:h-48"
+                  src={element.img}
+                  // src="https://i.imgur.com/cBqnwy8.png"
+                  alt="ingredient"
+                />
+                <CardBody>
+                  <CardTitle className="text-lg">{element.name}</CardTitle>
+                </CardBody>
+              </Card>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
