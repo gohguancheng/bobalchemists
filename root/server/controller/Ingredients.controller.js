@@ -27,7 +27,7 @@ Router.get("/base/seed", async(req, res) => {
 
 Router.get("/flavours/seed", async(req, res) => {
     try{
-        await Flavours.deleteMany({})
+        await Flavour.deleteMany({})
         const newFlavours = await Flavour.create(flavour_seed);
         res.status(200).json({
             status:"ok",

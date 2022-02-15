@@ -48,6 +48,9 @@ app.use('/api/sessions/', sessionController);
 
 app.use('/api/ingredients/', ingredientsController);
 
+//test
+const populateTestController = require("./models/populate_test");
+app.use('/api/populateTest/', populateTestController);
 
 //for build
 /* app.get("/*", (req, res) => {
