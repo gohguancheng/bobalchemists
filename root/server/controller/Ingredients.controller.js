@@ -2,10 +2,10 @@ const express = require("express");
 const Router = express.Router();
 
 //import ingredients
-const Base = require("../models/Ingredients/base");
+const Bases = require("../models/Ingredients/base");
 const base_seed = require("../models/Ingredients/base_seed");
 
-const Flavour = require("../models/Ingredients/flavour");
+const Flavours = require("../models/Ingredients/flavour");
 const flavour_seed = require("../models/Ingredients/flavour_seed");
 
 const Toppings = require("../models/Ingredients/toppings");
@@ -15,7 +15,7 @@ const toppings_seed = require("../models/Ingredients/toppings_seed");
 // get "/api/ingredients/base/seed/"
 Router.get("/base/seed", async(req, res) => {
     try{
-        await Base.deleteMany({})
+        await Bases.deleteMany({})
         const newBase = await Base.create(base_seed);
         res.status(200).json({
             status:"ok",
@@ -31,7 +31,7 @@ Router.get("/base/seed", async(req, res) => {
 Router.get("/flavours/seed", async(req, res) => {
     try{
         await Flavours.deleteMany({})
-        const newFlavours = await Flavour.create(flavour_seed);
+        const newFlavours = await Flavours.create(flavour_seed);
         res.status(200).json({
             status:"ok",
             message:"flavours seeded",
@@ -57,7 +57,7 @@ Router.get("/toppings/seed", async(req, res) => {
     }
 });
 
-// get "/api/ingredients/toppings/seed"
+// get "/api/ingredients/base"
 Router.get("/base", async(req, res) => {
     try{
         const allBase = await Base.find({});
@@ -71,9 +71,10 @@ Router.get("/base", async(req, res) => {
     }
 });
 
+// get "/api/ingredients/flavours"
 Router.get("/flavours", async(req, res) => {
     try{
-        const allFlavours = await Flavour.find({});
+        const allFlavours = await Flavours.find({});
         res.status(200).json({
             status:"ok",
             message:"flavour data gotten",
@@ -84,6 +85,7 @@ Router.get("/flavours", async(req, res) => {
     }
 })
 
+// get "/api/ingredients/toppings"
 Router.get("/toppings", async(req, res) => {
     try{
         const allToppings = await Toppings.find({});
@@ -97,10 +99,11 @@ Router.get("/toppings", async(req, res) => {
     }
 })
 
+// get "/api/ingredients/"
 Router.get("/", async(req, res) =>{
     try{
         const allBase = await Base.find({});
-        const allFlavours = await Flavour.find({});
+        const allFlavours = await Flavours.find({});
         const allToppings = await Toppings.find({});
         
         res.status(200).json({

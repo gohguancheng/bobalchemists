@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+const axios = require("axios").default;
 
 const SignUpForm = ({ setAccessSignUp }) => {
   const [usernameInput, setUsernameInput] = useState();
@@ -9,39 +10,34 @@ const SignUpForm = ({ setAccessSignUp }) => {
   const navigate = useNavigate();
 
   async function submitCredentials(credentials) {
-    return fetch("/api/registration/newUser", {
-      method: "POST",
+    return axios.post("/api/registration/newUser", credentials, {
       headers: {
-        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
       },
-      body: JSON.stringify(credentials),
-    }).then((data) => data.json());
+    }).then(({data}) => data);
   }
 
   async function checkName(credentials) {
-    return fetch("/api/registration/check", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    }).then((data) => data.json());
+      return axios.post("/api/registration/check", credentials, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      }).then(({data}) => data);
   }
 
   useEffect(async () => {
-    const response = await checkName({ username: usernameInput });
-    setNameAvailable(response.isAvailable);
+    const responseData = await checkName({ username: usernameInput });
+    console.log(responseData);
+    setNameAvailable(responseData.isAvailable);
   }, [usernameInput]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const credentials = { username: usernameInput, password: passwordInput };
     const response = await submitCredentials(credentials);
-    setSignupResult(response);
-  };
-
-  const handleUserInput = async (e) => {
-    setUsernameInput(e.target.value);
+    setSignupResult(response)
   };
 
   if (signupResult?.status === "success") {
@@ -98,9 +94,9 @@ const SignUpForm = ({ setAccessSignUp }) => {
           <div className="text-xs font-semibold">
             {signupResult
               ? `Sign Up: ${signupResult.status}.`
-              : nameAvailable
+              : (nameAvailable
               ? `Click 'Sign Up' to submit credentials to create account`
-              : `username is not available`}
+              : `username is not available`)}
           </div>
           {/* <div className="flex items-center justify-between">
                 <div className="flex items-center">

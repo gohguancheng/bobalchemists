@@ -3,9 +3,10 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userData.js");
+const seedUsers = require("../models/userData_seed");
 
 // ROUTES (/api/registration/)
-// get '/api/registration/' index
+// post '/api/registration/' index
 router.post("/check", async (req, res) => {
   try {
     const foundUser = await User.findOne({ username: req.body.username });
@@ -40,6 +41,21 @@ router.post("/newUser", async (req, res) => {
     res.status(200).json({ data: response, status: "success" });
   } catch (error) {
     console.log(error);
+  }
+});
+
+// post '/api/registration/seed' index ---> route to create seed users
+router.post("/seed", async(req, res) => {
+  try{
+      await User.deleteMany({})
+      const newUsers = await User.create(seedUsers);
+      res.status(200).json({
+          status:"ok",
+          message:"users seeded",
+          data: newUsers,
+      });;
+  }catch(error){
+      console.log("at /registration/seed", error);
   }
 });
 

@@ -3,6 +3,7 @@ import FiltersContainer from './FiltersContainer';
 import Gallery from './Gallery';
 
 const ContentContainer = () => {
+  
   return <div className='h-full w-full grid grid-rows-5 grid-cols-5'>
     <div className='col-start-1 col-end-2 row-start-1 row-end-6'>
       <FiltersContainer />
