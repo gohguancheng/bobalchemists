@@ -1,16 +1,23 @@
-import React, { forwardRef, useState, useContext } from "react";
+import React, { useState } from "react";
 import AvailableIngredients from "./AvailableIngredients";
 import PlusButton from "./PlusButton";
 import axios from "axios";
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log("form submitted");
-  console.log("e.target", e.target);
-};
 
-const IngredientSelection = (props) => {
-  console.log("props", props.allData);
+
+const IngredientSelection = ( { setCategory, chosenIngredients }) => {
+  const [formData, setFormData] = useState()
+
+  const postCreation = async () => {
+  
+  }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //console.log("form submitted");
+    //console.log("e.target", e.target);
+  };
+
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4">
@@ -21,7 +28,7 @@ const IngredientSelection = (props) => {
           <div className="flex flex-col mb-4">
             <label
               className="mb-2 uppercase font-bold text-lg text-grey-darkest"
-              for="name"
+              htmlFor="name"
             >
               Name
             </label>
@@ -35,7 +42,7 @@ const IngredientSelection = (props) => {
           <div className="flex flex-col mb-4">
             <label
               className="mb-2 uppercase font-bold text-lg text-grey-darkest"
-              for="description"
+              htmlFor="description"
             >
               Description
             </label>
@@ -47,14 +54,17 @@ const IngredientSelection = (props) => {
             />
           </div>
           <div className="container mx-auto">
-            <label>Base:</label>
-            <PlusButton setCategory={props.setCategory} />
+            <label className="p-1 text-sm font-semibold">Base:</label>
+            <div className="p-1 text-sm" >{chosenIngredients?.Bases}</div>
+            <PlusButton id={"Bases"} setCategory={setCategory} />
             <br />
             <label>Flavouring:</label>
-            <PlusButton />
+            <div className="p-1 text-sm">{chosenIngredients?.Flavourings}</div>
+            <PlusButton id={"Flavourings"} setCategory={setCategory} />
             <br />
-            <label>Toppings:</label>
-            <PlusButton />
+            <label className="p-1 text-sm font-semibold">Toppings:</label>
+            <div className="p-1 text-sm">{ chosenIngredients?.Toppings?.length > 1 ? chosenIngredients?.Toppings?.join(", ") : chosenIngredients?.Toppings}</div>
+            <PlusButton id={"Toppings"} setCategory={setCategory} />
             <br />
           </div>
           <input
