@@ -12,30 +12,36 @@ const Navbar = ({ currentUser, setSession }) => {
     });
   };
   return (
-    <div className="h-16 flex flex-row bg-zinc-600 justify-between items-center">
+    <div className="h-16 flex flex-row bg-zinc-600 justify-between items-center bg-purple text-lightgray">
       <span className="flex flex-row justify-between items-center">
         <Link to="/">
-          <h1 className="text-white text-4xl font-bold mx-4">BOBAlchemist</h1>
+          <h1 className="text-white text-4xl font-bold mx-4 font-logo">
+            BOBAlchemist
+          </h1>
         </Link>
 
         {currentUser?.username ? (
           <Link to="/create">
-            <div className="text-white text-xl font-bold mx-4">Create BOBA</div>
+            <div className="text-white text-xl font-bold mx-4 font-logo">
+              Create BOBA
+            </div>
           </Link>
         ) : (
           <Link to="/login">
-            <div className="text-white text-xl font-bold mx-4">Create BOBA</div>
+            <div className="text-white text-xl font-bold mx-4 font-logo">
+              Create BOBA
+            </div>
           </Link>
         )}
       </span>
       {currentUser?.username ? (
         <span className="flex flex-row justify-between items-center">
-          <div className="text-white text-lg font-semibold mx-4">
+          <div className="text-white text-lg font-semibold mx-4 font-logo">
             Welcome back, {currentUser.username}!
           </div>
           <Link to="/">
             <div
-              className="text-white text-xl font-bold mx-4"
+              className="text-white text-xl font-bold mx-4 font-logo"
               onClick={handleLogOut}
             >
               Log Out
@@ -45,7 +51,7 @@ const Navbar = ({ currentUser, setSession }) => {
       ) : (
         <span className="flex flex-row justify-between items-center">
           <Link to="/login">
-            <div className="text-white text-xl font-bold mx-4">
+            <div className="text-white text-xl font-bold mx-4 font-logo">
               Login / Sign Up
             </div>
           </Link>
