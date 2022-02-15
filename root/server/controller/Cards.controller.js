@@ -16,7 +16,7 @@ Router.get("/seed", async(req, res)=>{
             status: "ok",
             message: "tea cards seeded",
             data: seedCards,
-        })
+        });
     }catch(error){
         console.log("at teacardsinfo/seed", error);
     }
@@ -35,7 +35,7 @@ Router.get("/", async(req, res)=>{
             status:"ok",
             message: "populated teaCards returned",
             data: populatedCards
-        })
+        });
     }catch(error){
         console.log(error);
     }
@@ -55,14 +55,32 @@ Router.get("/show/:id", async(req, res)=>{
             status:"ok",
             message: "populated one teaCard",
             data: populatedOneCard,
-        })
+        });
     }catch(error){
         console.log("at show/:id", error);
     }
 })
 
 //post "api/teacardsinfo/newCard"
-/* Routes.post("/newCard", ) */
+Router.post("/newcard", async(req, res)=>{
+    const newCard = req.body;
+    if(!newCard){
+        res.status(400).json({
+            status:"error",
+            message: "please add the card"
+        });
+    }
+    try{
+        const createNewCard = await TeaCardsInfo.create(newCard);
+        res.status(200).json({
+            status: "ok",
+            message: "new Card created",
+            data: createNewCard
+        })
+    }catch(error){
+        console.log("at /newCard", error);
+    }
+})
 
 //delete "api/teacardsinfo/delete"
 
