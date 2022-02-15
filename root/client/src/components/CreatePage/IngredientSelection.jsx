@@ -2,44 +2,60 @@ import React, { useEffect, useState } from "react";
 import PlusButton from "./PlusButton";
 const axios = require("axios").default;
 
+const checkSession = async () => {
+  return axios
+    .get("/api/sessions/authcheck")
+    .then(({ data }) => data.session.currentUser);
+};
 
-
-const IngredientSelection = ( { setCategory, chosenIngredients }) => {
+const IngredientSelection = ({ setCategory, chosenIngredients }) => {
   const [nameInput, setNameInput] = useState();
   const [descriptionInput, setDescriptionInput] = useState();
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
-  console.log("ready: ", readyToSubmit);
   console.log(formData);
 
-  useEffect(()=>{
+  const fetchUserID = async () => {
+    const response = await checkSession();
+    const userID = { createdBy: response._id };
+    setFormData((prev) => {
+      return { ...prev, ...userID };
+    });
+  };
+
+  useEffect(() => {
     const updates = {
       name: nameInput,
       createdBy: "randomObjID",
       description: descriptionInput,
       base: chosenIngredients?.Bases?.id,
       flavour: chosenIngredients?.Flavourings?.id,
-      toppings:chosenIngredients?.Toppings?.map(e=>e.id),
+      toppings: chosenIngredients?.Toppings?.map((e) => e.id),
       likes: 0,
     };
-    setFormData({...formData, ...updates});
-  }, [nameInput, descriptionInput, chosenIngredients])
+    setFormData({ ...formData, ...updates });
+    fetchUserID();
+  }, [nameInput, descriptionInput, chosenIngredients]);
 
-  useEffect(()=>{
-    if ( (formData.base !== undefined) && (formData.flavour !== undefined) && (formData.name)) {
+  useEffect(() => {
+    if (
+      formData.base !== undefined &&
+      formData.flavour !== undefined &&
+      formData.name
+    ) {
       setReadyToSubmit(true);
     } else {
       setReadyToSubmit(false);
     }
-  },[formData])
+  }, [formData]);
 
   const postCreation = async (credentials) => {
     //console.log(credentials);
-  }
-  
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    postCreation(formData)
+    postCreation(formData);
     //console.log("form submitted");
     //console.log("e.target", e.target);
   };
@@ -63,7 +79,7 @@ const IngredientSelection = ( { setCategory, chosenIngredients }) => {
               type="text"
               name="name"
               id="name"
-              onChange={(e)=>setNameInput(e.target.value)}
+              onChange={(e) => setNameInput(e.target.value)}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -78,30 +94,46 @@ const IngredientSelection = ( { setCategory, chosenIngredients }) => {
               name="description"
               id="description"
               rows="3"
-              onChange={(e)=>setDescriptionInput(e.target.value)}
+              onChange={(e) => setDescriptionInput(e.target.value)}
             />
           </div>
           <div className="container mx-auto">
             <label className="p-1 text-sm font-semibold">Base:</label>
-            <div className="p-1 text-sm" >{chosenIngredients?.Bases?.name ? chosenIngredients?.Bases.name : null}</div>
+            <div className="p-1 text-sm">
+              {chosenIngredients?.Bases?.name
+                ? chosenIngredients?.Bases.name
+                : null}
+            </div>
             <PlusButton id={"Bases"} setCategory={setCategory} />
             <br />
             <label>Flavouring:</label>
-            <div className="p-1 text-sm">{chosenIngredients?.Flavourings?.name ? chosenIngredients?.Flavourings.name : null}</div>
+            <div className="p-1 text-sm">
+              {chosenIngredients?.Flavourings?.name
+                ? chosenIngredients?.Flavourings.name
+                : null}
+            </div>
             <PlusButton id={"Flavourings"} setCategory={setCategory} />
             <br />
             <label className="p-1 text-sm font-semibold">Toppings:</label>
-            <div className="p-1 text-sm">{chosenIngredients?.Toppings ? chosenIngredients?.Toppings.map(e=>e.name).join(", ") : null}</div>
+            <div className="p-1 text-sm">
+              {chosenIngredients?.Toppings
+                ? chosenIngredients?.Toppings.map((e) => e.name).join(", ")
+                : null}
+            </div>
             <PlusButton id={"Toppings"} setCategory={setCategory} />
             <br />
           </div>
-          { readyToSubmit ?
-          (<input
-            type="submit"
-            value="Create bubble tea"
-            className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
-          />) : null
-          }
+          {readyToSubmit ? (
+            <input
+              type="submit"
+              value="Create bubble tea"
+              className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
+            />
+          ) : (
+            <div className="p-1 text-sm">
+              Ensure all fields are filled up / selected.
+            </div>
+          )}
         </form>
       </div>
     </div>

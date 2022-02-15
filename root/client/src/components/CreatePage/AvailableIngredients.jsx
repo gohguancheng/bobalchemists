@@ -35,39 +35,53 @@ const AvailableIngredients = ({
   chosenIngredients,
   setChosenIngredients,
 }) => {
-
   const handleCardClick = (event, name, id) => {
     //for Bases and Flavourings
     if (category !== "Toppings") {
       if (!chosenIngredients[category]) {
-        const added = { [category]: {name:name, id:id} };
-        setChosenIngredients({ ...chosenIngredients, ...added });
-      } else {
+        const added = { [category]: { name: name, id: id } };
+        setChosenIngredients((prev) => {
+          return { ...prev, ...added };
+        });
+      } else if (chosenIngredients[category]) {
         const remove = { [category]: null };
-        setChosenIngredients({ ...chosenIngredients, ...remove });
+        setChosenIngredients((prev) => {
+          return { ...prev, ...remove };
+        });
       }
-    //for Toppings  
+      //for Toppings
     } else {
-      if (chosenIngredients[category] !== undefined) {
-        const index = chosenIngredients[category].findIndex(item => item.id === id);
+      if (!chosenIngredients[category]) {
+        const added = { [category]: { name: name, id: id } };
+        setChosenIngredients((prev) => {
+          return { ...prev, ...added };
+        });
+      } else {
+        const index = chosenIngredients[category].findIndex(
+          (item) => item.id === id
+        );
         if (index === -1) {
-          const newArr = [...chosenIngredients[category], {name:name, id:id}];
+          const newArr = [
+            ...chosenIngredients[category],
+            { name: name, id: id },
+          ];
           const added = { [category]: newArr };
-          setChosenIngredients({ ...chosenIngredients, ...added });
+          setChosenIngredients((prev) => {
+            return { ...prev, ...added };
+          });
         } else {
           const newArr = chosenIngredients[category].filter(
             (item) => item.id !== id
           );
           const remove = { [category]: newArr };
-          setChosenIngredients({ ...chosenIngredients, ...remove });
+          setChosenIngredients((prev) => {
+            return { ...prev, ...remove };
+          });
         }
-      } else {
-        const added = { [category]: {name:name, id:id} };
-        setChosenIngredients({ ...chosenIngredients, ...added });
       }
     }
   };
-
+  
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <h1 className="text-2xl">Available ingredients</h1>
@@ -79,7 +93,9 @@ const AvailableIngredients = ({
                 <div
                   className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3"
                   key={id}
-                  onClick={(evt) => handleCardClick(evt, element.name, element._id)}
+                  onClick={(evt) =>
+                    handleCardClick(evt, element.name, element._id)
+                  }
                 >
                   <Card>
                     <img
