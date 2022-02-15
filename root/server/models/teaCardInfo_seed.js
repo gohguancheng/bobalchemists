@@ -1,12 +1,11 @@
 const teaCards_seed = [
     {
-        name:"Green Tea Boba",
-        createdBy: {type: Schema.Types.ObjectId, ref: 'users'},
-        description:"Great for those who like the pure flavour of tea but also like boba.",
-        base: "620b2683d4912d8146ccc797",
-        flavour:"620b253dd4912d8146ccc781",
-        toppings:["620b250c18ed58c41d288639"],
+        name:"Matcha with Boba",
+        createdBy: "620b3fdb42f6719ba12bfd34",
+        description:"Great for those who like anything matcha but also like boba.",
+        base: "620b29891d0ef89dbe4554f4",
+        flavour:"620b2afdb98e26a5d939f8d8",
+        toppings:["620b50b59c2072e4dc9ba034"],
         likes: 5,
-        dateCreated: '2022-02-10',
     }
 ]

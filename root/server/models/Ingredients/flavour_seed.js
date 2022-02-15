@@ -20,7 +20,7 @@ const flavour_seed = [
         name: "Hazelnut",
         flavourType: "Nuts",
         color: "#996b0b",
-        img: "https://i.imgur.com/jTMNKFv.png",
+        img: "https://i.imgur.com/nhdN9kD.png",
     },
     {
         _id: mongoose.Types.ObjectId("620b2afdb98e26a5d939f8d7"),
