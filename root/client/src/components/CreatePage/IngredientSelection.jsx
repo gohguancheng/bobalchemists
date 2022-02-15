@@ -1,19 +1,37 @@
-import React, { useState } from "react";
-import AvailableIngredients from "./AvailableIngredients";
+import React, { useEffect, useState } from "react";
 import PlusButton from "./PlusButton";
-import axios from "axios";
+const axios = require("axios").default;
 
 
 
 const IngredientSelection = ( { setCategory, chosenIngredients }) => {
-  const [formData, setFormData] = useState()
+  const [nameInput, setNameInput] = useState();
+  const [descriptionInput, setDescriptionInput] = useState();
+  const [formData, setFormData] = useState({});
 
-  const postCreation = async () => {
-  
+  console.log(formData);
+
+  useEffect(()=>{
+    const updates = {
+      name: nameInput,
+      createdBy: "randomObjID",
+      description: descriptionInput,
+      base: chosenIngredients?.Bases?.id,
+      flavour: chosenIngredients?.Flavourings?.id,
+      toppings:chosenIngredients?.Toppings?.map(e=>e.id),
+      likes: 0,
+    };
+    setFormData({...formData, ...updates});
+  }, [nameInput, descriptionInput, chosenIngredients])
+
+
+  const postCreation = async (credentials) => {
+    //console.log(credentials);
   }
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    postCreation(formData)
     //console.log("form submitted");
     //console.log("e.target", e.target);
   };
@@ -37,6 +55,7 @@ const IngredientSelection = ( { setCategory, chosenIngredients }) => {
               type="text"
               name="name"
               id="name"
+              onChange={(e)=>setNameInput(e.target.value)}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -51,19 +70,20 @@ const IngredientSelection = ( { setCategory, chosenIngredients }) => {
               name="description"
               id="description"
               rows="3"
+              onChange={(e)=>setDescriptionInput(e.target.value)}
             />
           </div>
           <div className="container mx-auto">
             <label className="p-1 text-sm font-semibold">Base:</label>
-            <div className="p-1 text-sm" >{chosenIngredients?.Bases}</div>
+            <div className="p-1 text-sm" >{chosenIngredients?.Bases?.name ? chosenIngredients?.Bases.name : null}</div>
             <PlusButton id={"Bases"} setCategory={setCategory} />
             <br />
             <label>Flavouring:</label>
-            <div className="p-1 text-sm">{chosenIngredients?.Flavourings}</div>
+            <div className="p-1 text-sm">{chosenIngredients?.Flavourings?.name ? chosenIngredients?.Flavourings.name : null}</div>
             <PlusButton id={"Flavourings"} setCategory={setCategory} />
             <br />
             <label className="p-1 text-sm font-semibold">Toppings:</label>
-            <div className="p-1 text-sm">{ chosenIngredients?.Toppings?.length > 1 ? chosenIngredients?.Toppings?.join(", ") : chosenIngredients?.Toppings}</div>
+            <div className="p-1 text-sm">{chosenIngredients?.Toppings ? chosenIngredients?.Toppings.map(e=>e.name).join(", ") : null}</div>
             <PlusButton id={"Toppings"} setCategory={setCategory} />
             <br />
           </div>
