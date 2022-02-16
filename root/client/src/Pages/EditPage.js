@@ -44,7 +44,7 @@ const EditPage = ({ currentUsername, setNoSessionFound }) => {
           console.log("ingredients list", ingredientsList);
           console.log("selectionData", selectionData);
           setCurrentSelection(selectionData?.data);
-        //   console.log("currentSelection", currentSelection);
+          //   console.log("currentSelection", currentSelection);
         }
       );
   }, []);
