@@ -84,7 +84,7 @@ const AvailableIngredients = ({
   
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
-      <h1 className="text-2xl">Available ingredients</h1>
+      <h1 className="font-bold">Click below to select</h1>
       <h1 className="font-bold">{category}</h1>
       <div className="flex flex-wrap">
         {ingredientsList[category]
