@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import Button from "../components/Reusables/Button";
 import CreatedImage from "../components/CreatePage/CreatedImage";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ShowPage = () => {
   const [card, setCard] = useState({});
 
+  const { id } = useParams();
+  console.log("id", id);
+
   useEffect(async () => {
-    await axios.get("/api/teacardsinfo").then((res) => {
+    await axios.get(`/api/teacardsinfo/show/${id}`).then((res) => {
       console.log("res", res);
       // setCard();
     });
