@@ -1,0 +1,26 @@
+{
+  "name": "bobalchemists",
+  "version": "1.0.0",
+  "description": "<!-- **Try it here: https://TBC** -->",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd root/server && node server.js",
+    "install-client": "cd /root/client && npm install",
+    "build": "cd root/client && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
+    "go": "cd root && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gohguancheng/bobalchemists.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gohguancheng/bobalchemists/issues"
+  },
+  "homepage": "https://github.com/gohguancheng/bobalchemists#readme"
+}
