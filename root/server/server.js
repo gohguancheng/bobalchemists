@@ -58,10 +58,10 @@ const populateTestController = require("./models/populate_test");
 app.use("/api/populateTest/", populateTestController);
 
 //for build
-/* app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
- */
+
 app.listen(PORT, () => {
   console.log("listening on port: " + PORT);
 });
