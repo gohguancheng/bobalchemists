@@ -68,6 +68,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await postCreation(formData);
+    navigate(`/show/${response.data._id}`)
     console.log(response);
   };
 
@@ -108,8 +109,8 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
               onChange={(e) => setDescriptionInput(e.target.value)}
             />
           </div>
-          <div className="container mx-auto">
-            <label className="p-1 text-sm font-semibold">Base:</label>
+          <div className="flex flex-col container mx-auto items-center">
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Base</label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Bases?.name
                 ? chosenIngredients?.Bases.name
@@ -117,7 +118,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
             </div>
             <PlusButton id={"Bases"} setCategory={setCategory} />
             <br />
-            <label>Flavouring:</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Flavouring</label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Flavourings?.name
                 ? chosenIngredients?.Flavourings.name
@@ -125,7 +126,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
             </div>
             <PlusButton id={"Flavourings"} setCategory={setCategory} />
             <br />
-            <label className="p-1 text-sm font-semibold">Toppings:</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Toppings</label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Toppings
                 ? chosenIngredients?.Toppings.map((e) => e.name).join(", ")
@@ -137,7 +138,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
           {readyToSubmit ? (
             <input
               type="submit"
-              value="Create bubble tea"
+              value="Submit Creation"
               className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
             />
           ) : (
