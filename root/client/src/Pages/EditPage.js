@@ -42,8 +42,6 @@ const EditPage = ({ currentUsername, setNoSessionFound }) => {
           };
           setIngredientsList({ ...ingredientsList, ...fetched });
           setCurrentSelection(selectionData.data);
-          console.log("api and current sel fetched!")
-          console.log(selectionData);
         }
       );
   }, [id, currentUsername]);
