@@ -29,11 +29,6 @@ const IngredientSelection = ({
   console.log(formData);
   console.log("currentSelection", currentSelection);
 
-  if (!username) {
-    setNoSessionFound(true);
-    console.log("no session detected!");
-  }
-
   useEffect(() => {
     const updates = {
       name: nameInput,
@@ -45,10 +40,7 @@ const IngredientSelection = ({
       likes: 0,
     };
     setFormData({ ...formData, ...updates });
-    // if (formData.createdBy === null) {
-    //   navigate("/login")
-    // }
-  }, [nameInput, descriptionInput, chosenIngredients]);
+  }, [nameInput, descriptionInput, chosenIngredients, username]);
 
   useEffect(() => {
     if (
@@ -62,13 +54,23 @@ const IngredientSelection = ({
     }
   }, [formData]);
 
+  const handleNameInput = (e) => {
+    setNameInput(e.target.value);
+    console.log(username);
+    if (!username) {
+      setNoSessionFound(true);
+      console.log("no session detected!");
+      navigate("/login");
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await postCreation(formData);
-    navigate(`/show/${response.data._id}`);
+    navigate(`/show/${response.data._id}`)
     console.log(response);
   };
-
+  
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4">
@@ -88,8 +90,7 @@ const IngredientSelection = ({
               type="text"
               name="name"
               id="name"
-              defaultValue={currentSelection ? currentSelection.name : null}
-              onChange={(e) => setNameInput(e.target.value)}
+              onChange={handleNameInput}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -111,9 +112,7 @@ const IngredientSelection = ({
             />
           </div>
           <div className="flex flex-col container mx-auto items-center">
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
-              Base
-            </label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Base</label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Bases?.name
                 ? chosenIngredients?.Bases.name
@@ -121,9 +120,7 @@ const IngredientSelection = ({
             </div>
             <PlusButton id={"Bases"} setCategory={setCategory} />
             <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
-              Flavouring
-            </label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Flavouring</label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Flavourings?.name
                 ? chosenIngredients?.Flavourings.name
@@ -131,9 +128,7 @@ const IngredientSelection = ({
             </div>
             <PlusButton id={"Flavourings"} setCategory={setCategory} />
             <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
-              Toppings
-            </label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Toppings</label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Toppings
                 ? chosenIngredients?.Toppings.map((e) => e.name).join(", ")

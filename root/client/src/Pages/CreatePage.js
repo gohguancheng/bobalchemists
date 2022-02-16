@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import IngredientSelection from "../components/CreatePage/IngredientSelection";
 import AvailableIngredients from "../components/CreatePage/AvailableIngredients";
 import CreatedImage from "../components/CreatePage/CreatedImage";

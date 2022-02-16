@@ -13,19 +13,20 @@ import SearchResultPage from "./Pages/SearchResultPage";
 async () => fetch("/api/sessions/authcheck").then((data) => data.json());
 
 function App() {
-  const [session, setSession] = useState({});
+  const [ session, setSession ] = useState({});
   const [noSessionFound, setNoSessionFound] = useState(true);
 
   useEffect(async () => {
-    const response = await (async () =>
-      axios.get("/api/sessions/authcheck").then(({ data }) => data))();
-    console.log("useEffect authcheck: ", response);
-    if (response.session) {
+    const response = await (async () => axios.get('/api/sessions/authcheck').then(({data}) => data))();
+    console.log("useEffect: ", response);
+    if (!!response.session.currentUser) {
+      console.log("session found")
       setSession(response.session);
       setNoSessionFound(false);
     }
-  }, [noSessionFound]);
+  }, [noSessionFound])
 
+  
   return (
     <div className="App font-sans h-full w-full">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
