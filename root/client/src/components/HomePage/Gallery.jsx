@@ -12,8 +12,9 @@ const Gallery = () => {
     await axios.get("/api/teacardsinfo").then((res) => {
       console.log("res", res.data.data);
       setGallery(res?.data?.data);
+      console.log("res?.data?.data", res?.data?.data);
     });
-  }, [gallery]);
+  }, []);
 
   const galleryDisplay = gallery.map((e) => (
     <Link key={e._id} to={`/show/${e._id}`}>
