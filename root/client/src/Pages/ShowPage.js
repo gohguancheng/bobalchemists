@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Button from "../components/Reusables/Button";
 import CreatedImage from "../components/CreatePage/CreatedImage";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ShowPage = () => {
   const [card, setCard] = useState({});
+  const navigate = useNavigate();
 
   const { id } = useParams();
   console.log("id", id);
@@ -17,6 +18,13 @@ const ShowPage = () => {
       console.log("Card data", card);
     });
   }, []);
+
+  const handleEdit = () => {
+    console.log("edit button clicked");
+    // redirect user to the "create page"
+    navigate("/create");
+    // "create page" should have fields populated with 'card' details
+  };
 
   return (
     <div className="flex bg-lighterpink text-gray-700">
@@ -34,7 +42,9 @@ const ShowPage = () => {
           <div>
             <p className="w-1/3 inline-block">👍 Likes</p>
             <p className="w-1/3 inline-block">Creator: {card?.createdBy}</p>
-            <Button color="primary">Edit</Button>
+            <Button color="primary" onClick={() => handleEdit()}>
+              Edit
+            </Button>
             <Button color="danger">Delete</Button>
           </div>
         </div>
