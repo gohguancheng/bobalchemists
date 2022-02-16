@@ -5,22 +5,29 @@ const axios = require("axios").default;
 
 const postCreation = async (credentials) => {
   return axios
-  .post("/api/teacardsinfo/newCard", credentials, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-  })
-  .then(({ data }) => data);
+    .post("/api/teacardsinfo/newCard", credentials, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    })
+    .then(({ data }) => data);
 };
 
-const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSessionFound }) => {
+const IngredientSelection = ({
+  setCategory,
+  chosenIngredients,
+  username,
+  setNoSessionFound,
+  currentSelection,
+}) => {
   const [nameInput, setNameInput] = useState();
   const [descriptionInput, setDescriptionInput] = useState();
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
   const navigate = useNavigate();
   console.log(formData);
+  console.log("currentSelection", currentSelection);
 
   useEffect(() => {
     const updates = {
@@ -98,6 +105,9 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
               name="description"
               id="description"
               rows="3"
+              defaultValue={
+                currentSelection ? currentSelection.description : null
+              }
               onChange={(e) => setDescriptionInput(e.target.value)}
             />
           </div>

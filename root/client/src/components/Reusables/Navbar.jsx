@@ -9,6 +9,7 @@ const Navbar = ({ currentUser, setSession }) => {
     window.location.reload();
     console.log("response: ", response);
   };
+
   return (
     <div className="h-16 flex flex-row justify-between items-center bg-purple text-lightgray">
       <span className="flex flex-row justify-between items-center">

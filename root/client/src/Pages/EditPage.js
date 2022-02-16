@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import CreatedImage from "../components/CreatePage/CreatedImage";
 import IngredientSelection from "../components/CreatePage/IngredientSelection";
 import AvailableIngredients from "../components/CreatePage/AvailableIngredients";
-import CreatedImage from "../components/CreatePage/CreatedImage";
-import axios from "axios";
 
-const CreatePage = ({ currentUsername, setNoSessionFound }) => {
+const EditPage = ({ currentUsername, setNoSessionFound }) => {
   // Create states
   const [ingredientsList, setIngredientsList] = useState({});
   const [category, setCategory] = useState("Bases");
@@ -13,6 +14,10 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
     Flavourings: null,
     Toppings: [],
   });
+  const [currentSelection, setCurrentSelection] = useState({});
+
+  // Use params
+  const { id } = useParams();
 
   // Make API calls
   useEffect(async () => {
@@ -21,12 +26,14 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
         axios.get("/api/ingredients/base"),
         axios.get("/api/ingredients/flavours"),
         axios.get("/api/ingredients/toppings"),
+        axios.get(`/api/teacardsinfo/show/${id}`),
       ])
       .then(
         ([
           { data: baseData },
           { data: flavouringData },
           { data: toppingsData },
+          { data: selectionData },
         ]) => {
           const fetched = {
             Bases: baseData.data,
@@ -34,6 +41,10 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
             Toppings: toppingsData.data,
           };
           setIngredientsList({ ...ingredientsList, ...fetched });
+          console.log("ingredients list", ingredientsList);
+          console.log("selectionData", selectionData);
+          setCurrentSelection(selectionData?.data);
+        //   console.log("currentSelection", currentSelection);
         }
       );
   }, []);
@@ -48,6 +59,7 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
           chosenIngredients={chosenIngredients}
           username={currentUsername}
           setNoSessionFound={setNoSessionFound}
+          currentSelection={currentSelection}
         />
         <AvailableIngredients
           ingredientsList={ingredientsList}
@@ -60,4 +72,4 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
   );
 };
 
-export default CreatePage;
+export default EditPage;

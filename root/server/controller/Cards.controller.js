@@ -41,7 +41,6 @@ Router.get("/", async (req, res) => {
 });
 
 //get "api/teacardsinfo/show/:id"
-// "api/teacardsinfo/:id/show"
 Router.get("/show/:id", async (req, res) => {
   try {
     const { id } = req.params;

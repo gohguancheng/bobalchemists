@@ -22,7 +22,7 @@ const ShowPage = () => {
   const handleEdit = () => {
     console.log("edit button clicked");
     // redirect user to the "create page"
-    navigate("/create");
+    navigate(`/edit/${id}`);
     // "create page" should have fields populated with 'card' details
   };
 
