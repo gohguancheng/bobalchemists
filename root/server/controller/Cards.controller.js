@@ -82,6 +82,18 @@ Router.post("/newcard", async (req, res) => {
 });
 
 //delete "api/teacardsinfo/delete/:id"
-Router.delete("/");
+Router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await TeaCardsInfo.findByIdAndDelete(id);
+    res.status(200).json({
+      status: "ok",
+      message: "indiv card deleted",
+      data: null,
+    });
+  } catch (error) {
+    console.log("at /delete/:id", error);
+  }
+});
 
 module.exports = Router;

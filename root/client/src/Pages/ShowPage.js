@@ -26,9 +26,10 @@ const ShowPage = () => {
     // "create page" should have fields populated with 'card' details
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     console.log("delete button clicked");
     // deletes card from database
+    await axios.delete(`/api/teacardsinfo/delete/${id}`);
     navigate("/");
   };
 
