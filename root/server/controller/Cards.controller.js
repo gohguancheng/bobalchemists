@@ -26,7 +26,6 @@ Router.get("/seed", async (req, res) => {
 Router.get("/", async (req, res) => {
   try {
     const populatedCards = await TeaCardsInfo.find({})
-      .populate("createdBy", "username")
       .populate("base", ["name", "img"])
       .populate("flavour", ["name", "img"])
       .populate("toppings", ["name", "img"]);
