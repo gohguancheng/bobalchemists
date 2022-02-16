@@ -41,13 +41,22 @@ const EditPage = ({ currentUsername, setNoSessionFound }) => {
             Toppings: toppingsData.data,
           };
           setIngredientsList({ ...ingredientsList, ...fetched });
-          console.log("ingredients list", ingredientsList);
-          console.log("selectionData", selectionData);
-          setCurrentSelection(selectionData?.data);
-          //   console.log("currentSelection", currentSelection);
+          setCurrentSelection(selectionData.data);
         }
       );
-  }, []);
+  }, [id, currentUsername]);
+  console.log(currentSelection);
+  useEffect(() => {
+    //triggers only once
+    const initial = {
+      Bases: {name: currentSelection?.base?.name, id: currentSelection?.base?._id },
+      Flavourings: {name: currentSelection?.flavour?.name, id: currentSelection?.flavour?._id },
+      Toppings: currentSelection?.toppings?.map((e)=> {
+        return {name: e.name, id: e._id}
+      })
+    };
+    setChosenIngredients({ ...chosenIngredients, ...initial });
+  }, [currentSelection]);
 
   return (
     <div className="flex bg-lighterpink font-normal">
