@@ -22,11 +22,6 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
   const navigate = useNavigate();
   console.log(formData);
 
-  if (!username) {
-    setNoSessionFound(true);
-    console.log("no session detected!");
-  }
-
   useEffect(() => {
     const updates = {
       name: nameInput,
@@ -38,10 +33,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
       likes: 0,
     };
     setFormData({ ...formData, ...updates });
-    // if (formData.createdBy === null) {
-    //   navigate("/login")
-    // }
-  }, [nameInput, descriptionInput, chosenIngredients]);
+  }, [nameInput, descriptionInput, chosenIngredients, username]);
 
   useEffect(() => {
     if (
@@ -55,13 +47,23 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
     }
   }, [formData]);
 
+  const handleNameInput = (e) => {
+    setNameInput(e.target.value);
+    console.log(username);
+    if (!username) {
+      setNoSessionFound(true);
+      console.log("no session detected!");
+      navigate("/login");
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await postCreation(formData);
     navigate(`/show/${response.data._id}`)
     console.log(response);
   };
-
+  
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4">
@@ -81,7 +83,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
               type="text"
               name="name"
               id="name"
-              onChange={(e) => setNameInput(e.target.value)}
+              onChange={handleNameInput}
             />
           </div>
           <div className="flex flex-col mb-4">

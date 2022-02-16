@@ -17,8 +17,9 @@ function App() {
 
   useEffect(async () => {
     const response = await (async () => axios.get('/api/sessions/authcheck').then(({data}) => data))();
-    console.log("useEffect authcheck: ", response)
-    if (response.session) {
+    console.log("useEffect: ", response);
+    if (!!response.session.currentUser) {
+      console.log("session found")
       setSession(response.session);
       setNoSessionFound(false);
     }
