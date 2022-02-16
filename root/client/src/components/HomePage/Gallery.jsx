@@ -17,7 +17,7 @@ const Gallery = () => {
 
   const galleryDisplay = gallery.map((e) => (
     <Link key={e._id} to={`/show/${e._id}`}>
-      <Card key={e._id} info={e} />/
+      <Card key={e._id} info={e} />
     </Link>
   ));
 
