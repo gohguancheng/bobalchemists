@@ -45,7 +45,6 @@ const EditPage = ({ currentUsername, setNoSessionFound }) => {
         }
       );
   }, [id, currentUsername]);
-  console.log(currentSelection);
   useEffect(() => {
     //triggers only once
     const initial = {

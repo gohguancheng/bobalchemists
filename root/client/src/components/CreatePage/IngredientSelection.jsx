@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PlusButton from "./PlusButton";
 const axios = require("axios").default;
 
@@ -26,6 +26,7 @@ const IngredientSelection = ({
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
   console.log("formData: ", formData);
   // console.log("currentsel: ", currentSelection)
 
@@ -40,8 +41,8 @@ const IngredientSelection = ({
       likes: 0,
     };
     if (!!currentSelection) {
-      if (!updates.name) updates.name = currentSelection.name;
-      if (!updates.description) updates.description = currentSelection.description;
+      if (updates.name === undefined) updates.name = currentSelection.name;
+      if (updates.description === undefined) updates.description = currentSelection.description;
     }
     setFormData(prev => {
       return { ...prev, ...updates }
@@ -147,17 +148,21 @@ const IngredientSelection = ({
             <PlusButton id={"Toppings"} setCategory={setCategory} />
             <br />
           </div>
-          {readyToSubmit ? (
-            <input
-              type="submit"
-              value="Submit Creation"
-              className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
-            />
-          ) : (
+          {!readyToSubmit ? (
             <div className="p-1 text-sm">
               Ensure all fields are filled up / selected.
             </div>
-          )}
+          ) : ( !!id ? (            <input
+            type="submit"
+            value="Edit Your Creation"
+            className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
+          />) :
+(            <input
+              type="submit"
+              value="Submit Creation"
+              className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
+            />)
+          )  }
         </form>
       </div>
     </div>
