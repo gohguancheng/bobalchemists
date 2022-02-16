@@ -2,7 +2,7 @@ import React from "react";
 
 const CreatedImage = () => {
   return (
-    <div className="container inline-block w-1/4 h-screen relative bg-lightgray rounded-full">
+    <div className="container inline-block w-1/4 h-1/3 relative bg-lightgray rounded-full">
       {/* Put BASE here - so it will appear above CUP but below TOPPING */}
       <img
         className="absolute"
