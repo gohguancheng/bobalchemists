@@ -33,7 +33,7 @@ const ShowPage = () => {
           </div>
           <div>
             <p className="w-1/3 inline-block">👍 Likes</p>
-            <p className="w-1/3 inline-block">Creator:</p>
+            <p className="w-1/3 inline-block">Creator: {card?.createdBy}</p>
             <Button color="primary">Edit</Button>
             <Button color="danger">Delete</Button>
           </div>
