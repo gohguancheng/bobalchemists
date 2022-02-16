@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const teaCardInfo_Schema = new mongoose.Schema({
     name:{type: String, required: true},
-    createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
+    createdBy: {type: String, required: true},
     description:{type: String, default: "This person was too lazy to give a description."},
     base: {type: mongoose.Schema.Types.ObjectId, ref: 'Bases'},
     flavour: {type: mongoose.Schema.Types.ObjectId, ref: 'Flavours'},

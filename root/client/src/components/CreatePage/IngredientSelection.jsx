@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PlusButton from "./PlusButton";
 const axios = require("axios").default;
 
@@ -8,11 +9,23 @@ const checkSession = async () => {
     .then(({ data }) => data.session.currentUser);
 };
 
+const postCreation = async (credentials) => {
+  return axios
+  .post("/api/teacardsinfo/newCard", credentials, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  })
+  .then(({ data }) => data);
+};
+
 const IngredientSelection = ({ setCategory, chosenIngredients }) => {
   const [nameInput, setNameInput] = useState();
   const [descriptionInput, setDescriptionInput] = useState();
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
+  const navigate = useNavigate();
   console.log(formData);
 
   const fetchUserID = async () => {
@@ -26,7 +39,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
   useEffect(() => {
     const updates = {
       name: nameInput,
-      createdBy: "randomObjID",
+      createdBy: null,
       description: descriptionInput,
       base: chosenIngredients?.Bases?.id,
       flavour: chosenIngredients?.Flavourings?.id,
@@ -35,6 +48,9 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
     };
     setFormData({ ...formData, ...updates });
     fetchUserID();
+    // if (formData.createdBy === null) {
+    //   navigate("/login")
+    // }
   }, [nameInput, descriptionInput, chosenIngredients]);
 
   useEffect(() => {
@@ -49,15 +65,10 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
     }
   }, [formData]);
 
-  const postCreation = async (credentials) => {
-    //console.log(credentials);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    postCreation(formData);
-    //console.log("form submitted");
-    //console.log("e.target", e.target);
+    const response = await postCreation(formData);
+    console.log(response);
   };
 
   return (
