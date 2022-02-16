@@ -41,7 +41,7 @@ app.use(
   session({
     secret: process.env.SECRET, //some random string
     resave: true,
-    cookie: { maxAge: 8*60*60*1000 },
+    cookie: { maxAge: 60*60*1000 },
     saveUninitialized: false,
   })
 );

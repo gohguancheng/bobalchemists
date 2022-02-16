@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ currentUser, setSession }) => {
-  const handleLogOut = () => {
-    const logoutPromise = (async () =>
+  const handleLogOut = async () => {
+    const response = await (async () =>
       fetch("/api/sessions/authcheck").then((data) => data.json()))();
-    logoutPromise.then((res) => {
-      if (res.isAuthenticated === false) {
-        setSession({});
-      }
-    });
+      console.log(response);
+    if (response.session) {
+      setSession({});
+    }
   };
+
   return (
     <div className="h-16 flex flex-row justify-between items-center bg-purple text-lightgray">
       <span className="flex flex-row justify-between items-center">

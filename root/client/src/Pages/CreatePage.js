@@ -4,7 +4,7 @@ import AvailableIngredients from "../components/CreatePage/AvailableIngredients"
 import CreatedImage from "../components/CreatePage/CreatedImage";
 import axios from "axios";
 
-const CreatePage = () => {
+const CreatePage = ({ currentUsername, setNoSessionFound }) => {
   // Create states
   const [ingredientsList, setIngredientsList] = useState({});
   const [category, setCategory] = useState("Bases");
@@ -13,7 +13,6 @@ const CreatePage = () => {
     Flavourings: null,
     Toppings: [],
   });
-  // console.log("list: ", ingredientsList);
 
   // Make API calls
   useEffect(async () => {
@@ -47,6 +46,8 @@ const CreatePage = () => {
           category={category}
           setCategory={setCategory}
           chosenIngredients={chosenIngredients}
+          username={currentUsername}
+          setNoSessionFound={setNoSessionFound}
         />
         <AvailableIngredients
           ingredientsList={ingredientsList}
