@@ -18,7 +18,7 @@ const PopulateTest = mongoose.model("Populate_test", populateSchema);
 { flavourings: [ "caramel", "earl grey", "brown sugar", "durian", "hazelnut" ] },] */
 const populate_seed = [
     {
-        name: "a bunch of bases",
+        name: "base1",
         getChosenBases: ["620b29891d0ef89dbe4554f4", "620b2683d4912d8146ccc251"]
     }
 ]
@@ -48,6 +48,21 @@ Router.get("/populate", async(req, res)=>{
         });;
     }catch(error){
         console.log("at /populate/test", error)
+    }
+})
+
+Router.put("/populateupdate", async()=>{
+
+    const addBase = req.query.teacardid;
+    const name = req.query.user;
+
+    try{
+        const findName = await PopulateTest.findOneAndUpdate(
+            { name: name},
+            { getChosenBases: ["620b29891d0ef89dbe4554f4"]},
+        )
+    }catch(error){
+        console.log(error);
     }
 })
 
