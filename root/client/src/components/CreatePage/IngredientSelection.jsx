@@ -17,7 +17,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
 
   const fetchUserID = async () => {
     const response = await checkSession();
-    const userID = { createdBy: response._id };
+    const userID = { createdBy: response.username };
     setFormData((prev) => {
       return { ...prev, ...userID };
     });
