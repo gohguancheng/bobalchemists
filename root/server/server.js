@@ -40,7 +40,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
     secret: process.env.SECRET, //some random string
-    resave: false,
+    resave: true,
+    cookie: { maxAge: 8*60*60*1000 },
     saveUninitialized: false,
   })
 );
