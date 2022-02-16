@@ -12,7 +12,7 @@ const Navbar = ({ currentUser, setSession }) => {
   };
 
   return (
-    <div className="h-16 flex flex-row bg-zinc-600 justify-between items-center bg-purple text-lightgray">
+    <div className="h-16 flex flex-row justify-between items-center bg-purple text-lightgray">
       <span className="flex flex-row justify-between items-center">
         <Link to="/">
           <h1 className="text-white text-4xl font-bold mx-4 font-logo">
