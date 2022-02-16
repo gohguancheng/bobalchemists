@@ -3,12 +3,6 @@ import { useNavigate } from "react-router-dom";
 import PlusButton from "./PlusButton";
 const axios = require("axios").default;
 
-const checkSession = async () => {
-  return axios
-    .get("/api/sessions/authcheck")
-    .then(({ data }) => data.session.currentUser);
-};
-
 const postCreation = async (credentials) => {
   return axios
   .post("/api/teacardsinfo/newCard", credentials, {
@@ -20,7 +14,7 @@ const postCreation = async (credentials) => {
   .then(({ data }) => data);
 };
 
-const IngredientSelection = ({ setCategory, chosenIngredients }) => {
+const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSessionFound }) => {
   const [nameInput, setNameInput] = useState();
   const [descriptionInput, setDescriptionInput] = useState();
   const [formData, setFormData] = useState({});
@@ -28,18 +22,15 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
   const navigate = useNavigate();
   console.log(formData);
 
-  const fetchUserID = async () => {
-    const response = await checkSession();
-    const userID = { createdBy: response.username };
-    setFormData((prev) => {
-      return { ...prev, ...userID };
-    });
-  };
+  if (!username) {
+    setNoSessionFound(true);
+    console.log("no session detected!");
+  }
 
   useEffect(() => {
     const updates = {
       name: nameInput,
-      createdBy: null,
+      createdBy: username,
       description: descriptionInput,
       base: chosenIngredients?.Bases?.id,
       flavour: chosenIngredients?.Flavourings?.id,
@@ -47,7 +38,6 @@ const IngredientSelection = ({ setCategory, chosenIngredients }) => {
       likes: 0,
     };
     setFormData({ ...formData, ...updates });
-    fetchUserID();
     // if (formData.createdBy === null) {
     //   navigate("/login")
     // }

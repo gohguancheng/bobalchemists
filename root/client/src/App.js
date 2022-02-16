@@ -13,21 +13,24 @@ async () => fetch('/api/sessions/authcheck').then(data => data.json());
 
 function App() {
   const [ session, setSession ] = useState({});
+  const [noSessionFound, setNoSessionFound] = useState(true);
 
-  useEffect(() => {
-    const response = (async () => axios.get('/api/sessions/authcheck').then(({data}) => data))();
-    // console.log("useEffect!")
-    if (response.currentUser !== undefined) {
-      setSession({...session, ...response});
+  useEffect(async () => {
+    const response = await (async () => axios.get('/api/sessions/authcheck').then(({data}) => data))();
+    console.log("useEffect authcheck: ", response)
+    if (response.session) {
+      setSession(response.session);
+      setNoSessionFound(false);
     }
-  }, [session])
+  }, [noSessionFound])
 
+  
   return (
     <div className="App font-sans h-full w-full">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/create" element={<CreatePage />} />
+        <Route path="/create" element={<CreatePage currentUsername={session?.currentUser?.username} setNoSessionFound={setNoSessionFound} />} />
         <Route path="/login" element={<LoginPage setSession={setSession} />} />
         <Route path="/show/:id" element={<ShowPage />} />
         <Route path="/results" element={<SearchResultPage />} />

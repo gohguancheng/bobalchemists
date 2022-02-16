@@ -14,7 +14,7 @@ sessions.get("/authcheck", async (req, res) => {
     });
   } else {
     res.status(200).json({
-      isAuthenticated: false,
+      isAuthenticated: true,
       session: req.session
     });
   }
