@@ -11,10 +11,15 @@ Router.put("/newteacard/", async (req, res) => {
     try{
         const findUpdateUser = await User.findOneAndUpdate(
                                             { username: user }, 
-                                            { userCreations: [teaCardId]}
+                                            { $push: {userCreations: [teaCardId]}}
                                             );
+        res.status(200).json({
+            status:"ok",
+            message: "found and updated",
+            data: findUpdateUser,
+        })
         
     }catch(error){
-        console.log(error);
+        console.log("at /updateuserdata/newteacard/:id", error);
     }
 });
