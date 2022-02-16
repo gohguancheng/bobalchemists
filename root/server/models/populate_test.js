@@ -51,16 +51,23 @@ Router.get("/populate", async(req, res)=>{
     }
 })
 
-Router.put("/populateupdate", async()=>{
+Router.post("/populateupdate", async(req, res)=>{
 
     const addBase = req.query.teacardid;
-    const name = req.query.user;
+    const name = req.query.name;
 
     try{
         const findName = await PopulateTest.findOneAndUpdate(
             { name: name},
-            { getChosenBases: ["620b29891d0ef89dbe4554f4"]},
+            { $push:{getChosenBases: ["620b2683d4912d8146ccc251"]}}, 
+            {new: true}
         )
+        res.status(200).json({
+            status:"ok",
+            message: "found and updated",
+            data: findName,
+            name: name,
+        })
     }catch(error){
         console.log(error);
     }
