@@ -34,7 +34,7 @@ db.on("connected", () => console.log("mongo database connected successfully!"));
 db.on("disconnected", () => console.log("mongo database disconnected"));
 
 //app middleware
-app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -59,7 +59,7 @@ app.use("/api/populateTest/", populateTestController);
 
 //for build
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../client/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
 app.listen(PORT, () => {
