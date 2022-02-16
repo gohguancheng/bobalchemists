@@ -48,7 +48,9 @@ const ShowPage = () => {
           </div>
           <div>
             <p className="w-1/3 inline-block">👍 Likes</p>
-            <p className="w-1/3 inline-block">Creator: {card?.createdBy}</p>
+            <p className="w-1/3 inline-block">
+              Creator: {card?.createdBy?.username}
+            </p>
             <Button color="primary" onClick={() => handleEdit()}>
               Edit
             </Button>
