@@ -54,7 +54,9 @@ sessions.post("/login", async (req, res) => {
 // get 'api/sessions/logout'
 sessions.get("/logout", async (req, res) => {
   req.session.destroy(() => {
-    res.status(200).json();
+    res.status(200).json({
+      message: "logout successful"
+    });
   });
 });
 

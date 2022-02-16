@@ -5,27 +5,29 @@ const axios = require("axios").default;
 
 const postCreation = async (credentials) => {
   return axios
-  .post("/api/teacardsinfo/newCard", credentials, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-  })
-  .then(({ data }) => data);
+    .post("/api/teacardsinfo/newCard", credentials, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    })
+    .then(({ data }) => data);
 };
 
-const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSessionFound }) => {
+const IngredientSelection = ({
+  setCategory,
+  chosenIngredients,
+  username,
+  setNoSessionFound,
+  currentSelection,
+}) => {
   const [nameInput, setNameInput] = useState();
   const [descriptionInput, setDescriptionInput] = useState();
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
   const navigate = useNavigate();
   console.log(formData);
-
-  if (!username) {
-    setNoSessionFound(true);
-    console.log("no session detected!");
-  }
+  console.log("currentSelection", currentSelection);
 
   useEffect(() => {
     const updates = {
@@ -38,10 +40,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
       likes: 0,
     };
     setFormData({ ...formData, ...updates });
-    // if (formData.createdBy === null) {
-    //   navigate("/login")
-    // }
-  }, [nameInput, descriptionInput, chosenIngredients]);
+  }, [nameInput, descriptionInput, chosenIngredients, username]);
 
   useEffect(() => {
     if (
@@ -55,13 +54,23 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
     }
   }, [formData]);
 
+  const handleNameInput = (e) => {
+    setNameInput(e.target.value);
+    console.log(username);
+    if (!username) {
+      setNoSessionFound(true);
+      console.log("no session detected!");
+      navigate("/login");
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await postCreation(formData);
     navigate(`/show/${response.data._id}`)
     console.log(response);
   };
-
+  
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4">
@@ -81,7 +90,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
               type="text"
               name="name"
               id="name"
-              onChange={(e) => setNameInput(e.target.value)}
+              onChange={handleNameInput}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -96,6 +105,9 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
               name="description"
               id="description"
               rows="3"
+              defaultValue={
+                currentSelection ? currentSelection.description : null
+              }
               onChange={(e) => setDescriptionInput(e.target.value)}
             />
           </div>
