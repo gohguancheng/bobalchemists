@@ -80,6 +80,4 @@ Router.post("/newcard", async (req, res) => {
   }
 });
 
-//delete "api/teacardsinfo/delete"
-
 module.exports = Router;

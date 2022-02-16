@@ -26,6 +26,12 @@ const ShowPage = () => {
     // "create page" should have fields populated with 'card' details
   };
 
+  const handleDelete = () => {
+    console.log("delete button clicked");
+    // deletes card from database
+    navigate("/");
+  };
+
   return (
     <div className="flex bg-lighterpink text-gray-700">
       <CreatedImage />
@@ -45,7 +51,9 @@ const ShowPage = () => {
             <Button color="primary" onClick={() => handleEdit()}>
               Edit
             </Button>
-            <Button color="danger">Delete</Button>
+            <Button color="danger" onClick={() => handleDelete()}>
+              Delete
+            </Button>
           </div>
         </div>
       </div>
