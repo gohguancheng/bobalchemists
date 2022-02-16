@@ -40,7 +40,8 @@ Router.get("/", async (req, res) => {
   }
 });
 
-//get "api/teacardsinfo/card/:id"
+//get "api/teacardsinfo/show/:id"
+// "api/teacardsinfo/:id/show"
 Router.get("/show/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -79,5 +80,8 @@ Router.post("/newcard", async (req, res) => {
     console.log("at /newCard", error);
   }
 });
+
+//delete "api/teacardsinfo/delete/:id"
+Router.delete("/");
 
 module.exports = Router;

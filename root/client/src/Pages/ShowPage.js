@@ -37,13 +37,13 @@ const ShowPage = () => {
       <CreatedImage />
       <div className="container inline-block w-2/3 h-screen font-normal">
         <div className="container mx-auto w-5/6 h-screen p-20 text-center justify-around">
-          <h1 className="text-2xl py-5">{card.name}</h1>
-          <p className="py-5">{card.description}</p>
+          <h1 className="text-2xl py-5">{card?.name}</h1>
+          <p className="py-5">{card?.description}</p>
           <div className="py-5">
             <h1>Ingredients</h1>
             <p>Base: {card?.base?.name}</p>
             <p>Flavouring: {card?.flavour?.name}</p>
-            <p>Toppings:{card?.toppings}</p>
+            <p>Toppings: {card?.toppings?.map((e) => e.name).join(", ")}</p>
           </div>
           <div>
             <p className="w-1/3 inline-block">👍 Likes</p>
