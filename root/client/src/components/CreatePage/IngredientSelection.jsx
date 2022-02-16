@@ -26,8 +26,8 @@ const IngredientSelection = ({
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
   const navigate = useNavigate();
-  console.log(formData);
-  console.log("currentSelection", currentSelection);
+  console.log("formData: ", formData);
+  // console.log("currentsel: ", currentSelection)
 
   useEffect(() => {
     const updates = {
@@ -39,7 +39,13 @@ const IngredientSelection = ({
       toppings: chosenIngredients?.Toppings?.map((e) => e.id),
       likes: 0,
     };
-    setFormData({ ...formData, ...updates });
+    if (!!currentSelection) {
+      if (!updates.name) updates.name = currentSelection.name;
+      if (!updates.description) updates.description = currentSelection.description;
+    }
+    setFormData(prev => {
+      return { ...prev, ...updates }
+    });
   }, [nameInput, descriptionInput, chosenIngredients, username]);
 
   useEffect(() => {
@@ -56,7 +62,6 @@ const IngredientSelection = ({
 
   const handleNameInput = (e) => {
     setNameInput(e.target.value);
-    console.log(username);
     if (!username) {
       setNoSessionFound(true);
       console.log("no session detected!");
@@ -71,6 +76,8 @@ const IngredientSelection = ({
     console.log(response);
   };
   
+  // console.log(currentSelection);
+
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4">
@@ -90,6 +97,9 @@ const IngredientSelection = ({
               type="text"
               name="name"
               id="name"
+              defaultValue={
+                !!currentSelection ? currentSelection.name : null
+              }
               onChange={handleNameInput}
             />
           </div>
@@ -106,7 +116,7 @@ const IngredientSelection = ({
               id="description"
               rows="3"
               defaultValue={
-                currentSelection ? currentSelection.description : null
+                !!currentSelection ? currentSelection.description : null
               }
               onChange={(e) => setDescriptionInput(e.target.value)}
             />
