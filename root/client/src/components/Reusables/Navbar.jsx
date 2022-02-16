@@ -4,13 +4,11 @@ import { Link } from "react-router-dom";
 const Navbar = ({ currentUser, setSession }) => {
   const handleLogOut = async () => {
     const response = await (async () =>
-      fetch("/api/sessions/authcheck").then((data) => data.json()))();
-      console.log(response);
-    if (response.session) {
-      setSession({});
-    }
+      fetch("/api/sessions/logout").then((data) => data.json()))();
+    setSession((prev) => {});
+    window.location.reload();
+    console.log("response: ", response);
   };
-
   return (
     <div className="h-16 flex flex-row justify-between items-center bg-purple text-lightgray">
       <span className="flex flex-row justify-between items-center">
