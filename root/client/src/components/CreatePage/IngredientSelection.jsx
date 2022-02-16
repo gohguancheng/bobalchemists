@@ -5,22 +5,29 @@ const axios = require("axios").default;
 
 const postCreation = async (credentials) => {
   return axios
-  .post("/api/teacardsinfo/newCard", credentials, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-  })
-  .then(({ data }) => data);
+    .post("/api/teacardsinfo/newCard", credentials, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    })
+    .then(({ data }) => data);
 };
 
-const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSessionFound }) => {
+const IngredientSelection = ({
+  setCategory,
+  chosenIngredients,
+  username,
+  setNoSessionFound,
+  currentSelection,
+}) => {
   const [nameInput, setNameInput] = useState();
   const [descriptionInput, setDescriptionInput] = useState();
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
   const navigate = useNavigate();
   console.log(formData);
+  console.log("currentSelection", currentSelection);
 
   if (!username) {
     setNoSessionFound(true);
@@ -58,7 +65,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await postCreation(formData);
-    navigate(`/show/${response.data._id}`)
+    navigate(`/show/${response.data._id}`);
     console.log(response);
   };
 
@@ -81,6 +88,7 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
               type="text"
               name="name"
               id="name"
+              defaultValue={currentSelection ? currentSelection.name : null}
               onChange={(e) => setNameInput(e.target.value)}
             />
           </div>
@@ -96,11 +104,16 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
               name="description"
               id="description"
               rows="3"
+              defaultValue={
+                currentSelection ? currentSelection.description : null
+              }
               onChange={(e) => setDescriptionInput(e.target.value)}
             />
           </div>
           <div className="flex flex-col container mx-auto items-center">
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Base</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
+              Base
+            </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Bases?.name
                 ? chosenIngredients?.Bases.name
@@ -108,7 +121,9 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
             </div>
             <PlusButton id={"Bases"} setCategory={setCategory} />
             <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Flavouring</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
+              Flavouring
+            </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Flavourings?.name
                 ? chosenIngredients?.Flavourings.name
@@ -116,7 +131,9 @@ const IngredientSelection = ({ setCategory, chosenIngredients, username, setNoSe
             </div>
             <PlusButton id={"Flavourings"} setCategory={setCategory} />
             <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Toppings</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
+              Toppings
+            </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Toppings
                 ? chosenIngredients?.Toppings.map((e) => e.name).join(", ")
