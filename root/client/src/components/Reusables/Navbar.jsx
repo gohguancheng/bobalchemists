@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ currentUser, setSession }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
   const handleLogOut = async () => {
     const response = await (async () =>
       fetch("/api/sessions/logout").then((data) => data.json()))();
@@ -9,6 +11,17 @@ const Navbar = ({ currentUser, setSession }) => {
     window.location.reload();
     console.log("response: ", response);
   };
+
+  useEffect(()=>{
+    const admincheck =
+    (currentUser?.username === "guanch") ||
+    (currentUser?.username === "rizal") ||
+    (currentUser?.username === "danning");
+
+    if(admincheck) setIsAdmin(true);
+  })
+
+
 
   return (
     <div className="h-16 flex flex-row justify-between items-center bg-purple text-lightgray">
@@ -32,6 +45,16 @@ const Navbar = ({ currentUser, setSession }) => {
             </div>
           </Link>
         )}
+
+        {isAdmin ? (
+          <Link to="/admin">
+            <div className="text-gray-100 text-sm font-bold mx-4 font-logo">
+              Admin Page
+            </div>
+          </Link>
+        ) : null
+        }
+
       </span>
       {currentUser?.username ? (
         <span className="flex flex-row justify-between items-center">

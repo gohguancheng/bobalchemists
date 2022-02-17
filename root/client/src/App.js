@@ -8,6 +8,7 @@ import LoginPage from "./Pages/LoginPage";
 import ShowPage from "./Pages/ShowPage";
 import EditPage from "./Pages/EditPage";
 import SearchResultPage from "./Pages/SearchResultPage";
+import AdminPage from "./Pages/AdminPage";
 //* import pages here and plugin pages as components inside retun below
 
 async () => fetch("/api/sessions/authcheck").then((data) => data.json());
@@ -57,7 +58,7 @@ function App() {
             />
           }
         />
-        <Route path="/results" element={<SearchResultPage />} />
+        <Route path="/admin" element={<AdminPage currentUser={session?.currentUser} />} />
         {/* <Route path="/TEMPLATE" element={COMPONENT} /> */}
       </Routes>
     </div>

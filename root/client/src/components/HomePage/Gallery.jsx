@@ -5,12 +5,12 @@ import axios from "axios";
 const Gallery = ({ currentUserData, selectedFilters}) => {
   // gallery holds an array of BOBAcreations objects
   const [gallery, setGallery] = useState([]);
-  console.log("gallery: ", gallery);
 
   // Make api call to get cards data
   useEffect(async () => {
     
     // response => { data: { data } } -> inner data, i.e array, is defined by destructuring
+<<<<<<< HEAD
     if(selectedFilters.length <= 0){
       await axios.get("/api/teacardsinfo").then( ({ data:{data} }) => {
         // console.log("data:", data);
@@ -26,6 +26,12 @@ const Gallery = ({ currentUserData, selectedFilters}) => {
     }
 
   }, [selectedFilters]);
+=======
+    await axios.get("/api/teacardsinfo").then( ({ data:{data} }) => {
+      setGallery(data);
+    });
+  }, []);
+>>>>>>> caea7bb03405029ecfec0ae31e5bd9a97aa91289
 
   const galleryDisplay = gallery.map((e) => (
     <Card key={e._id} info={e} currentUserData={currentUserData} />
