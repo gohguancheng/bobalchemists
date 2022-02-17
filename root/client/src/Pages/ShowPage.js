@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const ShowPage = ( { currentUsername } ) => {
-  const [card, setCard] = useState({});
+  const [ card, setCard] = useState({});
   const [ rightsToEdit, setRightsToEdit ] = useState(false);
   const navigate = useNavigate();
 
@@ -40,10 +40,6 @@ const ShowPage = ( { currentUsername } ) => {
     navigate("/");
   };
 
-
-
-
-
   return (
     <div className="flex bg-lighterpink text-gray-700">
       <CreatedImage />
@@ -58,7 +54,7 @@ const ShowPage = ( { currentUsername } ) => {
             <p>Toppings: {card?.toppings?.map((e) => e.name).join(", ")}</p>
           </div>
           <div>
-            <p className="w-1/3 inline-block">👍 Likes</p>
+            <p className="w-1/3 inline-block">👍 {card?.likes} Likes</p>
             <p className="w-1/3 inline-block">
               Creator: {card?.createdBy}
             </p>
@@ -72,7 +68,7 @@ const ShowPage = ( { currentUsername } ) => {
               Delete
             </Button>
             </div>
-            ) : (!currentUsername ?  <span className="text-xs"> For creators, log in for more functions.</span> : null) }
+            ) : (!currentUsername ?  <div><span className="text-xs"> For creators, log in for more functions.</span></div>: null) }
           </div>
         </div>
       </div>
