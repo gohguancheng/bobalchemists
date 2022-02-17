@@ -8,20 +8,15 @@ const CreatedImage = ({ info }) => {
       <img className="absolute" src={info?.base?.img} alt="base" />
 
       {/* Put TOPPING here*/}
-      <img
-        className="absolute"
-        src="https://drive.google.com/uc?export=view&id=1pgEENjWjQldeA95EyXCXcemZeaNKbMs2"
-        alt="topping(s)"
-      />
-      {/* {info?.toppings.map((topping) => {
+      {info?.toppings?.map((topping) => {
         return <img className="absolute" src={topping?.img} alt="topping(s)" />;
-      })} */}
+      })}
       {/* Put FLAVOURING here */}
       {info?.flavour?.img &&
       info?.flavour?._id !== "620b2afdb98e26a5d939f8d8" ? (
         <img className="absolute" src={info?.flavour?.img} alt="flavouring" />
       ) : null}
-      {/* Put CUP here - so it will appear below BASE and TOPPING */}
+      {/* Put CUP here */}
       <img
         src="https://drive.google.com/uc?export=view&id=1DIvoIC4JTWbeTzwiouiikbe81dmu8VcE"
         alt="cup"
