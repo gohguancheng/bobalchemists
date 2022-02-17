@@ -19,8 +19,9 @@ const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
 
     const dataName = response.data.map((e) => ({
       name: e.name, 
-      ingredientId: e._id}));
-    console.log(dataName);
+      ingredientId: e._id,
+      type: category}));
+    //console.log("gotten data",dataName);
     //const dataName = response.data.map((e) => e.name);
     setOptions(dataName);
   }, []);
@@ -29,6 +30,7 @@ const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
     <ToggleButton
       key={e.ingredientId}
       id={e.ingredientId}
+      type={e.type}
       label={e.name}
       selection={selectedFilters}
       setSelection={setSelectedFilters}

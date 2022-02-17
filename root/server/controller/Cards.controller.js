@@ -43,8 +43,45 @@ Router.get("/", async (req, res) => {
 });
 
 //get "api/teacardsinfo/filter/"
-Router.get("/filter/", async(req, res)=>{
+Router.post("/filterbyingredients", async(req, res)=>{
   const filters = req.body.filters
+  const reformat = {
+    base:[],
+    toppings: [],
+    flavour: []
+  };
+  filters.map((elements)=>{
+    switch(elements.type){
+      case "Bases":
+        reformat.base.push(elements.id);
+        break;
+      case "Toppings":
+        reformat.toppings.push(elements.id);
+        break;
+      case "Flavours":
+        reformat.flavour.push(elements.id);
+        break;
+    }
+  })
+  
+  console.log("i see", filters);
+  try{
+    const filteredCards = await TeaCardsInfo.find(
+      {$or:[{base : {$in : reformat.base}}, 
+        {flavour: {$in: reformat.flavour}},
+        {toppings: {$all: reformat.toppings}}]}
+    ) 
+    .populate("base", ["name", "img"])
+    .populate("flavour", ["name", "img"])
+    .populate("toppings", ["name", "img"]);
+    res.status(200).json({
+      status: "ok",
+      message: "found filtered cards",
+      data: filteredCards
+    })
+  }catch(error){
+    console.log(error);
+  }
 })
 
 //get "api/teacardsinfo/show/:id"
