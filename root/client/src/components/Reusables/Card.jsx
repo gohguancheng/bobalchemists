@@ -11,13 +11,13 @@ const updateDBLikes = async (url, uploadedData) => {
 
 const Card = ({ info, currentUserData }) => {
   const cardID = info._id;
-  if (!!currentUserData) console.log("we have user data!", )
+  //if (!!currentUserData) console.log("we have user data!", )
   const [likeState, setLikeState] = useState({likes: "loading", likedCreations: "loading"});
   const [likedByCurrent, setLikedByCurrent] = useState()
 
-  console.log("liked by me? -> ", likeState, likedByCurrent);
-  console.log("db: ", currentUserData?.likedCreations)
-  console.log("frontend: ", likeState?.likedCreations)
+  //console.log("liked by me? -> ", likeState, likedByCurrent);
+  //console.log("db: ", currentUserData?.likedCreations)
+  //console.log("frontend: ", likeState?.likedCreations)
   
   useEffect(()=>{
     if(!!currentUserData?.likedCreations) {
@@ -26,7 +26,7 @@ const Card = ({ info, currentUserData }) => {
         return {...prev, ...fetchedState}
       })
       if (!!info) {
-        console.log(" is this in liked array in database? ", currentUserData?.likedCreations?.includes(info?._id))
+      //  console.log(" is this in liked array in database? ", currentUserData?.likedCreations?.includes(info?._id))
         const dbShowsLiked = currentUserData?.likedCreations?.includes(info?._id);
         setLikedByCurrent(dbShowsLiked);
       }
