@@ -21,7 +21,7 @@ const Gallery = () => {
     </Link>
   ));
 
-  return <div className="p-4 flex gap-4">{galleryDisplay}</div>;
+  return <div className="p-4 flex flex-wrap gap-4">{galleryDisplay}</div>;
 };
 
 export default Gallery;

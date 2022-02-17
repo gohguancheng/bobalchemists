@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import PlusButton from "./PlusButton";
 const axios = require("axios").default;
 
@@ -175,11 +175,15 @@ const IngredientSelection = ({
               Ensure all fields are filled up / selected.
             </div>
           ) : !!id ? (
-            <input
-              type="submit"
-              value="Edit Your Creation"
-              className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
-            />
+            <div>
+              Warning: The 'like' count will be reset to 0, upon your resubmission.
+              <input
+                type="submit"
+                value="Edit Your Creation"
+                className="bg-red-700 hover:bg-red-500 text-white m-2 p-1 drop-shadow-2xl rounded"
+              />
+              
+            </div>
           ) : (
             <input
               type="submit"
@@ -188,6 +192,7 @@ const IngredientSelection = ({
             />
           )}
         </form>
+        <Link to={`/show/${id}`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Details Page</button></Link>
       </div>
     </div>
   );
