@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import PlusButton from "./PlusButton";
 const axios = require("axios").default;
+import RedAsterisk from "../Reusables/RedAsterisk";
 
 const postCreation = async (credentials) => {
   return axios
@@ -110,6 +111,7 @@ const IngredientSelection = ({
               htmlFor="name"
             >
               Name
+              <RedAsterisk />
             </label>
             <input
               className="border py-2 px-3 text-grey-darkest"
@@ -141,6 +143,7 @@ const IngredientSelection = ({
           <div className="flex flex-col container mx-auto items-center">
             <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
               Base
+              <RedAsterisk />
             </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Bases?.name
@@ -151,6 +154,7 @@ const IngredientSelection = ({
             <br />
             <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
               Flavouring
+              <RedAsterisk />
             </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Flavourings?.name
@@ -172,7 +176,10 @@ const IngredientSelection = ({
           </div>
           {!readyToSubmit ? (
             <div className="p-1 text-sm">
-              Ensure all fields are filled up / selected.
+              <p className="text-red-700 border-2 border-red-700 rounded-md text-xs">
+                Note: Please fill in 'Name' field and select a minimum of 1 base
+                and 1 flavouring for 'Submit' button to appear.
+              </p>
             </div>
           ) : !!id ? (
             <div>
@@ -192,7 +199,11 @@ const IngredientSelection = ({
             />
           )}
         </form>
-        <Link to={`/show/${id}`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Details Page</button></Link>
+      { !!currentSelection ? 
+        <Link to={`/show/${id}`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Details Page</button></Link> 
+        :
+        <Link to={`/`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Home Page</button></Link>
+      }
       </div>
     </div>
   );
