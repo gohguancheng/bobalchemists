@@ -6,7 +6,7 @@ const User = require("../models/userData.js");
 const seedUsers = require("../models/userData_seed");
 
 // ROUTES (/api/registration/)
-// post '/api/registration/' index
+// post '/api/registration/check' index
 router.post("/check", async (req, res) => {
   try {
     const foundUser = await User.findOne({ username: req.body.username });
