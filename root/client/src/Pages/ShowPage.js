@@ -30,17 +30,12 @@ const ShowPage = ({ currentUsername }) => {
 
   const handleEditButtonClick = () => {
     console.log("edit button clicked");
-    // redirect user to the "create page"
     navigate(`/edit/${id}`);
-    // "create page" should have fields populated with 'card' details
   };
 
   const handleDeleteButtonClick = async () => {
     console.log("delete button clicked");
     setAlertOpen(true);
-    // deletes card from database
-    // await axios.delete(`/api/teacardsinfo/delete/${id}`);
-    // navigate("/");
   };
 
   return (
