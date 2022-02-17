@@ -72,7 +72,6 @@ Router.post("/newcard", async (req, res) => {
   }
   try {
     const createNewCard = await TeaCardsInfo.create(newCard);
-    console.log(createNewCard);
     const updateUser = await User.findOneAndUpdate(
                                     { username: createNewCard.createdBy }, 
                                     { $push: {userCreations: createNewCard._id}}
@@ -115,6 +114,28 @@ Router.put("/liked/:id", async (req, res) =>{
   const likedCard = req.body.likes;
   const likedUser = req.body.username;
   try{
+      const checkLiked = await User.findOne(
+        { username: likedUser},
+        { likedCreations: 1}
+        );
+      
+      let alreadyliked = false;
+      checkLiked.likedCreations.map((likedId)=>{
+        if(likedId === id){
+          alreadyliked = true;
+        }
+      })
+
+      if(alreadyliked === true){
+        res.status(400).json({
+          status: "error: already liked",
+          message: "user has already liked this card",
+          data: checkLiked
+        })
+        return;
+      }
+      console.log(alreadyliked);
+      
       const updateLikes = await TeaCardsInfo.findByIdAndUpdate(
         id,
         {$set :{ likes : likedCard}},
