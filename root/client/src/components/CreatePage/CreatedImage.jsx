@@ -1,7 +1,6 @@
 import React from "react";
 
 const CreatedImage = ({ info }) => {
-  console.log("info", info?.toppings);
   return (
     <div className="container inline-block w-1/4 h-1/3 relative bg-lightgray rounded-full drop-shadow-md">
       {/* Put BASE here */}
