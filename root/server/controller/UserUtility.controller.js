@@ -4,6 +4,7 @@ const Router = express.Router();
 const User = require("../models/userData.js");
 
 //THESE ROUTES ARE NOT YET ACCESSIBLE
+
 //get 'api/userdata/' ---> route only accesible by admin
 
 //get 'api/userdata/admin/:id' ---> for listing admins
