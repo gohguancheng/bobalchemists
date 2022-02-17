@@ -42,6 +42,11 @@ Router.get("/", async (req, res) => {
   }
 });
 
+//get "api/teacardsinfo/filter/"
+Router.get("/filter/", async(req, res)=>{
+  const filters = req.body.filters
+})
+
 //get "api/teacardsinfo/show/:id"
 Router.get("/show/:id", async (req, res) => {
   try {
@@ -156,24 +161,7 @@ Router.put("/liked/:id", async (req, res) =>{
   }
 });
 
-Router.put("/update/:id", async (req, res) => {
-  const { id } = req.params;
-  const updatedCardData = req.body;
-  try {
-    const updatedCard = await TeaCardsInfo.findByIdAndUpdate(
-      id,
-      updatedCardData,
-      { new: true }
-    );
-    res.status(200).json({
-      status: "ok",
-      message: "tea card is edited",
-      data: updatedCard,
-    });
-  } catch (error) {
-    console.log("at/update/:id", error);
-  }
-});
+
 
 //put "api/teacardsinfo/unliked/:id" --> for unlikes
 Router.put("/unliked/:id", async (req, res) =>{
@@ -225,7 +213,24 @@ Router.put("/unliked/:id", async (req, res) =>{
   }
 });
 
-
+Router.put("/update/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedCardData = req.body;
+  try {
+    const updatedCard = await TeaCardsInfo.findByIdAndUpdate(
+      id,
+      updatedCardData,
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      message: "tea card is edited",
+      data: updatedCard,
+    });
+  } catch (error) {
+    console.log("at/update/:id", error);
+  }
+});
 
 //delete "api/teacardsinfo/delete/:id"
 Router.delete("/delete/:id", async (req, res) => {

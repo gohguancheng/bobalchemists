@@ -16,14 +16,20 @@ const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
 
   useEffect(async () => {
     const response = await getIngredientData(ingredientURL[category]);
-    const dataName = response.data.map((e) => e.name);
+
+    const dataName = response.data.map((e) => ({
+      name: e.name, 
+      ingredientId: e._id}));
+    console.log(dataName);
+    //const dataName = response.data.map((e) => e.name);
     setOptions(dataName);
   }, []);
 
   const ingredientsDisplay = options.map((e) => (
     <ToggleButton
-      key={e}
-      label={e}
+      key={e.ingredientId}
+      id={e.ingredientId}
+      label={e.name}
       selection={selectedFilters}
       setSelection={setSelectedFilters}
       category={category}

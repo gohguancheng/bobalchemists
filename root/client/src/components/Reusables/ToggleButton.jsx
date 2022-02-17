@@ -1,15 +1,19 @@
 import React from "react";
 
-const ToggleButton = ({ label, selection, setSelection, category }) => {
+const ToggleButton = ({ id, label, selection, setSelection, category }) => {
   const handleChange = (event) => {
     const isSelected = event.target.checked;
-    const labelToFilter = event.target.name;
+    const labelToFilter = {
+      name: event.target.name,
+      id: event.target.id
+    };
+    //const labelToFilter = event.target.name;
     if (isSelected) {
       setSelection((prev) => [...prev, labelToFilter]);
     } else {
-      const index = selection.indexOf(labelToFilter);
+      const index = selection.findIndex((element)=>element.name === labelToFilter.name);
       if (index > -1) {
-        setSelection((prev) => prev.filter((item) => item !== label));
+        setSelection((prev) => prev.filter((item, i) =>index !== i));
       }
     }
   };
@@ -20,7 +24,7 @@ const ToggleButton = ({ label, selection, setSelection, category }) => {
         <input
           type="checkbox"
           name={label}
-          id={label}
+          id={id}
           onChange={handleChange}
           className="checked:bg-blue-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-4 h-4 rounded-full bg-white border-2 appearance-none cursor-pointer"
         />
