@@ -57,6 +57,51 @@ Router.get("/toppings/seed", async (req, res) => {
   }
 });
 
+// get "/api/ingredients/new/bases/"
+Router.post("/new/bases", async (req, res) => {
+  try {
+    const input = req.body;
+    const newBase = await Bases.create(input);
+    res.status(200).json({
+      status: "ok",
+      message: "base added",
+      data: newBase,
+    });
+  } catch (error) {
+    console.log("at /new/bases", error);
+  }
+});
+
+// post "/api/ingredients/new/flavours"
+Router.post("/new/flavourings", async (req, res) => {
+  try {
+    const input = req.body;
+    const newFlavours = await Flavours.create(input);
+    res.status(200).json({
+      status: "ok",
+      message: "flavours added",
+      data: newFlavours,
+    });
+  } catch (error) {
+    console.log("at /new/flavours", error);
+  }
+});
+
+// get "/api/ingredients/new/toppings"
+Router.post("/new/toppings/", async (req, res) => {
+  try {
+    const input = req.body;
+    const newToppings = await Toppings.create(input);
+    res.status(200).json({
+      status: "ok",
+      message: "toppings added",
+      data: newToppings,
+    });
+  } catch (error) {
+    console.log("at /new/toppings", error);
+  }
+});
+
 // get "/api/ingredients/base"
 Router.get("/base", async (req, res) => {
   try {
@@ -120,22 +165,129 @@ Router.get("/", async (req, res) => {
   }
 });
 
-Router.post("api/ingredients/delete/:id", async (req, res) => {
+// post "/api/ingredients/delete/:id/bases"
+Router.delete("/delete/:id/bases", async (req, res) => {
   const id = req.params.id;
-  const cat = req.body.cat;
-  let model = null;
-  if (cat === "bases") model = Bases;
-  if (cat === "flavourings") model = Flavours;
-  if (cat === "toppings") model = Toppings;
   try {
-    await model.findByIdAndDelete(id);
+    const response = await Bases.findByIdAndDelete(id);
     res.status(200).json({
       status: "ok",
       message: "indiv ingredient deleted",
-      data: null,
+      response: response,
     });
   } catch (error) {
     console.log("at /delete/:id", error);
+  }
+});
+
+// post "/api/ingredients/delete/:id/flavourings"
+Router.delete("/delete/:id/flavourings", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const response = await Flavours.findByIdAndDelete(id);
+    res.status(200).json({
+      status: "ok",
+      message: "indiv ingredient deleted",
+      response: response,
+    });
+  } catch (error) {
+    console.log("at /delete/:id", error);
+  }
+});
+
+// post "/api/ingredients/delete/:id/toppings"
+Router.delete("/delete/:id/toppings", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const response = await Toppings.findByIdAndDelete(id);
+    res.status(200).json({
+      status: "ok",
+      message: "indiv ingredient deleted",
+      response: response,
+    });
+  } catch (error) {
+    console.log("at /delete/:id", error);
+  }
+});
+
+// put "/api/ingredients/update/bases/:id/"
+Router.put("/update/bases/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  try {
+    const updatedRes = await Bases.findByIdAndUpdate(
+      id,
+      updatedData,
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      message: "base is edited",
+      data: updatedRes,
+    });
+  } catch (error) {
+    console.log("/update/bases/:id", error);
+  }
+});
+
+// put "/api/ingredients/update/flavourings/:id/"
+Router.put("/update/flavourings/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  try {
+    const updatedRes = await Flavours.findByIdAndUpdate(
+      id,
+      updatedData,
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      message: "flavour is edited",
+      data: updatedRes,
+    });
+  } catch (error) {
+    console.log("/update/flavourings/:id", error);
+  }
+});
+
+// put "/api/ingredients/update/toppings/:id/"
+Router.put("/update/toppings/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  try {
+    const updatedRes = await Toppings.findByIdAndUpdate(
+      id,
+      updatedData,
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      message: "topping is edited",
+      data: updatedRes,
+    });
+  } catch (error) {
+    console.log("/update/toppings/:id", error);
+  }
+});
+
+
+// put "/api/ingredients/update/toppings/:id/"
+Router.put("/update/toppings/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  try {
+    const updatedRes = await Toppings.findByIdAndUpdate(
+      id,
+      updatedData,
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      message: "topping is edited",
+      data: updatedRes,
+    });
+  } catch (error) {
+    console.log("at/update/:id", error);
   }
 });
 

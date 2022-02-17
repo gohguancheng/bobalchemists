@@ -12,7 +12,6 @@ const ShowPage = ({ currentUsername }) => {
   const [alertOpen, setAlertOpen] = useState(false);
 
   const { id } = useParams();
-  console.log(card);
   useEffect(async () => {
     await axios.get(`/api/teacardsinfo/show/${id}`).then((res) => {
       setCard(res?.data?.data);
@@ -22,14 +21,12 @@ const ShowPage = ({ currentUsername }) => {
   useEffect(() => {
     if (!!currentUsername && !!card?.createdBy) {
       if (currentUsername === card.createdBy) {
-        console.log("valid user!");
         setRightsToEdit(true);
       }
     }
   }, [card]);
 
   const handleEditButtonClick = () => {
-    console.log("edit button clicked");
     navigate(`/edit/${id}`);
   };
 
@@ -50,8 +47,8 @@ const ShowPage = ({ currentUsername }) => {
             <div className="py-5">
               <h1>Ingredients</h1>
               <p>Base: {card?.base?.name}</p>
-              <p>Flavouring: {card?.flavour?.name}</p>
-              <p>Toppings: {card?.toppings?.map((e) => e.name).join(", ")}</p>
+              <p>Flavouring: { !card?.flavour ? "None" : card?.flavour?.name}</p>
+              <p>Toppings: {card?.toppings?.length === 0 ? "None" : card?.toppings?.map((e) => e.name).join(", ")}</p>
             </div>
             <div>
               <p className="w-1/3 inline-block">👍 {card?.likes} Likes</p>
