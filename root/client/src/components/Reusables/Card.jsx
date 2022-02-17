@@ -11,7 +11,7 @@ const Card = ({ info }) => {
   const handleLikeClick = () => {};
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 bg-white rounded-lg w-80 drop-shadow-md hover:border-purple hover:border-2">
+    <div className="flex flex-col justify-center items-center gap-4 bg-white rounded-lg w-80 drop-shadow-md hover:border-purple hover:border-2 hover:drop-shadow-md">
       <CreatedImage info={info} />
       <div className="h-max text-center text-sm font-semibold">{info.name}</div>
       <span className="flex flex-row gap-4 justify-between items-center">
