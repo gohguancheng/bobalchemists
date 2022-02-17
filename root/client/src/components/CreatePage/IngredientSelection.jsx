@@ -28,8 +28,6 @@ const IngredientSelection = ({
   const [readyToSubmit, setReadyToSubmit] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log("formData: ", formData);
-  // console.log("currentsel: ", currentSelection)
 
   const postEdit = async (credentials) => {
     return axios

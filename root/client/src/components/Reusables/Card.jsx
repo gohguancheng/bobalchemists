@@ -6,7 +6,6 @@ const axios = require("axios").default;
 
 const updateDBLikes = async (url, uploadedData) => {
   const response = axios.put(url, uploadedData);
-  console.log("update likes API:", response);
 };
 
 const getUserLikes = async (userID) => {
@@ -21,9 +20,6 @@ const Card = ({ info, currentUserData }) => {
   const [likedByCurrent, setLikedByCurrent] = useState();
   const [user, setUser] = useState();
 
-  //console.log("liked by me? -> ", likeState, likedByCurrent);
-  // console.log("currentuser", currentUserData)
-  //console.log("frontend: ", likeState?.likedCreations)
   
   //set up local user data --> for page refreshes
   useEffect(async ()=>{
@@ -48,13 +44,10 @@ const Card = ({ info, currentUserData }) => {
   }, [user])
 
   const handleLikeClick = async () => {
-    console.log("clicked!");
     if (!currentUserData || !info) {
-      console.log("login to like!");
       return;
     }
     if (likedByCurrent) {
-      console.log("unlike!");
       const updatedLikes = likeState.likes - 1;
       const dataForUpload = {
         likes: updatedLikes,
@@ -70,7 +63,6 @@ const Card = ({ info, currentUserData }) => {
       });
       setLikedByCurrent((prev) => !prev);
     } else if (!likedByCurrent) {
-      console.log("like!");
       const updatedLikes = likeState.likes + 1;
       const dataForUpload = {
         likes: updatedLikes,
