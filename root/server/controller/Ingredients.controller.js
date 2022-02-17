@@ -120,4 +120,23 @@ Router.get("/", async (req, res) => {
   }
 });
 
+Router.post("api/ingredients/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  const cat = req.body.cat;
+  let model = null;
+  if (cat === "bases") model = Bases;
+  if (cat === "flavourings") model = Flavours;
+  if (cat === "toppings") model = Toppings;
+  try {
+    await model.findByIdAndDelete(id);
+    res.status(200).json({
+      status: "ok",
+      message: "indiv ingredient deleted",
+      data: null,
+    });
+  } catch (error) {
+    console.log("at /delete/:id", error);
+  }
+});
+
 module.exports = Router;
