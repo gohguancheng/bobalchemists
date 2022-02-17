@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const db = mongoose.connection;
 
 //.env import and configuration
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config({ path: "../../.env" });
 const PORT = process.env.PORT || 4000;
 const mongoURI = process.env.MONGODB_URI;
 
@@ -34,7 +34,7 @@ db.on("connected", () => console.log("mongo database connected successfully!"));
 db.on("disconnected", () => console.log("mongo database disconnected"));
 
 //app middleware
-app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -58,10 +58,10 @@ const populateTestController = require("./models/populate_test");
 app.use("/api/populateTest/", populateTestController);
 
 //for build
-/* app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
- */
+
 app.listen(PORT, () => {
   console.log("listening on port: " + PORT);
 });
