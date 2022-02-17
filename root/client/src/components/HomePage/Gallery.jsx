@@ -5,13 +5,11 @@ import axios from "axios";
 const Gallery = ({ currentUserData }) => {
   // gallery holds an array of BOBAcreations objects
   const [gallery, setGallery] = useState([]);
-  console.log("gallery: ", gallery);
 
   // Make api call to get cards data
   useEffect(async () => {
     // response => { data: { data } } -> inner data, i.e array, is defined by destructuring
     await axios.get("/api/teacardsinfo").then( ({ data:{data} }) => {
-      // console.log("data:", data);
       setGallery(data);
     });
   }, []);
