@@ -63,7 +63,7 @@ const AvailableIngredients = ({
         if (index === -1) {
           const newArr = [
             ...chosenIngredients[category],
-            { name: name, id: id },
+            { name: name, id: id, img: img },
           ];
           const added = { [category]: newArr };
           setChosenIngredients((prev) => {

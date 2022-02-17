@@ -11,7 +11,9 @@ const CustomImage = ({ chosenIngredients }) => {
         alt="base"
       />
       {/* Put TOPPING here*/}
-      <img className="absolute" src="" alt="topping(s)" />
+      {chosenIngredients?.Toppings?.map((topping) => {
+        return <img className="absolute" src={topping?.img} alt="topping(s)" />;
+      })}
       {/* Put FLAVOURING here */}
       <img
         className="absolute"
