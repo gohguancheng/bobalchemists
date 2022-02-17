@@ -72,7 +72,6 @@ Router.post("/newcard", async (req, res) => {
   }
   try {
     const createNewCard = await TeaCardsInfo.create(newCard);
-    console.log(createNewCard);
     const updateUser = await User.findOneAndUpdate(
                                     { username: createNewCard.createdBy }, 
                                     { $push: {userCreations: createNewCard._id}}
@@ -115,6 +114,28 @@ Router.put("/liked/:id", async (req, res) =>{
   const likedCard = req.body.likes;
   const likedUser = req.body.username;
   try{
+      const checkLiked = await User.findOne(
+        { username: likedUser},
+        { likedCreations: 1}
+        );
+      
+      let alreadyliked = false;
+      checkLiked.likedCreations.map((likedId)=>{
+        if(likedId === id){
+          alreadyliked = true;
+        }
+      })
+
+      if(alreadyliked === true){
+        res.status(400).json({
+          status: "error: already liked",
+          message: "user has already liked this card",
+          data: checkLiked
+        })
+        return;
+      }
+      console.log(alreadyliked);
+      
       const updateLikes = await TeaCardsInfo.findByIdAndUpdate(
         id,
         {$set :{ likes : likedCard}},
@@ -134,8 +155,60 @@ Router.put("/liked/:id", async (req, res) =>{
   }catch(error){
     console.log("at liked/:id: ", error);
   }
+});
 
-})
+Router.put("/update/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedCardData = req.body;
+  try {
+    const updatedCard = await TeaCardsInfo.findByIdAndUpdate(
+      id,
+      updatedCardData,
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      message: "tea card is edited",
+      data: updatedCard,
+    });
+  } catch (error) {
+    console.log("at/update/:id", error);
+  }
+});
+
+//put "api/teacardsinfo/unliked/:id" --> for unlikes
+Router.put("/unliked/:id", async (req, res) =>{
+  const { id } = req.params;
+  const unlikedCard = req.body.likes;
+  const unlikedUser = req.body.username;
+  try{
+/*       const checkLiked = await User.findOne(
+        { username: likedUser},
+        { likedCreations: 1}
+      ); */
+      const updateUser = await User.findOneAndUpdate(
+        { username: unlikedUser},
+        { $pull: {likedCreations : id}},
+        {new: true}
+      )
+      const updateLikes = await TeaCardsInfo.findByIdAndUpdate(
+        id,
+        {$set :{ likes : unlikedCard}},
+        {new: true}
+      )
+
+      res.status(200).json({
+        status: "ok",
+        message: "teacards unliked",
+        data: updateLikes,
+        userData : updateUser
+      })
+  }catch(error){
+    console.log("at liked/:id: ", error);
+  }
+});
+
+
 
 //delete "api/teacardsinfo/delete/:id"
 Router.delete("/delete/:id", async (req, res) => {
