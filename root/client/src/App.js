@@ -42,7 +42,7 @@ function App() {
           }
         />
         <Route path="/login" element={<LoginPage setSession={setSession} />} />
-        <Route path="/show/:id" element={<ShowPage />} />
+        <Route path="/show/:id" element={<ShowPage currentUsername={session?.currentUser?.username} />} />
         <Route
           path="/edit/:id"
           element={

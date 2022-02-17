@@ -7,6 +7,7 @@ const SignUpForm = ({ setAccessSignUp }) => {
   const [passwordInput, setPasswordInput] = useState();
   const [signupResult, setSignupResult] = useState(null);
   const [nameAvailable, setNameAvailable] = useState(true);
+  const [keyInput, setKeyInput] = useState(null);
   const navigate = useNavigate();
 
   async function submitCredentials(credentials) {
@@ -129,13 +130,20 @@ const SignUpForm = ({ setAccessSignUp }) => {
               </div> */}
 
           <div>
-            <button
+          {            (keyInput === "3RDG") ? (<button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 mb-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
               Sign Up
-            </button>
+            </button>) : <div className="mb-4">
+              <input
+                  name="testerpass"
+                  type="text"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 w-40 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Tester passcode"
+                  onChange={(e) => setKeyInput(e.target.value)}></input> <p className="text-xs">App in beta: Please ask admins for passcode to complete sign up.</p> 
+            </div> }
           </div>
         </form>
         <span>
