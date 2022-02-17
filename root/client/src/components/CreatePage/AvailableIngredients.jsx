@@ -3,7 +3,7 @@ import React from "react";
 // Got Card component from https://kimia-ui.vercel.app/components/card
 
 const style = {
-  card: `relative flex flex-col border-2 border-gray-200 rounded-lg`,
+  card: `relative flex flex-col border-2 border-gray-200 rounded-lg bg-white`,
   cardBody: `block flex-grow flex-shrink p-5`,
   cardTitle: `font-medium text-gray-700 mb-3`,
   cardText: `text-gray-500`,
@@ -83,7 +83,7 @@ const AvailableIngredients = ({
   };
 
   return (
-    <div className="container mx-auto h-screen w-1/2 text-center justify-around">
+    <div className="container mx-auto h-screen w-1/3 text-center justify-around">
       <h1 className="font-bold">Click below to select</h1>
       <h1 className="font-bold">{category}</h1>
       <div className="flex flex-wrap">
@@ -91,7 +91,7 @@ const AvailableIngredients = ({
           ? ingredientsList[category].map((element, id) => {
               return (
                 <div
-                  className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3"
+                  className="w-40 m-2"
                   key={id}
                   onClick={(evt) =>
                     handleCardClick(evt, element.name, element._id, element.img)
