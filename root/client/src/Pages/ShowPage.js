@@ -3,8 +3,6 @@ import Button from "../components/Reusables/Button";
 import CreatedImage from "../components/CreatePage/CreatedImage";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationIcon } from "@heroicons/react/outline";
 import Alert from "../components/Reusables/Alert";
 
 const ShowPage = ({ currentUsername }) => {
