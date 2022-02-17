@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import IngredientSelection from "../components/CreatePage/IngredientSelection";
 import AvailableIngredients from "../components/CreatePage/AvailableIngredients";
 import CreatedImage from "../components/CreatePage/CreatedImage";
+import CustomImage from "../components/CreatePage/CustomImage";
 import axios from "axios";
 
 const CreatePage = ({ currentUsername, setNoSessionFound }) => {
@@ -40,7 +41,7 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
 
   return (
     <div className="flex bg-lighterpink font-normal">
-      <CreatedImage />
+      <CustomImage chosenIngredients={chosenIngredients} />
       <div className="container w-3/4 h-screen flex">
         <IngredientSelection
           category={category}
