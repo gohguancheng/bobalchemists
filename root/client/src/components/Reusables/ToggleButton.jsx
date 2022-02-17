@@ -1,12 +1,14 @@
 import React from "react";
 
-const ToggleButton = ({ id, label, selection, setSelection, category }) => {
+const ToggleButton = ({ id, label, type, selection, setSelection, category }) => {
   const handleChange = (event) => {
     const isSelected = event.target.checked;
     const labelToFilter = {
       name: event.target.name,
-      id: event.target.id
+      id: event.target.id,
+      type: type
     };
+    console.log(type);
     //const labelToFilter = event.target.name;
     if (isSelected) {
       setSelection((prev) => [...prev, labelToFilter]);

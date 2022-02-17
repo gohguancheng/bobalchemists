@@ -29,7 +29,7 @@ const ContentContainer = ( {currentUserData} ) => {
       </div>
       <div className="col-start=5 col-end-6 row-start-1 row-end-2">Search</div>
       <div className="col-start-2 row-start-2 col-end-6 row-end-6">
-        <Gallery currentUserData={currentUserData} />
+        <Gallery currentUserData={currentUserData} selectedFilters={selectedFilters}/>
       </div>
     </div>
   );
