@@ -31,7 +31,7 @@ function App() {
     <div className="App font-sans h-full w-full">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage currentUserData={session?.currentUser} />} />
         <Route
           path="/create"
           element={

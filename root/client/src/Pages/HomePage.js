@@ -1,10 +1,10 @@
 import React from "react";
 import ContentContainer from "../components/HomePage/ContentContainer";
 
-const HomePage = () => {
+const HomePage = ({ currentUserData }) => {
   return (
     <div className="w-screen bg-lighterpink text-gray-700">
-      <ContentContainer />
+      <ContentContainer currentUserData={currentUserData} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import FiltersContainer from "./FiltersContainer";
 import Gallery from "./Gallery";
 import Logo from "../Reusables/Logo";
 
-const ContentContainer = () => {
+const ContentContainer = ( {currentUserData} ) => {
   const [selectedFilters, setSelectedFilters] = useState([]);
   console.log("selectedOptions: ", selectedFilters);
   return (
@@ -28,7 +28,7 @@ const ContentContainer = () => {
       </div>
       <div className="col-start=5 col-end-6 row-start-1 row-end-2">Search</div>
       <div className="col-start-2 row-start-2 col-end-6 row-end-6">
-        <Gallery />
+        <Gallery currentUserData={currentUserData} />
       </div>
     </div>
   );
