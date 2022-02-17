@@ -109,6 +109,34 @@ Router.put("/update/:id", async (req, res) => {
   }
 });
 
+//put "api/teacardsinfo/liked/:id" --> for likes
+Router.put("/liked/:id", async (req, res) =>{
+  const { id } = req.params;
+  const likedCard = req.body.likes;
+  const likedUser = req.body.username;
+  try{
+      const updateLikes = await TeaCardsInfo.findByIdAndUpdate(
+        id,
+        {$set :{ likes : likedCard}},
+        {new: true}
+      )
+      const updateUser = await User.findOneAndUpdate(
+        { username: likedUser},
+        { $push: {likedCreations : id}},
+        {new: true}
+      )
+      res.status(200).json({
+        status: "ok",
+        message: "teacards liked",
+        data: updateLikes,
+        userData : updateUser
+      })
+  }catch(error){
+    console.log("at liked/:id: ", error);
+  }
+
+})
+
 //delete "api/teacardsinfo/delete/:id"
 Router.delete("/delete/:id", async (req, res) => {
   const { id } = req.params;
