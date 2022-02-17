@@ -46,7 +46,7 @@ const Card = ({ info, currentUserData }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 bg-white rounded-lg w-80 drop-shadow-md">
+    <div className="flex flex-col justify-center items-center gap-4 bg-white rounded-lg w-80 drop-shadow-md hover:border-purple hover:border-2 hover:drop-shadow-md">
       <Link key={info._id} to={`/show/${info._id}`}>
         <div>
         <CreatedImage info={info} />

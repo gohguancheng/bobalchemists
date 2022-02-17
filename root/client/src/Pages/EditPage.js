@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import CreatedImage from "../components/CreatePage/CreatedImage";
+import CustomImage from "../components/CreatePage/CustomImage";
 import IngredientSelection from "../components/CreatePage/IngredientSelection";
 import AvailableIngredients from "../components/CreatePage/AvailableIngredients";
 
@@ -48,18 +49,26 @@ const EditPage = ({ currentUsername, setNoSessionFound }) => {
   useEffect(() => {
     //triggers only once
     const initial = {
-      Bases: {name: currentSelection?.base?.name, id: currentSelection?.base?._id },
-      Flavourings: {name: currentSelection?.flavour?.name, id: currentSelection?.flavour?._id },
-      Toppings: currentSelection?.toppings?.map((e)=> {
-        return {name: e.name, id: e._id}
-      })
+      Bases: {
+        name: currentSelection?.base?.name,
+        id: currentSelection?.base?._id,
+        img: currentSelection?.base?.img,
+      },
+      Flavourings: {
+        name: currentSelection?.flavour?.name,
+        id: currentSelection?.flavour?._id,
+        img: currentSelection?.flavour?.img,
+      },
+      Toppings: currentSelection?.toppings?.map((e) => {
+        return { name: e.name, id: e._id, img: e.img };
+      }),
     };
     setChosenIngredients({ ...chosenIngredients, ...initial });
   }, [currentSelection]);
 
   return (
     <div className="flex bg-lighterpink font-normal">
-      <CreatedImage />
+      <CustomImage chosenIngredients={chosenIngredients} />
       <div className="container w-3/4 h-screen flex">
         <IngredientSelection
           category={category}

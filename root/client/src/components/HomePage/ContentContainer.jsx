@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FiltersContainer from "./FiltersContainer";
 import Gallery from "./Gallery";
 import Logo from "../Reusables/Logo";
+import Button from "../Reusables/Button";
 
 const ContentContainer = ( {currentUserData} ) => {
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -22,8 +23,8 @@ const ContentContainer = ( {currentUserData} ) => {
           </h1>
         </div>
         <span className="basis-1/6 flex flex-row items-center">
-          <button className="h-full w-max p-1">Popular</button>
-          <button className="h-full w-max p-1">Recently Added</button>
+          <Button color="regular">Popular</Button>
+          <Button color="regular">Recently added</Button>
         </span>
       </div>
       <div className="col-start=5 col-end-6 row-start-1 row-end-2">Search</div>
