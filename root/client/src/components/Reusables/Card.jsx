@@ -4,10 +4,11 @@ import CreatedImage from "../CreatePage/CreatedImage";
 const axios = require("axios").default;
 
 const updateDBLikes = () => {
-
+  const response = axios.put(url, uploadedData)
 }
 
 const Card = ({ info }) => {
+  const cardID = info._id;
   console.log(info);
 
   const handleLikeClick = () => {
