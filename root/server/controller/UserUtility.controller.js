@@ -12,7 +12,8 @@ const User = require("../models/userData.js");
 //put 'api/userdata/permissions/:id' ---> toggle permissons: only assessible by admin
 
 //get 'api/userdata/creations/:id' ---> to populate and show creations
-Router.get("creations/:id", async (req, res) => {
+
+Router.get("/creations/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const populatedCreations = await User.findById(id)
@@ -28,7 +29,8 @@ Router.get("creations/:id", async (req, res) => {
 })
 //get 'api/userdata/liked/:id'---> to populate and show liked
 
-Router.get("liked/:id", async (req, res) => {
+
+Router.get("/liked/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const populatedLikes = await User.findById(id)
