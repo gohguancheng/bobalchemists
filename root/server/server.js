@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const db = mongoose.connection;
 
 //.env import and configuration
-require("dotenv").config({ path: "../../.env" });
+require("dotenv").config({ path: "../../.env" });  
 const PORT = process.env.PORT || 4000;
 const mongoURI = process.env.MONGODB_URI;
 
@@ -41,7 +41,7 @@ app.use(
   session({
     secret: process.env.SECRET, //some random string
     resave: true,
-    cookie: { maxAge: 60*60*1000 },
+    cookie: { maxAge: 60 * 60 * 1000 },
     saveUninitialized: false,
   })
 );

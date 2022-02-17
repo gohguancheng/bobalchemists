@@ -8,8 +8,15 @@ const CreatedImage = ({ info }) => {
       <img className="absolute" src={info?.base?.img} alt="base" />
 
       {/* Put TOPPING here*/}
-      {info?.toppings?.map((topping) => {
-        return <img className="absolute" src={topping?.img} alt="topping(s)" />;
+      {info?.toppings?.map((topping, id) => {
+        return (
+          <img
+            className="absolute"
+            src={topping?.img}
+            alt="topping(s)"
+            key={id}
+          />
+        );
       })}
       {/* Put FLAVOURING here */}
       {info?.flavour?.img &&
