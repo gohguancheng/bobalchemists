@@ -63,11 +63,7 @@ const IngredientSelection = ({
   }, [nameInput, descriptionInput, chosenIngredients, username]);
 
   useEffect(() => {
-    if (
-      formData.base !== undefined &&
-      formData.flavour !== undefined &&
-      formData.name
-    ) {
+    if (formData.base !== undefined && formData.name) {
       setReadyToSubmit(true);
     } else {
       setReadyToSubmit(false);
@@ -154,7 +150,6 @@ const IngredientSelection = ({
             <br />
             <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
               Flavouring
-              <RedAsterisk />
             </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Flavourings?.name
@@ -178,18 +173,18 @@ const IngredientSelection = ({
             <div className="p-1 text-sm">
               <p className="text-red-700 border-2 border-red-700 rounded-md text-xs">
                 Note: Please fill in 'Name' field and select a minimum of 1 base
-                and 1 flavouring for 'Submit' button to appear.
+                for 'Submit' button to appear.
               </p>
             </div>
           ) : !!id ? (
             <div>
-              Warning: The 'like' count will be reset to 0, upon your resubmission.
+              Warning: The 'like' count will be reset to 0, upon your
+              resubmission.
               <input
                 type="submit"
                 value="Edit Your Creation"
                 className="bg-red-700 hover:bg-red-500 text-white m-2 p-1 drop-shadow-2xl rounded"
               />
-              
             </div>
           ) : (
             <input
@@ -199,7 +194,11 @@ const IngredientSelection = ({
             />
           )}
         </form>
-        <Link to={`/show/${id}`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Details Page</button></Link>
+        <Link to={`/show/${id}`}>
+          <button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">
+            Return to Details Page
+          </button>
+        </Link>
       </div>
     </div>
   );
