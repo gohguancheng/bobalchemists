@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../Reusables/Card";
-import { cardInfo } from "./seedCards";
 import axios from "axios";
 
 const Gallery = () => {
-  const [gallery, setGallery] = useState(cardInfo);
+  // gallery holds an array of BOBAcreations objects
+  const [gallery, setGallery] = useState([]);
   console.log("gallery: ", gallery);
+
   // Make api call
   useEffect(async () => {
-    await axios.get("/api/teacardsinfo").then((res) => {
-      // console.log("res", res.data.data);
-      setGallery(res?.data?.data);
-      // console.log("res?.data?.data", res?.data?.data);
-      console.log("gallery", gallery);
+    // response => { data: { data } } -> inner data, i.e array, is defined by destructuring
+    await axios.get("/api/teacardsinfo").then( ({ data:{data} }) => {
+      // console.log("data:", data);
+      setGallery(data);
     });
   }, []);
 

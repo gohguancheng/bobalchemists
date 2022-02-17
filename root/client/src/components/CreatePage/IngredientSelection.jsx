@@ -199,7 +199,11 @@ const IngredientSelection = ({
             />
           )}
         </form>
-        <Link to={`/show/${id}`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Details Page</button></Link>
+      { !!currentSelection ? 
+        <Link to={`/show/${id}`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Details Page</button></Link> 
+        :
+        <Link to={`/`}><button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">Return to Home Page</button></Link>
+      }
       </div>
     </div>
   );
