@@ -4,9 +4,9 @@ import CreatedImage from "../components/CreatePage/CreatedImage";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
-const ShowPage = ( { currentUsername } ) => {
-  const [ card, setCard] = useState({});
-  const [ rightsToEdit, setRightsToEdit ] = useState(false);
+const ShowPage = ({ currentUsername }) => {
+  const [card, setCard] = useState({});
+  const [rightsToEdit, setRightsToEdit] = useState(false);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -24,7 +24,7 @@ const ShowPage = ( { currentUsername } ) => {
         setRightsToEdit(true);
       }
     }
-  } , [card])
+  }, [card]);
 
   const handleEditButtonClick = () => {
     console.log("edit button clicked");
@@ -42,7 +42,7 @@ const ShowPage = ( { currentUsername } ) => {
 
   return (
     <div className="flex bg-lighterpink text-gray-700">
-      <CreatedImage />
+      <CreatedImage info={card} />
       <div className="container inline-block w-2/3 h-screen font-normal">
         <div className="container mx-auto w-5/6 h-screen p-20 text-center justify-around">
           <h1 className="text-2xl py-5">{card?.name}</h1>
@@ -55,20 +55,27 @@ const ShowPage = ( { currentUsername } ) => {
           </div>
           <div>
             <p className="w-1/3 inline-block">👍 {card?.likes} Likes</p>
-            <p className="w-1/3 inline-block">
-              Creator: {card?.createdBy}
-            </p>
- {           rightsToEdit?
-            (
-            <div >
-            <Button color="primary" onClick={() => handleEditButtonClick()}>
-              Edit
-            </Button>
-            <Button color="danger" onClick={() => handleDeleteButtonClick()}>
-              Delete
-            </Button>
-            </div>
-            ) : (!currentUsername ?  <div><span className="text-xs"> For creators, log in for more functions.</span></div>: null) }
+            <p className="w-1/3 inline-block">Creator: {card?.createdBy}</p>
+            {rightsToEdit ? (
+              <div>
+                <Button color="primary" onClick={() => handleEditButtonClick()}>
+                  Edit
+                </Button>
+                <Button
+                  color="danger"
+                  onClick={() => handleDeleteButtonClick()}
+                >
+                  Delete
+                </Button>
+              </div>
+            ) : !currentUsername ? (
+              <div>
+                <span className="text-xs">
+                  {" "}
+                  For creators, log in for more functions.
+                </span>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
