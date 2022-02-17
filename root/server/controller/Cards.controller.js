@@ -6,6 +6,9 @@ const Router = express.Router();
 const TeaCardsInfo = require("../models/teaCardInfo");
 const teaCardInfo_seed = require("../models/teaCardInfo_seed");
 
+//import user info
+const User = require("../models/userData");
+
 //ROUTES ('api/teacardsinfo/')
 //get "api/teacardsinfo/seed"
 Router.get("/seed", async (req, res) => {
@@ -69,13 +72,19 @@ Router.post("/newcard", async (req, res) => {
   }
   try {
     const createNewCard = await TeaCardsInfo.create(newCard);
+    console.log(createNewCard);
+    const updateUser = await User.findOneAndUpdate(
+                                    { username: createNewCard.createdBy }, 
+                                    { $push: {userCreations: createNewCard._id}}
+                                    );
+
     res.status(200).json({
       status: "ok",
       message: "new Card created",
       data: createNewCard,
+      updatedUser: updateUser
     }
     );
-    //res.redirect()
   } catch (error) {
     console.log("at /newCard", error);
   }
