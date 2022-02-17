@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PlusButton from "./PlusButton";
 const axios = require("axios").default;
 
@@ -26,8 +26,20 @@ const IngredientSelection = ({
   const [formData, setFormData] = useState({});
   const [readyToSubmit, setReadyToSubmit] = useState(false);
   const navigate = useNavigate();
-  console.log(formData);
-  console.log("currentSelection", currentSelection);
+  const { id } = useParams();
+  console.log("formData: ", formData);
+  // console.log("currentsel: ", currentSelection)
+
+  const postEdit = async (credentials) => {
+    return axios
+      .put(`/api/teacardsinfo/update/${id}`, credentials, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      })
+      .then(({ data }) => data);
+  };
 
   useEffect(() => {
     const updates = {
@@ -39,7 +51,14 @@ const IngredientSelection = ({
       toppings: chosenIngredients?.Toppings?.map((e) => e.id),
       likes: 0,
     };
-    setFormData({ ...formData, ...updates });
+    if (!!currentSelection) {
+      if (updates.name === undefined) updates.name = currentSelection.name;
+      if (updates.description === undefined)
+        updates.description = currentSelection.description;
+    }
+    setFormData((prev) => {
+      return { ...prev, ...updates };
+    });
   }, [nameInput, descriptionInput, chosenIngredients, username]);
 
   useEffect(() => {
@@ -56,21 +75,28 @@ const IngredientSelection = ({
 
   const handleNameInput = (e) => {
     setNameInput(e.target.value);
-    console.log(username);
     if (!username) {
       setNoSessionFound(true);
       console.log("no session detected!");
       navigate("/login");
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await postCreation(formData);
-    navigate(`/show/${response.data._id}`)
-    console.log(response);
+    if (!currentSelection) {
+      const response = await postCreation(formData);
+      navigate(`/show/${response.data._id}`);
+      console.log(response);
+    } else if (!!currentSelection) {
+      const response = await postEdit(formData);
+      navigate(`/show/${response.data._id}`);
+      console.log(response);
+    }
   };
-  
+
+  // console.log(currentSelection);
+
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4">
@@ -90,6 +116,7 @@ const IngredientSelection = ({
               type="text"
               name="name"
               id="name"
+              defaultValue={!!currentSelection ? currentSelection.name : null}
               onChange={handleNameInput}
             />
           </div>
@@ -106,13 +133,15 @@ const IngredientSelection = ({
               id="description"
               rows="3"
               defaultValue={
-                currentSelection ? currentSelection.description : null
+                !!currentSelection ? currentSelection.description : null
               }
               onChange={(e) => setDescriptionInput(e.target.value)}
             />
           </div>
           <div className="flex flex-col container mx-auto items-center">
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Base</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
+              Base
+            </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Bases?.name
                 ? chosenIngredients?.Bases.name
@@ -120,7 +149,9 @@ const IngredientSelection = ({
             </div>
             <PlusButton id={"Bases"} setCategory={setCategory} />
             <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Flavouring</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
+              Flavouring
+            </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Flavourings?.name
                 ? chosenIngredients?.Flavourings.name
@@ -128,7 +159,9 @@ const IngredientSelection = ({
             </div>
             <PlusButton id={"Flavourings"} setCategory={setCategory} />
             <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">Toppings</label>
+            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
+              Toppings
+            </label>
             <div className="p-1 text-sm">
               {chosenIngredients?.Toppings
                 ? chosenIngredients?.Toppings.map((e) => e.name).join(", ")
@@ -137,16 +170,22 @@ const IngredientSelection = ({
             <PlusButton id={"Toppings"} setCategory={setCategory} />
             <br />
           </div>
-          {readyToSubmit ? (
+          {!readyToSubmit ? (
+            <div className="p-1 text-sm">
+              Ensure all fields are filled up / selected.
+            </div>
+          ) : !!id ? (
+            <input
+              type="submit"
+              value="Edit Your Creation"
+              className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
+            />
+          ) : (
             <input
               type="submit"
               value="Submit Creation"
               className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
             />
-          ) : (
-            <div className="p-1 text-sm">
-              Ensure all fields are filled up / selected.
-            </div>
           )}
         </form>
       </div>

@@ -83,30 +83,31 @@ Router.post("/newcard", async (req, res) => {
       message: "new Card created",
       data: createNewCard,
       updatedUser: updateUser
-    }
-    );
+    });
   } catch (error) {
     console.log("at /newCard", error);
   }
 });
 
 //put "api/teacardsinfo/update/:id" --> updates
-Router.put("/update/:id", async(req, res) =>{
-    const { id } = req.params;
-    const updatedCardData = req.body;
-    try{
-        const updatedCard = await TeaCardsInfo.findByIdAndUpdate(id,
-                                                        updatedCardData,
-                                                        {new: true,});
-        res.status(200).json({
-            status:"ok",
-            message: "tea card is edited",
-            data: updatedCard,
-        });
-    }catch(error){
-        console.log("at/update/:id", error);
-    }
-})
+Router.put("/update/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedCardData = req.body;
+  try {
+    const updatedCard = await TeaCardsInfo.findByIdAndUpdate(
+      id,
+      updatedCardData,
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      message: "tea card is edited",
+      data: updatedCard,
+    });
+  } catch (error) {
+    console.log("at/update/:id", error);
+  }
+});
 
 //delete "api/teacardsinfo/delete/:id"
 Router.delete("/delete/:id", async (req, res) => {
