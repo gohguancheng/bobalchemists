@@ -8,30 +8,31 @@ import LoginPage from "./Pages/LoginPage";
 import ShowPage from "./Pages/ShowPage";
 import EditPage from "./Pages/EditPage";
 import SearchResultPage from "./Pages/SearchResultPage";
+import AdminPage from "./Pages/AdminPage";
 //* import pages here and plugin pages as components inside retun below
 
 async () => fetch("/api/sessions/authcheck").then((data) => data.json());
 
 function App() {
-  const [ session, setSession ] = useState({});
+  const [session, setSession] = useState({});
   const [noSessionFound, setNoSessionFound] = useState(true);
 
   useEffect(async () => {
-    const response = await (async () => axios.get('/api/sessions/authcheck').then(({data}) => data))();
+    const response = await (async () =>
+      axios.get("/api/sessions/authcheck").then(({ data }) => data))();
     // console.log("useEffect: ", response);
     if (!!response.session.currentUser) {
-      console.log("session found")
+      console.log("session found");
       setSession(response.session);
       setNoSessionFound(false);
     }
-  }, [noSessionFound])
+  }, [noSessionFound]);
 
-  
   return (
     <div className="App font-sans h-full w-full">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage currentUserData={session?.currentUser} />} />
         <Route
           path="/create"
           element={
@@ -42,7 +43,12 @@ function App() {
           }
         />
         <Route path="/login" element={<LoginPage setSession={setSession} />} />
-        <Route path="/show/:id" element={<ShowPage currentUsername={session?.currentUser?.username} />} />
+        <Route
+          path="/show/:id"
+          element={
+            <ShowPage currentUsername={session?.currentUser?.username} />
+          }
+        />
         <Route
           path="/edit/:id"
           element={
@@ -52,7 +58,7 @@ function App() {
             />
           }
         />
-        <Route path="/results" element={<SearchResultPage />} />
+        <Route path="/admin" element={<AdminPage currentUser={session?.currentUser} />} />
         {/* <Route path="/TEMPLATE" element={COMPONENT} /> */}
       </Routes>
     </div>

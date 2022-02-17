@@ -45,6 +45,7 @@ Router.get("/populate", async(req, res)=>{
             status:"ok",
             message:" seeded",
             data: populateBase,
+            request: req.body
         });;
     }catch(error){
         console.log("at /populate/test", error)

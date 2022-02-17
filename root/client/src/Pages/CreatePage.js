@@ -40,9 +40,9 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
   }, []);
 
   return (
-    <div className="flex bg-lighterpink font-normal">
+    <div className="flex font-normal">
       <CustomImage chosenIngredients={chosenIngredients} />
-      <div className="container w-3/4 h-screen flex">
+      <div className="container w-3/4 h-full flex">
         <IngredientSelection
           category={category}
           setCategory={setCategory}
