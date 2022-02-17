@@ -4,34 +4,45 @@ import CreatedImage from "../components/CreatePage/CreatedImage";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
-const ShowPage = () => {
+const ShowPage = ( { currentUsername } ) => {
   const [card, setCard] = useState({});
+  const [ rightsToEdit, setRightsToEdit ] = useState(false);
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log("id", id);
-
+  console.log(card);
   useEffect(async () => {
     await axios.get(`/api/teacardsinfo/show/${id}`).then((res) => {
-      console.log("res", res.data.data);
       setCard(res?.data?.data);
-      console.log("Card data", card);
     });
   }, []);
 
-  const handleEdit = () => {
+  useEffect(() => {
+    if (!!currentUsername && !!card?.createdBy) {
+      if (currentUsername === card.createdBy) {
+        console.log("valid user!");
+        setRightsToEdit(true);
+      }
+    }
+  } , [card])
+
+  const handleEditButtonClick = () => {
     console.log("edit button clicked");
     // redirect user to the "create page"
     navigate(`/edit/${id}`);
     // "create page" should have fields populated with 'card' details
   };
 
-  const handleDelete = async () => {
+  const handleDeleteButtonClick = async () => {
     console.log("delete button clicked");
     // deletes card from database
     await axios.delete(`/api/teacardsinfo/delete/${id}`);
     navigate("/");
   };
+
+
+
+
 
   return (
     <div className="flex bg-lighterpink text-gray-700">
@@ -49,14 +60,19 @@ const ShowPage = () => {
           <div>
             <p className="w-1/3 inline-block">👍 Likes</p>
             <p className="w-1/3 inline-block">
-              Creator: {card?.createdBy?.username}
+              Creator: {card?.createdBy}
             </p>
-            <Button color="primary" onClick={() => handleEdit()}>
+ {           rightsToEdit?
+            (
+            <div >
+            <Button color="primary" onClick={() => handleEditButtonClick()}>
               Edit
             </Button>
-            <Button color="danger" onClick={() => handleDelete()}>
+            <Button color="danger" onClick={() => handleDeleteButtonClick()}>
               Delete
             </Button>
+            </div>
+            ) : (!currentUsername ?  <span className="text-xs"> For creators, log in for more functions.</span> : null) }
           </div>
         </div>
       </div>
