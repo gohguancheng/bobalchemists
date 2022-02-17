@@ -35,11 +35,11 @@ const AvailableIngredients = ({
   chosenIngredients,
   setChosenIngredients,
 }) => {
-  const handleCardClick = (event, name, id) => {
+  const handleCardClick = (event, name, id, img) => {
     //for Bases and Flavourings
     if (category !== "Toppings") {
       if (!chosenIngredients[category]) {
-        const added = { [category]: { name: name, id: id } };
+        const added = { [category]: { name: name, id: id, img: img } };
         setChosenIngredients((prev) => {
           return { ...prev, ...added };
         });
@@ -52,7 +52,7 @@ const AvailableIngredients = ({
       //for Toppings
     } else {
       if (!chosenIngredients[category]) {
-        const added = { [category]: { name: name, id: id } };
+        const added = { [category]: { name: name, id: id, img: img } };
         setChosenIngredients((prev) => {
           return { ...prev, ...added };
         });
@@ -63,7 +63,7 @@ const AvailableIngredients = ({
         if (index === -1) {
           const newArr = [
             ...chosenIngredients[category],
-            { name: name, id: id },
+            { name: name, id: id, img: img },
           ];
           const added = { [category]: newArr };
           setChosenIngredients((prev) => {
@@ -81,7 +81,7 @@ const AvailableIngredients = ({
       }
     }
   };
-  
+
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">
       <h1 className="font-bold">Click below to select</h1>
@@ -94,7 +94,7 @@ const AvailableIngredients = ({
                   className="w-full md:w-4/12 mb-6 md:mb-0 md:p-3"
                   key={id}
                   onClick={(evt) =>
-                    handleCardClick(evt, element.name, element._id)
+                    handleCardClick(evt, element.name, element._id, element.img)
                   }
                 >
                   <Card>
