@@ -1,19 +1,29 @@
 import { Fragment, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
+import axios from "axios";
 
-const Alert = () => {
-  const [open, setOpen] = useState(true);
+const Alert = (props) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  console.log("props", props.alertOpen);
 
   const cancelButtonRef = useRef(null);
 
+  const handleClickDelete = async () => {
+    await axios.delete(`/api/teacardsinfo/delete/${id}`);
+    props.setAlertOpen(false);
+    navigate("/");
+  };
+
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={props.alertOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
+        onClose={props.setAlertOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -58,13 +68,13 @@ const Alert = () => {
                       as="h3"
                       className="text-lg leading-6 font-medium text-gray-900"
                     >
-                      Deactivate account
+                      Delete Your Boba?
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to deactivate your account? All of
-                        your data will be permanently removed. This action
-                        cannot be undone.
+                        Are you sure you want to delete your boba? All of your
+                        data will be permanently removed. This action cannot be
+                        undone.
                       </p>
                     </div>
                   </div>
@@ -74,14 +84,14 @@ const Alert = () => {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
+                  onClick={() => handleClickDelete()}
                 >
-                  Deactivate
+                  Confirm delete
                 </button>
                 <button
                   type="button"
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
+                  onClick={() => props.setAlertOpen(false)}
                   ref={cancelButtonRef}
                 >
                   Cancel
