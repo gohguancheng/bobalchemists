@@ -6,7 +6,7 @@ import axios from "axios";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState(cardInfo);
-
+  console.log("gallery: ", gallery);
   // Make api call
   useEffect(async () => {
     await axios.get("/api/teacardsinfo").then((res) => {
