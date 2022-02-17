@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, Fragment } from "react";
 import Button from "../components/Reusables/Button";
 import CreatedImage from "../components/CreatePage/CreatedImage";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { Dialog, Transition } from "@headlessui/react";
+import { ExclamationIcon } from "@heroicons/react/outline";
+import Alert from "../components/Reusables/Alert";
 
 const ShowPage = ({ currentUsername }) => {
   const [card, setCard] = useState({});
   const [rightsToEdit, setRightsToEdit] = useState(false);
   const navigate = useNavigate();
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const { id } = useParams();
   console.log(card);
@@ -35,13 +39,15 @@ const ShowPage = ({ currentUsername }) => {
 
   const handleDeleteButtonClick = async () => {
     console.log("delete button clicked");
+    setAlertOpen(true);
     // deletes card from database
-    await axios.delete(`/api/teacardsinfo/delete/${id}`);
-    navigate("/");
+    // await axios.delete(`/api/teacardsinfo/delete/${id}`);
+    // navigate("/");
   };
 
   return (
-    <div className="flex bg-lighterpink text-gray-700">
+    <div className="flex text-gray-700">
+      <Alert alertOpen={alertOpen} setAlertOpen={setAlertOpen} />
       <CreatedImage info={card} />
       <div className="container inline-block w-2/3 h-screen font-normal">
         <div className="container mx-auto w-5/6 h-screen p-20 text-center justify-around">
