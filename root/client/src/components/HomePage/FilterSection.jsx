@@ -25,16 +25,18 @@ const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
     //const dataName = response.data.map((e) => e.name);
     setOptions(dataName);
   }, []);
+  
+  console.log("dataname: ", options);
 
   const ingredientsDisplay = options.map((e) => (
     <ToggleButton
       key={e.ingredientId}
       id={e.ingredientId}
-      type={e.type}
+      category={e.type}
       label={e.name}
       selection={selectedFilters}
       setSelection={setSelectedFilters}
-      category={category}
+      input={e.type === 'Toppings' ? "checkbox" : "radio"}
     />
   ));
 

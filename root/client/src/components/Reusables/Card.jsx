@@ -53,22 +53,21 @@ const Card = ({ info, currentUserData }) => {
         likes: updatedLikes,
         username: currentUserData.username,
       };
-
       await updateDBLikes(`/api/teacardsinfo/unliked/${cardID}`, dataForUpload);
       const newArr = likeState.likedCreations.filter(e => e !== cardID);
       const newState = { likes: updatedLikes, likedCreations: newArr }
       setLikeState(prev => {
         return {...prev, ...newState}
-
       });
       setLikedByCurrent((prev) => !prev);
+
     } else if (!likedByCurrent) {
+
       const updatedLikes = likeState.likes + 1;
       const dataForUpload = {
         likes: updatedLikes,
         username: currentUserData.username,
       };
-
       await updateDBLikes(`/api/teacardsinfo/liked/${cardID}`, dataForUpload);
       const newArr = [...likeState.likedCreations, cardID]
       const newState = { likes: updatedLikes, likedCreations: newArr }
