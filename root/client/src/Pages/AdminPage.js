@@ -26,14 +26,15 @@ const AdminPage = ({ currentUser }) => {
     
   }, [selection, isEditMode, done]);
 
-  // useEffect(()=>{
-  //   const admincheck =
-  //   (currentUser?.username === "guanch") ||
-  //   (currentUser?.username === "rizal") ||
-  //   (currentUser?.username === "danning");
-  //   if (!admincheck) setIsAdmin(prev=>false);
-  //   if (!isAdmin) navigate('/');
-  // })
+  useEffect(()=>{
+    const admincheck =
+    (currentUser?.username === "guanch") ||
+    (currentUser?.username === "rizal") ||
+    (currentUser?.username === "danning");
+
+    if (!!currentUser && !admincheck) setIsAdmin(prev=>false);
+    if (!isAdmin) navigate('/');
+  }, [currentUser])
 
   const handleDelete = async (id) => {
   const deleteRes = await axios.delete(`/api/ingredients/delete/${id}/${selection}`).then(({ data }) => data);

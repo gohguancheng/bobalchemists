@@ -9,7 +9,7 @@ const ContentContainer = ( {currentUserData} ) => {
   console.log("selectedOptions: ", selectedFilters);
   return (
     <div className="h-full w-full grid grid-rows-5 grid-cols-5 font-normal">
-      <div className="col-start-1 col-end-2 row-start-1 row-end-6">
+      <div className="pt-12 col-start-1 col-end-2 row-start-1 row-end-6">
         <FiltersContainer
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
@@ -27,7 +27,7 @@ const ContentContainer = ( {currentUserData} ) => {
           <Button color="regular">Recently added</Button>
         </span>
       </div>
-      <div className="col-start=5 col-end-6 row-start-1 row-end-2">Search</div>
+      <div className="col-start=5 col-end-6 row-start-1 row-end-2"></div>
       <div className="col-start-2 row-start-2 col-end-6 row-end-6">
         <Gallery currentUserData={currentUserData} selectedFilters={selectedFilters}/>
       </div>
