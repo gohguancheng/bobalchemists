@@ -6,7 +6,6 @@ import Button from "../Reusables/Button";
 
 const ContentContainer = ( {currentUserData} ) => {
   const [selectedFilters, setSelectedFilters] = useState([]);
-  console.log("selectedOptions: ", selectedFilters);
   return (
     <div className="h-full w-full grid grid-rows-5 grid-cols-5 font-normal">
       <div className="pt-12 col-start-1 col-end-2 row-start-1 row-end-6">
@@ -17,7 +16,7 @@ const ContentContainer = ( {currentUserData} ) => {
       </div>
       <div className="col-start-2 col-end-5 row-start-1 row-end-2 flex flex-col">
         <div className="basis-5/6 flex justify-center items-center">
-          <h1 className="h-max w-max shrink text-5xl font-black font-logo">
+          <h1 className="h-max w-max shrink text-5xl font-black font-logo md:flex md:2xl md:shrink">
             <Logo />
             BOBAlchemist
           </h1>

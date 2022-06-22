@@ -12,14 +12,12 @@ const Gallery = ({ currentUserData, selectedFilters}) => {
     // response => { data: { data } } -> inner data, i.e array, is defined by destructuring
     if(selectedFilters.length <= 0){
       await axios.get("/api/teacardsinfo").then( ({ data:{data} }) => {
-        // console.log("data:", data);
         setGallery(data);
       });
     }
     else{
       await axios.post("/api/teacardsinfo/filterbyingredients", {filters: selectedFilters})
       .then( ({ data:{data} }) => {
-        // console.log("data:", data);
         setGallery(data);
       });
     }

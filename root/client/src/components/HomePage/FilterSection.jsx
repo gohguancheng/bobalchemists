@@ -21,12 +21,9 @@ const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
       name: e.name, 
       ingredientId: e._id,
       type: category}));
-    //console.log("gotten data",dataName);
     //const dataName = response.data.map((e) => e.name);
     setOptions(dataName);
   }, []);
-  
-  console.log("dataname: ", options);
 
   const ingredientsDisplay = options.map((e) => (
     <ToggleButton

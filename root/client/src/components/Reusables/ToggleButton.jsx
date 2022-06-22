@@ -27,7 +27,6 @@ const ToggleButton = ({
       }
     }
   };
-  console.log(label, input);
   return (
     <div className="mb-2" name={label} id={id} onChange={handleChange}>
       <label className="relative inline-block w-8 mr-2 align-middle select-none cursor-pointer">

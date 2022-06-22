@@ -38,7 +38,6 @@ const AdminPage = ({ currentUser }) => {
 
   const handleDelete = async (id) => {
   const deleteRes = await axios.delete(`/api/ingredients/delete/${id}/${selection}`).then(({ data }) => data);
-   console.log("deleteRes:", deleteRes);
    setDone(prev => !prev);
   }
 

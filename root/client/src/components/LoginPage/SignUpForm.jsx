@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 const axios = require("axios").default;
 
 const SignUpForm = ({ setAccessSignUp }) => {
@@ -8,6 +8,7 @@ const SignUpForm = ({ setAccessSignUp }) => {
   const [signupResult, setSignupResult] = useState(null);
   const [nameAvailable, setNameAvailable] = useState(true);
   const [keyInput, setKeyInput] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   async function submitCredentials(credentials) {
@@ -34,7 +35,6 @@ const SignUpForm = ({ setAccessSignUp }) => {
 
   useEffect(async () => {
     const responseData = await checkName({ username: usernameInput });
-    console.log(responseData);
     setNameAvailable(responseData.isAvailable);
   }, [usernameInput]);
 
@@ -130,26 +130,35 @@ const SignUpForm = ({ setAccessSignUp }) => {
               </div> */}
 
           <div>
-          {            (keyInput === "3RDG") ? (<button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 mb-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
-              Sign Up
-            </button>) : <div className="mb-4">
-              <input
+            {keyInput === "3RDG" ? (
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 mb-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
+                Sign Up
+              </button>
+            ) : (
+              <div className="mb-4">
+                <input
                   name="testerpass"
                   type="text"
                   className="appearance-none rounded-none relative block w-full px-3 py-2 w-40 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Tester passcode"
-                  onChange={(e) => setKeyInput(e.target.value)}></input> <p className="text-xs">App in beta: Please ask admins for passcode to complete sign up.</p> 
-            </div> }
+                  onChange={(e) => setKeyInput(e.target.value)}
+                ></input>{" "}
+                <p className="text-xs">
+                  App in beta: Please ask admins for passcode to complete sign
+                  up.
+                </p>
+              </div>
+            )}
           </div>
         </form>
         <span>
           Have an account?
           <button
-            onClick={() => setAccessSignUp(false)}
+            onClick={() => setSearchParams({ form: "login" })}
             className="group relative w-max flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Log in here!

@@ -21,7 +21,6 @@ const Form = ( {selection, setDone } ) => {
         e.preventDefault();
         const credentials = { name: nameInput, baseType: baseTypeInput, color: colorInput, img: imageInput };
         let response = await submitIngredient(selection, credentials);
-        console.log("response:", response);
         setDone(prev => !prev);
     };
   return (

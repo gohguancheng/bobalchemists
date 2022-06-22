@@ -6,7 +6,6 @@ const HomePage = ({ currentUserData }) => {
 
     <div className="w-screen bg-lighterpink text-gray-700">
       <ContentContainer currentUserData={currentUserData} />
-
     </div>
   );
 };

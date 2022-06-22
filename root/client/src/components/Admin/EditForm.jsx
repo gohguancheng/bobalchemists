@@ -23,7 +23,6 @@ const EditForm = ({setIsEditMode, selection, selectedSub: {_id: id, name: name, 
         e.preventDefault();
         const credentials = { name: nameInput, baseType: baseTypeInput, color: colorInput, img: imageInput };
         let response = await submitEdit(selection, id, credentials);
-        console.log("response:", response);
         setIsEditMode(false);
     };
   return (
