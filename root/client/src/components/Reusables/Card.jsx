@@ -27,7 +27,6 @@ const Card = ({ info, currentUserData }) => {
     let { data } = await getUserLikes(currentUserData?._id);
     setUser(data);
     if (!!info) {
-      //  console.log(" is this in liked array in database? ", currentUserData?.likedCreations?.includes(info?._id))
         const dbShowsLiked = data?.likedCreations?.includes(info?._id);
         setLikedByCurrent(dbShowsLiked);
       }
@@ -75,9 +74,7 @@ const Card = ({ info, currentUserData }) => {
         return {...prev, ...newState}
       })
       setLikedByCurrent(prev => !prev);
-    } else {
-      console.log("Like Frontend Error!");
-    }
+    } 
   };
 
   return (

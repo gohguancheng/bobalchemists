@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Logo from "../Reusables/Logo";
 const axios = require("axios").default;
 
@@ -7,7 +7,8 @@ const LoginForm = ({ setSession, setAccessSignUp }) => {
   const [usernameInput, setUsernameInput] = useState();
   const [passwordInput, setPasswordInput] = useState();
   const [loginResult, setLoginResult] = useState(null);
-  
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const navigate = useNavigate();
 
   async function loginUser(credentials) {
@@ -117,7 +118,7 @@ const LoginForm = ({ setSession, setAccessSignUp }) => {
         <span>
           Don't have an account?
           <button
-            onClick={() => setAccessSignUp(true)}
+            onClick={() => setSearchParams({ form: "sign-up" })}
             className="group relative w-max flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Sign up here!

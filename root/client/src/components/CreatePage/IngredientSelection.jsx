@@ -72,7 +72,6 @@ const IngredientSelection = ({
     setNameInput(e.target.value);
     if (!username) {
       setNoSessionFound(true);
-      console.log("no session detected!");
       navigate("/login");
     }
   };
@@ -82,15 +81,13 @@ const IngredientSelection = ({
     if (!currentSelection) {
       const response = await postCreation(formData);
       navigate(`/show/${response.data._id}`);
-      console.log(response);
+
     } else if (!!currentSelection) {
       const response = await postEdit(formData);
       navigate(`/show/${response.data._id}`);
-      console.log(response);
+
     }
   };
-
-  // console.log(currentSelection);
 
   return (
     <div className="container mx-auto h-screen w-1/2 text-center justify-around">

@@ -31,7 +31,6 @@ const ShowPage = ({ currentUsername }) => {
   };
 
   const handleDeleteButtonClick = async () => {
-    console.log("delete button clicked");
     setAlertOpen(true);
   };
 

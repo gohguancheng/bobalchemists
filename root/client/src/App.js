@@ -20,9 +20,8 @@ function App() {
   useEffect(async () => {
     const response = await (async () =>
       axios.get("/api/sessions/authcheck").then(({ data }) => data))();
-    // console.log("useEffect: ", response);
+
     if (!!response.session.currentUser) {
-      console.log("session found");
       setSession(response.session);
       setNoSessionFound(false);
     }
@@ -32,7 +31,10 @@ function App() {
     <div className="App font-sans h-full w-full">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
       <Routes>
-        <Route path="/" element={<HomePage currentUserData={session?.currentUser} />} />
+        <Route
+          path="/"
+          element={<HomePage currentUserData={session?.currentUser} />}
+        />
         <Route
           path="/create"
           element={
@@ -42,7 +44,7 @@ function App() {
             />
           }
         />
-        <Route path="/login" element={<LoginPage setSession={setSession} />} />
+        <Route path="/user" element={<LoginPage setSession={setSession} />} />
         <Route
           path="/show/:id"
           element={
@@ -58,8 +60,10 @@ function App() {
             />
           }
         />
-        <Route path="/admin" element={<AdminPage currentUser={session?.currentUser} />} />
-        {/* <Route path="/TEMPLATE" element={COMPONENT} /> */}
+        <Route
+          path="/admin"
+          element={<AdminPage currentUser={session?.currentUser} />}
+        />
       </Routes>
     </div>
   );

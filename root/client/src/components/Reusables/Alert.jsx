@@ -7,7 +7,6 @@ import axios from "axios";
 const Alert = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log("props", props.alertOpen);
 
   const cancelButtonRef = useRef(null);
 
