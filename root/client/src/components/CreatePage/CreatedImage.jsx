@@ -2,7 +2,7 @@ import React from "react";
 
 const CreatedImage = ({ info }) => {
   return (
-    <div className="container w-1/3 h-1/3 relative bg-lightgray rounded-full drop-shadow-md">
+    <div className="container h-full relative bg-lightgray rounded-full drop-shadow-md">
       <div>
         {/* Put BASE here */}
         <img className="absolute" src={info?.base?.img} alt="base" />

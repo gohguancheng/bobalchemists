@@ -28,12 +28,17 @@ function App() {
   }, [noSessionFound]);
 
   return (
-    <div className="App font-sans h-full w-full">
+    <div className="App font-sans h-screen w-screen overflow-hidden flex flex-col">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
       <Routes>
         <Route
           path="/"
-          element={<HomePage currentUserData={session?.currentUser} />}
+          element={
+            <HomePage
+              currentUserData={session?.currentUser}
+              
+            />
+          }
         />
         <Route
           path="/create"
