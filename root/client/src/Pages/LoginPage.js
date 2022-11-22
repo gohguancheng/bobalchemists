@@ -11,7 +11,6 @@ const LoginPage = ({ setSession }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    console.log();
     setAccessSignUp(searchParams.get("form") === "sign-up" ? true : false);
   }, [searchParams]);
 

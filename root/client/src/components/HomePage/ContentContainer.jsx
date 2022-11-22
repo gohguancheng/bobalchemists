@@ -4,31 +4,37 @@ import Gallery from "./Gallery";
 import Logo from "../Reusables/Logo";
 import Button from "../Reusables/Button";
 
-const ContentContainer = ( {currentUserData} ) => {
+const ContentContainer = ({ currentUserData }) => {
   const [selectedFilters, setSelectedFilters] = useState([]);
   return (
-    <div className="h-full w-full grid grid-rows-5 grid-cols-5 font-normal">
-      <div className="pt-12 col-start-1 col-end-2 row-start-1 row-end-6">
+    <div className="flex-1 flex w-full bg-lighterpink text-gray-700">
+      <div className="hidden md:block max-w-1/4 h-full px-[20px] py-[40px]">
         <FiltersContainer
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
         />
       </div>
-      <div className="col-start-2 col-end-5 row-start-1 row-end-2 flex flex-col">
-        <div className="basis-5/6 flex justify-center items-center">
-          <h1 className="h-max w-max shrink text-5xl font-black font-logo md:flex md:2xl md:shrink">
+      <div className="flex-1 h-full max-h-full w-full flex flex-col">
+        <div className="">
+          <div className="flex justify-center items-end">
             <Logo />
-            BOBAlchemist
-          </h1>
+            <h1 className="text-2xl sm:text-5xl font-black font-logo pb-[5px] sm:pb-[10px]">
+              BOBAlchemist
+            </h1>
+          </div>
+          <span className="flex justify-center max-w-full overflow-x-auto text-sm py-[5px] sm:py-[10px]">
+            <Button color="regular">Popular</Button>
+            <Button color="regular">Recently added</Button>
+          </span>
         </div>
-        <span className="basis-1/6 flex flex-row items-center">
-          <Button color="regular">Popular</Button>
-          <Button color="regular">Recently added</Button>
-        </span>
-      </div>
-      <div className="col-start=5 col-end-6 row-start-1 row-end-2"></div>
-      <div className="col-start-2 row-start-2 col-end-6 row-end-6">
-        <Gallery currentUserData={currentUserData} selectedFilters={selectedFilters}/>
+        <div className="flex-1 h-full relative">
+          <div className="absolute inset-0 overflow-y-auto">
+            <Gallery
+              currentUserData={currentUserData}
+              selectedFilters={selectedFilters}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

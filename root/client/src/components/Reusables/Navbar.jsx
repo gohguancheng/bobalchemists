@@ -22,61 +22,61 @@ const Navbar = ({ currentUser, setSession }) => {
   });
 
   return (
-    <div className="h-16 w-full flex flex-row justify-between items-center bg-purple text-lightgray">
-      <span className="flex justify-between items-center">
-        <Link to="/">
-          <h1 className="text-white text-4xl font-bold mx-4 font-logo">
-            BOBAlchemist
-          </h1>
-        </Link>
-        {currentUser?.username ? (
-          <Link to="/create">
-            <div className="text-white text-xl font-bold mx-4 font-logo">
-              Create BOBA
-            </div>
-          </Link>
-        ) : (
-          <Link to="/user?form=sign-up">
-            <div
-              className="text-white text-xl font-bold mx-4 font-logo"
-            >
-              Create BOBA
-            </div>
-          </Link>
-        )}
-
-        {isAdmin ? (
-          <Link to="/admin">
-            <div className="text-gray-100 text-sm font-bold mx-4 font-logo">
-              Admin Page
-            </div>
-          </Link>
-        ) : null}
-      </span>
-
-      {currentUser?.username ? (
-        <span className="flex flex-row justify-between items-center">
-          <div className="text-white text-lg font-semibold mx-4 font-logo">
-            Welcome back, {currentUser.username}!
-          </div>
+    <div className="bg-purple text-lightgray">
+      <div className="h-full px-[20px] py-[10px] flex justify-between items-center">
+        <span className="flex justify-between items-end gap-[15px] sm:gap-[30px]">
           <Link to="/">
-            <div
-              className="text-white text-xl font-bold mx-4 font-logo"
-              onClick={handleLogOut}
-            >
-              Log Out
-            </div>
+            <h1 className="text-white text-lg font-bold font-logo">
+              BOBAlchemist
+            </h1>
           </Link>
+          {currentUser?.username ? (
+            <Link to="/create">
+              <div className="hidden sm:block text-white text-lg font-bold font-logo">
+                Create BOBA
+              </div>
+            </Link>
+          ) : (
+            <Link to="/user?form=sign-up">
+              <div className="hidden sm:block text-white text-lg font-bold font-logo">
+                Create BOBA
+              </div>
+            </Link>
+          )}
+
+          {isAdmin ? (
+            <Link to="/admin">
+              <div className="hidden sm:block text-gray-100 text-sm font-bold font-logo">
+                Admin Page
+              </div>
+            </Link>
+          ) : null}
         </span>
-      ) : (
-        <span className="flex flex-row justify-between items-center">
-          <Link to="/user?form=login">
-            <div className="text-white text-xl font-bold mx-4 font-logo">
-              Login / Sign Up
+
+        {currentUser?.username ? (
+          <span className="flex justify-between">
+            <div className="text-white text-sm font-semibold font-logo">
+              Welcome back, {currentUser.username}!
             </div>
-          </Link>
-        </span>
-      )}
+            <Link to="/">
+              <div
+                className="text-white text-sm font-bold font-logo"
+                onClick={handleLogOut}
+              >
+                Log Out
+              </div>
+            </Link>
+          </span>
+        ) : (
+          <span className="flex justify-between">
+            <Link to="/user?form=login">
+              <div className="text-white text-xs font-bold font-logo">
+                Login / Sign Up
+              </div>
+            </Link>
+          </span>
+        )}
+      </div>
     </div>
   );
 };
