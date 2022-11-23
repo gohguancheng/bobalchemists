@@ -94,29 +94,38 @@ const Card = ({ info, currentUserData }) => {
       </Link>
       <div className="flex-1 flex flex-col justify-evenly w-[200px]">
         <p className="text-center text-md font-semibold">{info.name}</p>
-        <div>
-          <span className="flex justify-between items-center">
-            <div className="border-rounded cursor-pointer text-left w-max">
-              <button className="text-sm" onClick={handleLikeClick}>
-                👍
-              </button>
-              <span onClick={handleLikeClick} className="text-sm">
-                {" "}
-                Likes: {!!currentUserData ? likeState?.likes : info.likes}{" "}
-              </span>
-            </div>
-            <div className="text-right text-sm w-max">
-              Created By: {info.createdBy}
-            </div>
-          </span>
 
-          <div className="text-sm text-center">
-            {!currentUserData
-              ? "Log in to add 'likes'."
-              : likedByCurrent
-              ? "Liked!"
-              : "Haven't like!"}
+        <span className="flex justify-between items-center">
+          <div className="border-rounded cursor-pointer text-left w-max">
+            <button className="text-sm" onClick={handleLikeClick}>
+              👍
+            </button>
+            <span onClick={handleLikeClick} className="text-sm">
+              {" "}
+              Likes: {!!currentUserData ? likeState?.likes : info.likes}{" "}
+            </span>
           </div>
+          <div className="text-right text-sm w-max">
+            Created By: {info.createdBy}
+          </div>
+        </span>
+
+        <div className="text-sm text-center">
+          {!currentUserData ? (
+            <span>
+              <Link
+                to="/user?form=login"
+                className="hover:underline font-semibold"
+              >
+                Sign In
+              </Link>{" "}
+              to vote!
+            </span>
+          ) : likedByCurrent ? (
+            "Liked!"
+          ) : (
+            "Haven't like!"
+          )}
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ const Button = forwardRef(({ children, color, ...props }, ref) => (
   <button
     {...props}
     ref={ref}
-    className={`${colors[color]} text-white focus:outline-none shadow rounded-lg px-3 py-1 font-medium m-2`}
+    className={`${colors[color]} text-white focus:outline-none shadow rounded-[10px] px-[15px] py-[5px] font-medium`}
   >
     {children}
   </button>

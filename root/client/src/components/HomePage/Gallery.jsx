@@ -29,7 +29,7 @@ const Gallery = ({ currentUserData, selectedFilters }) => {
   ));
 
   return (
-    <div className="flex flex-wrap justify-center gap-[10px] sm:gap-[20px]">
+    <div className="flex flex-wrap justify-center gap-[10px] sm:gap-[20px] px-[10px] py-[20px]">
       {galleryDisplay}
     </div>
   );
