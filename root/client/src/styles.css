@@ -4,18 +4,17 @@
 
 *::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px #F5F5F5;
-  background-color: #F5F5F5;
 }
 
 *::-webkit-scrollbar {
   width: 6px;
-  background-color: #F5F5F5;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #555;
+  background-color: #8785A2;
 }
 
-button, .button {
+button,
+.button {
   cursor: pointer;
 }

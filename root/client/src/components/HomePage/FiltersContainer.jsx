@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import FilterSection from "./FilterSection";
 const categoryList = ["Bases", "Toppings", "Flavours"];
 
-const FiltersContainer = ({ selectedFilters, setSelectedFilters }) => {
+const FiltersContainer = ({
+  selectedFilters,
+  setSelectedFilters,
+  showFilter,
+}) => {
   const filterContainerDisplay = categoryList.map((e) => (
     <FilterSection
       key={e}
@@ -13,9 +17,15 @@ const FiltersContainer = ({ selectedFilters, setSelectedFilters }) => {
   ));
 
   return (
-    <div className="flex flex-col h-full max-h-full overflow-y-auto">
-      <div className="text-lg font-bold"> Ingredients Filter: </div>
-      {filterContainerDisplay}
+    <div
+      className={`${
+        showFilter ? "items-center" : ""
+      } flex flex-col h-full max-h-full overflow-y-auto px-[20px] py-[40px]`}
+    >
+      <div>
+        <div className="text-lg font-bold"> Ingredients Filter: </div>
+        {filterContainerDisplay}
+      </div>
     </div>
   );
 };
