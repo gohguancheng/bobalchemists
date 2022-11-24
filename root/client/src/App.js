@@ -30,46 +30,48 @@ function App() {
   return (
     <div className="App font-sans h-screen w-screen overflow-hidden flex flex-col">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              currentUserData={session?.currentUser}
-              
+      <div className="flex-1 relative">
+        <div className="absolute inset-0">
+          <Routes>
+            <Route
+              path="/"
+              element={<HomePage currentUserData={session?.currentUser} />}
             />
-          }
-        />
-        <Route
-          path="/create"
-          element={
-            <CreatePage
-              currentUsername={session?.currentUser?.username}
-              setNoSessionFound={setNoSessionFound}
+            <Route
+              path="/create"
+              element={
+                <CreatePage
+                  currentUsername={session?.currentUser?.username}
+                  setNoSessionFound={setNoSessionFound}
+                />
+              }
             />
-          }
-        />
-        <Route path="/user" element={<LoginPage setSession={setSession} />} />
-        <Route
-          path="/show/:id"
-          element={
-            <ShowPage currentUsername={session?.currentUser?.username} />
-          }
-        />
-        <Route
-          path="/edit/:id"
-          element={
-            <EditPage
-              currentUsername={session?.currentUser?.username}
-              setNoSessionFound={setNoSessionFound}
+            <Route
+              path="/user"
+              element={<LoginPage setSession={setSession} />}
             />
-          }
-        />
-        <Route
-          path="/admin"
-          element={<AdminPage currentUser={session?.currentUser} />}
-        />
-      </Routes>
+            <Route
+              path="/show/:id"
+              element={
+                <ShowPage currentUsername={session?.currentUser?.username} />
+              }
+            />
+            <Route
+              path="/edit/:id"
+              element={
+                <EditPage
+                  currentUsername={session?.currentUser?.username}
+                  setNoSessionFound={setNoSessionFound}
+                />
+              }
+            />
+            <Route
+              path="/admin"
+              element={<AdminPage currentUser={session?.currentUser} />}
+            />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 }

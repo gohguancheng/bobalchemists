@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FiltersContainer from "./FiltersContainer";
 import Gallery from "./Gallery";
 import Logo from "../Reusables/Logo";
@@ -8,8 +8,9 @@ import close from "../../images/close.svg";
 const ContentContainer = ({ currentUserData }) => {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
+
   return (
-    <div className="flex-1 flex w-full bg-lighterpink text-gray-700">
+    <div className="flex w-full h-full bg-lighterpink text-gray-700">
       <div
         className={`${
           showFilter

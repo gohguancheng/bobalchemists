@@ -26,14 +26,16 @@ const Card = ({ info, currentUserData }) => {
 
   //set up local user data --> for page refreshes
   useEffect(async () => {
-    if (!currentUserData) {
+    if (!currentUserData || !info) {
       return;
     }
-    let { data } = await getUserLikes(currentUserData?._id);
-    setUser(data);
     if (!!info) {
-      const dbShowsLiked = data?.likedCreations?.includes(info?._id);
-      setLikedByCurrent(dbShowsLiked);
+      let { data } = await getUserLikes(currentUserData?._id);
+      if (data) {
+        setUser(() => data);
+        const dbShowsLiked = data?.likedCreations?.includes(info?._id);
+        setLikedByCurrent(dbShowsLiked);
+      }
     }
   }, [currentUserData, info]);
 

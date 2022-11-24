@@ -24,21 +24,21 @@ const Navbar = ({ currentUser, setSession }) => {
   return (
     <div className="bg-purple text-lightgray">
       <div className="h-full px-[20px] py-[10px] flex justify-between items-center">
-        <span className="flex justify-between items-end gap-[15px] sm:gap-[30px]">
+        <span className="flex justify-between items-center gap-[15px] md:gap-[30px]">
           <Link to="/">
-            <h1 className="text-white text-lg font-bold font-logo">
+            <h1 className="text-white text-lg md:text-4xl font-bold font-logo">
               BOBAlchemist
             </h1>
           </Link>
           {currentUser?.username ? (
             <Link to="/create">
-              <div className="hidden sm:block text-white text-lg font-bold font-logo">
+              <div className="text-white text-xs md:text-xl font-bold font-logo">
                 Create BOBA
               </div>
             </Link>
           ) : (
             <Link to="/user?form=sign-up">
-              <div className="hidden sm:block text-white text-lg font-bold font-logo">
+              <div className="text-white text-xs md:text-xl font-bold font-logo">
                 Create BOBA
               </div>
             </Link>
@@ -46,21 +46,23 @@ const Navbar = ({ currentUser, setSession }) => {
 
           {isAdmin ? (
             <Link to="/admin">
-              <div className="hidden sm:block text-gray-100 text-sm font-bold font-logo">
-                Admin Page
+              <div className="text-gray-100 text-xs md:text-xl font-bold font-logo">
+                Admin
               </div>
             </Link>
           ) : null}
         </span>
 
         {currentUser?.username ? (
-          <span className="flex justify-between">
-            <div className="text-white text-sm font-semibold font-logo">
-              Welcome back, {currentUser.username}!
+          <span className="flex gap-[10px]">
+            <div className="text-white text-xs md:text-lg font-semibold font-logo">
+              <span className="hidden md:inline">Welcome back, </span>
+              <span className="inline md:hidden">Hi, </span>
+              {currentUser.username}!
             </div>
             <Link to="/">
               <div
-                className="text-white text-sm font-bold font-logo"
+                className="text-white text-xs md:text-xl font-bold font-logo"
                 onClick={handleLogOut}
               >
                 Log Out
@@ -68,9 +70,9 @@ const Navbar = ({ currentUser, setSession }) => {
             </Link>
           </span>
         ) : (
-          <span className="flex justify-between">
+          <span className="flex">
             <Link to="/user?form=login">
-              <div className="text-white text-xs font-bold font-logo">
+              <div className="text-white text-xs md:text-xl font-bold font-logo">
                 Login / Sign Up
               </div>
             </Link>
