@@ -22,13 +22,13 @@ const ToggleButton = ({
       const index = selection.findIndex(
         (element) => element.name === labelToFilter.name
       );
-      if (index !== -1) {
+      if (index > -1) {
         setSelection((prev) => prev.filter((item, i) => index !== i));
       }
     }
   };
   return (
-    <div className="mb-2" name={label} id={id} onChange={handleChange}>
+    <div className="mb-2" name={label} id={id}>
       <label className="relative inline-block w-8 mr-2 align-middle select-none cursor-pointer">
         <input
           type={"checkbox"}
