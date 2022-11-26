@@ -18,6 +18,8 @@ const AdminPage = ({ currentUser }) => {
 
   const navigate = useNavigate();
 
+  useEffect(() => (document.title = `BobAlchemist - Admin (${currentUser.username})`));
+
   useEffect(async () => {
     let {
       data: { data },

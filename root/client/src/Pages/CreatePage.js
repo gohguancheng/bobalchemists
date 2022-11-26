@@ -6,6 +6,9 @@ import CustomImage from "../components/CreatePage/CustomImage";
 import axios from "axios";
 
 const CreatePage = ({ currentUsername, setNoSessionFound }) => {
+  useEffect(
+    () => (document.title = "BobAlchemist - Create recipe")
+  );
   // Create states
   const [ingredientsList, setIngredientsList] = useState({});
   const [category, setCategory] = useState("Bases");

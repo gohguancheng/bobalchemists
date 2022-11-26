@@ -19,6 +19,7 @@ const ShowPage = ({ currentUsername }) => {
   }, []);
 
   useEffect(() => {
+    document.title = card?.name ? `${card.name}` : "BobAlchemist";
     if (!!currentUsername && !!card?.createdBy) {
       if (currentUsername === card.createdBy) {
         setRightsToEdit(true);
@@ -46,8 +47,13 @@ const ShowPage = ({ currentUsername }) => {
             <div className="py-5">
               <h1>Ingredients</h1>
               <p>Base: {card?.base?.name}</p>
-              <p>Flavouring: { !card?.flavour ? "None" : card?.flavour?.name}</p>
-              <p>Toppings: {card?.toppings?.length === 0 ? "None" : card?.toppings?.map((e) => e.name).join(", ")}</p>
+              <p>Flavouring: {!card?.flavour ? "None" : card?.flavour?.name}</p>
+              <p>
+                Toppings:{" "}
+                {card?.toppings?.length === 0
+                  ? "None"
+                  : card?.toppings?.map((e) => e.name).join(", ")}
+              </p>
             </div>
             <div>
               <p className="w-1/3 inline-block">👍 {card?.likes} Likes</p>

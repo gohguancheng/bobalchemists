@@ -89,32 +89,33 @@ const Card = ({ info, currentUserData }) => {
     <div className="flex flex-col bg-white rounded-[20px] border-[1px] border-transparent px-[20px] py-[40px] hover:shadow-lg">
       <Link key={info._id} to={`/show/${info._id}`}>
         <div className="container">
-          <div className="h-[80px] w-[80px] mx-auto mb-[20px]">
+          <div className="h-[80px] w-[80px] mx-auto mb-[10px]">
             <CreatedImage info={info} />
           </div>
         </div>
       </Link>
-      <div className="flex-1 flex flex-col justify-evenly w-[200px]">
-        <p className="text-center text-md font-semibold">{info.name}</p>
+      <div className="flex-1 flex flex-col gap-[10px] justify-evenly w-[200px]">
+        <div className="min-h-[75px]">
+          <p className="text-center text-md font-semibold">{info.name}</p>
+        </div>
+        <div className="text-sm text-center">By: {info.createdBy}</div>
 
-        <span className="flex justify-between items-center">
-          <div className="border-rounded cursor-pointer text-left w-max">
-            <button className="text-sm" onClick={handleLikeClick}>
-              👍
-            </button>
-            <span onClick={handleLikeClick} className="text-sm">
-              {" "}
-              Likes: {!!currentUserData ? likeState?.likes : info.likes}{" "}
-            </span>
-          </div>
-          <div className="text-right text-sm w-max">
-            Created By: {info.createdBy}
-          </div>
-        </span>
+        <div
+          className={`w-[80px] mx-auto border-[0.5px] border-lighterpink rounded-[5px] cursor-pointer text-left px-[5px] py-[1px] flex items-center justify-center gap-[5px] ${
+            likedByCurrent ? "bg-lighterpink" : "bg-[#F5F5F5]"
+          }`}
+          onClick={handleLikeClick}
+        >
+          <button className="text-sm">❤️</button>
+          <span className="text-sm">
+            {" "}
+            {!!currentUserData ? likeState?.likes : info.likes}{" "}
+          </span>
+        </div>
 
         <div className="text-sm text-center">
           {!currentUserData ? (
-            <span>
+            <span className="h-[20px]">
               <Link
                 to="/user?form=login"
                 className="hover:underline font-semibold"
@@ -123,11 +124,7 @@ const Card = ({ info, currentUserData }) => {
               </Link>{" "}
               to vote!
             </span>
-          ) : likedByCurrent ? (
-            "Liked!"
-          ) : (
-            "Haven't like!"
-          )}
+          ) : null}
         </div>
       </div>
     </div>
