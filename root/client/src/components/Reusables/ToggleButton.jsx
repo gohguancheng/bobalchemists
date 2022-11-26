@@ -39,7 +39,7 @@ const ToggleButton = ({
         />
         <span className="block overflow-hidden h-4 rounded-full bg-gray-300 cursor-pointer"></span>
       </label>
-      <span className="text-gray-400 font-medium text-sm">{label}</span>
+      <span className="text-purple font-medium text-sm">{label}</span>
     </div>
   );
 };

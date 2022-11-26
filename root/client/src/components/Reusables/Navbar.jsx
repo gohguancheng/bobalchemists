@@ -22,7 +22,7 @@ const Navbar = ({ currentUser, setSession }) => {
   });
 
   return (
-    <div className="bg-purple text-lightgray">
+    <div className="bg-purple text-lightblue">
       <div className="h-full px-[20px] py-[10px] flex justify-between items-center">
         <span className="flex justify-between items-center gap-[15px] md:gap-[30px]">
           <Link to="/">

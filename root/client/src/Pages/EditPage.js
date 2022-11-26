@@ -7,6 +7,10 @@ import IngredientSelection from "../components/CreatePage/IngredientSelection";
 import AvailableIngredients from "../components/CreatePage/AvailableIngredients";
 
 const EditPage = ({ currentUsername, setNoSessionFound }) => {
+  useEffect(
+    () => (document.title = `BobAlchemist - Edit - ${currentSelection.name}`)
+  );
+
   // Create states
   const [ingredientsList, setIngredientsList] = useState({});
   const [category, setCategory] = useState("Bases");

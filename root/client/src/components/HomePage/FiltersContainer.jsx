@@ -23,7 +23,7 @@ const FiltersContainer = ({
       } flex flex-col h-full max-h-full overflow-y-auto px-[20px] py-[40px]`}
     >
       <div>
-        <div className="text-lg font-bold"> Ingredients Filter: </div>
+        <div className="text-purple text-lg font-bold"> Ingredients Filter: </div>
         {filterContainerDisplay}
       </div>
     </div>

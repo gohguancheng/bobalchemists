@@ -39,7 +39,7 @@ const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
 
   return (
     <div className="my-2">
-      <div className="my-1 text-lg font-bold">{category}</div>
+      <div className="text-purple my-1 text-lg font-bold">{category}</div>
       <div>{ingredientsDisplay}</div>
     </div>
   );

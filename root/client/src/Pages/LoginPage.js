@@ -10,6 +10,13 @@ const LoginPage = ({ setSession }) => {
   const [accessSignUp, setAccessSignUp] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  useEffect(
+    () =>
+      (document.title = accessSignUp
+        ? "BobAlchemist - Sign Up"
+        : "BobAlchemist - Log In")
+  );
+
   useEffect(() => {
     setAccessSignUp(searchParams.get("form") === "sign-up" ? true : false);
   }, [searchParams]);

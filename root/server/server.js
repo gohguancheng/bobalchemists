@@ -19,7 +19,7 @@ const session = require("express-session");
 //import controllers
 const registrationController = require("./controller/User.controller.js");
 const sessionController = require("./controller/Sessions.controller.js");
-const userUtilityController = require('./controller/UserUtility.controller.js')
+const userUtilityController = require("./controller/UserUtility.controller.js");
 
 const ingredientsController = require("./controller/Ingredients.controller");
 const teaCardsInfoController = require("./controller/Cards.controller");
@@ -36,13 +36,13 @@ db.on("disconnected", () => console.log("mongo database disconnected"));
 
 //app middleware
 app.use(express.static(path.join(__dirname, "../client/build")));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); // new body-parser extracts the entire body portion of an incoming request stream and exposes it on req.body
+app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SECRET, //some random string
     resave: true,
-    cookie: { maxAge: 60 * 60 * 1000 },
+    cookie: { maxAge: 1000 * 60 * 30 }, // 30 mins
     saveUninitialized: false,
   })
 );
