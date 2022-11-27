@@ -7,15 +7,15 @@ const User = require("../models/userData.js");
 // ROUTES (api/sessions/)
 // get 'api/sessions/authcheck'
 sessions.get("/authcheck", async (req, res) => {
-  if(!req.session.currentUser) {
+  if (!req.session.currentUser) {
     res.status(200).json({
       isAuthenticated: false,
-      session: req.session
+      session: req.session,
     });
   } else {
     res.status(200).json({
       isAuthenticated: true,
-      session: req.session
+      session: req.session,
     });
   }
 });
@@ -32,6 +32,9 @@ sessions.post("/login", async (req, res) => {
     } else {
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         req.session.currentUser = foundUser;
+        if (req.session.currentUser.isAdmin) {
+          req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7; // one week cookie for admin
+        }
         res.status(200).json({
           message: "Login successful",
           isAuthenticated: true,
@@ -55,7 +58,7 @@ sessions.post("/login", async (req, res) => {
 sessions.get("/logout", async (req, res) => {
   req.session.destroy(() => {
     res.status(200).json({
-      message: "logout successful"
+      message: "logout successful",
     });
   });
 });
