@@ -13,11 +13,7 @@ const Navbar = ({ currentUser, setSession }) => {
   };
 
   useEffect(() => {
-    const admincheck =
-      currentUser?.username === "guanch" ||
-      currentUser?.username === "rizal" ||
-      currentUser?.username === "danning";
-
+    const admincheck = currentUser?.isAdmin;
     if (admincheck) setIsAdmin(true);
   });
 

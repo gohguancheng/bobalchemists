@@ -5,6 +5,7 @@ const axios = require("axios").default;
 const SignUpForm = ({ setAccessSignUp }) => {
   const [usernameInput, setUsernameInput] = useState();
   const [passwordInput, setPasswordInput] = useState();
+  const [signUpKey, setsignUpKey] = useState();
   const [signupResult, setSignupResult] = useState(null);
   const [nameAvailable, setNameAvailable] = useState(true);
   const [keyInput, setKeyInput] = useState(null);
@@ -34,20 +35,25 @@ const SignUpForm = ({ setAccessSignUp }) => {
   }
 
   useEffect(async () => {
+    
     const responseData = await checkName({ username: usernameInput });
     setNameAvailable(responseData.isAvailable);
   }, [usernameInput]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const credentials = { username: usernameInput, password: passwordInput };
+    const credentials = {
+      username: usernameInput,
+      password: passwordInput,
+      key: signUpKey,
+    };
     const response = await submitCredentials(credentials);
     setSignupResult(response);
   };
 
   if (signupResult?.status === "success") {
     setAccessSignUp(false);
-    navigate("/login");
+    navigate("/user?form=login");
   }
 
   return (
@@ -93,6 +99,19 @@ const SignUpForm = ({ setAccessSignUp }) => {
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
                 onChange={(e) => setPasswordInput(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="key" className="sr-only">
+                Key
+              </label>
+              <input
+                id="key"
+                name="key"
+                type="password"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Sign Up Key (Optional)"
+                onChange={(e) => setsignUpKey(e.target.value)}
               />
             </div>
           </div>

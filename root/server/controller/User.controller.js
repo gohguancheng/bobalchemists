@@ -1,4 +1,5 @@
 // DEPENDENCIES
+require("dotenv").config({ path: "../../../.env" });
 const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
@@ -36,6 +37,7 @@ router.post("/newUser", async (req, res) => {
     const newUser = {
       username: req.body.username,
       password: req.body.password,
+      isAdmin: req.body.key === process.env.SIGN_UP_CODE,
     };
     const response = User.create(newUser);
     res.status(200).json({ data: response, status: "success" });
@@ -45,23 +47,24 @@ router.post("/newUser", async (req, res) => {
 });
 
 // post '/api/registration/seed' index ---> route to create seed users
-router.post("/seed", async(req, res) => {
-  try{
-      await User.deleteMany({});
-      const seeds = seedUsers.map((e) => {
-        return {...e, password: bcrypt.hashSync(e.password, bcrypt.genSaltSync(10))}
-       });
-      console.log(seeds);
-      const newUsers = await User.create(seeds);
-      res.status(200).json({
-          status:"ok",
-          message:"users seeded",
-          data: newUsers,
-      });;
-  }catch(error){
-      console.log("at /registration/seed", error);
+router.post("/seed", async (req, res) => {
+  try {
+    await User.deleteMany({});
+    const seeds = seedUsers.map((e) => {
+      return {
+        ...e,
+        password: bcrypt.hashSync(e.password, bcrypt.genSaltSync(10)),
+      };
+    });
+    const newUsers = await User.create(seeds);
+    res.status(200).json({
+      status: "ok",
+      message: "users seeded",
+      data: newUsers,
+    });
+  } catch (error) {
+    console.log("at /registration/seed", error);
   }
 });
 
 module.exports = router;
-
