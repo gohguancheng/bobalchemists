@@ -11,23 +11,27 @@ import SearchResultPage from "./Pages/SearchResultPage";
 import AdminPage from "./Pages/AdminPage";
 //* import pages here and plugin pages as components inside retun below
 
-async () => fetch("/api/sessions/authcheck").then((data) => data.json());
-
 function App() {
   const [session, setSession] = useState({});
   const [noSessionFound, setNoSessionFound] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(async () => {
-    const response = await (async () =>
-      axios.get("/api/sessions/authcheck").then(({ data }) => data))();
+    if (!session.currentUser) {
+      const response = await (async () =>
+        axios.get("/api/sessions/authcheck").then(({ data }) => data))();
 
-    if (!!response.session.currentUser) {
-      setSession(response.session);
-      setNoSessionFound(false);
+      if (!!response.session.currentUser) {
+        setSession(response.session);
+        setNoSessionFound(false);
+      }
     }
-  }, [noSessionFound]);
+    setIsLoading(false);
+  }, []);
 
-  return (
+  return isLoading ? (
+    <div className="absolute inset-0 bg-lighterpink" />
+  ) : (
     <div className="App font-sans h-screen w-screen overflow-hidden flex flex-col">
       <Navbar currentUser={session?.currentUser} setSession={setSession} />
       <div className="flex-1 relative">

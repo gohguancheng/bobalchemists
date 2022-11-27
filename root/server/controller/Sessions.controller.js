@@ -7,14 +7,14 @@ const User = require("../models/userData.js");
 // ROUTES (api/sessions/)
 // get 'api/sessions/authcheck'
 sessions.get("/authcheck", async (req, res) => {
-  if (!req.session.currentUser) {
+  if (req.session.currentUser) {
     res.status(200).json({
-      isAuthenticated: false,
+      isAuthenticated: true,
       session: req.session,
     });
   } else {
     res.status(200).json({
-      isAuthenticated: true,
+      isAuthenticated: false,
       session: req.session,
     });
   }
