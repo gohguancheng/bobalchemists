@@ -52,7 +52,8 @@ const Card = ({ info, currentUserData }) => {
     }
   }, [user]);
 
-  const handleLikeClick = async () => {
+  const handleLikeClick = async (e) => {
+    e.preventDefault();
     if (!currentUserData || !info) {
       return;
     }
@@ -86,48 +87,49 @@ const Card = ({ info, currentUserData }) => {
   };
 
   return (
-    <div className="flex flex-col bg-white rounded-[20px] border-[1px] border-transparent px-[20px] py-[40px] hover:shadow-lg">
-      <Link key={info._id} to={`/show/${info._id}`}>
+    <Link key={info._id} to={`/show/${info._id}`}>
+      <div className="flex flex-col bg-white rounded-[20px] border-[1px] border-transparent px-[20px] py-[40px] hover:shadow-lg">
         <div className="container">
           <div className="h-[80px] w-[80px] mx-auto mb-[10px]">
             <CreatedImage info={info} />
           </div>
         </div>
-      </Link>
-      <div className="flex-1 flex flex-col gap-[10px] justify-evenly w-[200px]">
-        <div className="min-h-[75px]">
-          <p className="text-center text-md font-semibold">{info.name}</p>
-        </div>
-        <div className="text-sm text-center">By: {info.createdBy}</div>
 
-        <div
-          className={`w-[80px] mx-auto border-[0.5px] border-lighterpink rounded-[5px] cursor-pointer text-left px-[5px] py-[1px] flex items-center justify-center gap-[5px] ${
-            likedByCurrent ? "bg-lighterpink" : "bg-[#F5F5F5]"
-          }`}
-          onClick={handleLikeClick}
-        >
-          <button className="text-sm">❤️</button>
-          <span className="text-sm">
-            {" "}
-            {!!currentUserData ? likeState?.likes : info.likes}{" "}
-          </span>
-        </div>
+        <div className="flex-1 flex flex-col gap-[10px] justify-evenly w-[200px]">
+          <div className="min-h-[75px]">
+            <p className="text-center text-md font-semibold">{info.name}</p>
+          </div>
+          <div className="text-sm text-center">By: {info.createdBy}</div>
 
-        <div className="text-sm text-center">
-          {!currentUserData ? (
-            <span className="h-[20px]">
-              <Link
-                to="/user?form=login"
-                className="hover:underline font-semibold"
-              >
-                Sign In
-              </Link>{" "}
-              to vote!
+          <div
+            className={`w-[80px] mx-auto border-[0.5px] border-lighterpink rounded-[5px] cursor-pointer text-left px-[5px] py-[1px] flex items-center justify-center gap-[5px] ${
+              likedByCurrent ? "bg-lighterpink" : "bg-[#F5F5F5]"
+            }`}
+            onClick={handleLikeClick}
+          >
+            <button className="text-sm">❤️</button>
+            <span className="text-sm">
+              {" "}
+              {!!currentUserData ? likeState?.likes : info.likes}{" "}
             </span>
-          ) : null}
+          </div>
+
+          <div className="text-sm text-center">
+            {!currentUserData ? (
+              <span className="h-[20px]">
+                <Link
+                  to="/user?form=login"
+                  className="hover:underline font-semibold"
+                >
+                  Sign In
+                </Link>{" "}
+                to vote!
+              </span>
+            ) : null}
+          </div>
         </div>
-      </div>
-    </div>
+      </div>{" "}
+    </Link>
   );
 };
 

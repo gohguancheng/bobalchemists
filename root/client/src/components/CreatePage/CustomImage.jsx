@@ -6,7 +6,7 @@ const displayReadyImg = (imgUrl, element) => {
 
 const CustomImage = ({ chosenIngredients }) => {
   return (
-    <div className="container inline-block w-1/4 h-1/3 relative bg-lightblue rounded-full drop-shadow-md">
+    <div className="container w-1/4 h-1/3 relative bg-lightblue rounded-full drop-shadow-md">
       {/* Put BASE here */}
       {displayReadyImg(
         chosenIngredients?.Bases?.img,
@@ -32,6 +32,7 @@ const CustomImage = ({ chosenIngredients }) => {
       <img
         src="https://drive.google.com/uc?export=view&id=1DIvoIC4JTWbeTzwiouiikbe81dmu8VcE"
         alt="cup"
+        className="w-full"
       />
     </div>
   );

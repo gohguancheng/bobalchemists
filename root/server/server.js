@@ -40,6 +40,7 @@ app.use(express.json()); // new body-parser extracts the entire body portion of 
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
+    name: 'boba-sid',
     secret: process.env.SECRET, //some random string
     resave: true,
     cookie: { maxAge: 1000 * 60 * 30 }, // 30 mins
