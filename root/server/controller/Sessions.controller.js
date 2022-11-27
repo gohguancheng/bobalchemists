@@ -7,6 +7,7 @@ const User = require("../models/userData.js");
 // ROUTES (api/sessions/)
 // get 'api/sessions/authcheck'
 sessions.get("/authcheck", async (req, res) => {
+  console.log(JSON.stringify(req.session))
   if (req.session.currentUser) {
     res.status(200).json({
       isAuthenticated: true,
@@ -32,7 +33,7 @@ sessions.post("/login", async (req, res) => {
     } else {
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         req.session.currentUser = foundUser;
-        if (req.session.currentUser.isAdmin) {
+        if (foundUser.isAdmin) {
           req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7; // one week cookie for admin
         }
         res.status(200).json({
@@ -57,6 +58,7 @@ sessions.post("/login", async (req, res) => {
 // get 'api/sessions/logout'
 sessions.get("/logout", async (req, res) => {
   req.session.destroy(() => {
+    res.clearCookie("connect.sid");
     res.status(200).json({
       message: "logout successful",
     });
