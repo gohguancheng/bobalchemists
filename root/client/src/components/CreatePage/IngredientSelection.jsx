@@ -90,8 +90,8 @@ const IngredientSelection = ({
   };
 
   return (
-    <div className="container mx-auto h-screen w-1/2 text-center justify-around">
-      <div className="w-full bg-white rounded shadow-lg p-8 m-4">
+    <div className="flex-1 h-full min-w-1/2 w-1/2 text-center justify-around">
+      <div className="w-full bg-white rounded shadow-lg p-8">
         <h1 className="block w-full text-center text-grey-darkest mb-6">
           Create a Bubble Tea
         </h1>

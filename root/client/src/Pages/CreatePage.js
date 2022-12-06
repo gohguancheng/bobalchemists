@@ -6,9 +6,7 @@ import CustomImage from "../components/CreatePage/CustomImage";
 import axios from "axios";
 
 const CreatePage = ({ currentUsername, setNoSessionFound }) => {
-  useEffect(
-    () => (document.title = "BobAlchemist - Create recipe")
-  );
+  useEffect(() => (document.title = "BobAlchemist - Create recipe"));
   // Create states
   const [ingredientsList, setIngredientsList] = useState({});
   const [category, setCategory] = useState("Bases");
@@ -43,7 +41,7 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
   }, []);
 
   return (
-    <div className="flex font-normal">
+    <div className="flex h-full font-normal">
       <CustomImage chosenIngredients={chosenIngredients} />
       <div className="container w-3/4 h-full flex">
         <IngredientSelection
@@ -52,12 +50,14 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
           chosenIngredients={chosenIngredients}
           username={currentUsername}
           setNoSessionFound={setNoSessionFound}
+          className="w-1/2"
         />
         <AvailableIngredients
           ingredientsList={ingredientsList}
           chosenIngredients={chosenIngredients}
           setChosenIngredients={setChosenIngredients}
           category={category}
+          className="w-1/2"
         />
       </div>
     </div>

@@ -3,19 +3,17 @@ import React from "react";
 // Got Card component from https://kimia-ui.vercel.app/components/card
 
 const style = {
-  card: `relative flex flex-col border-2 border-gray-200 rounded-lg bg-white`,
-  cardBody: `block flex-grow flex-shrink p-5`,
-  cardTitle: `font-medium text-gray-700 mb-3`,
+  card: `relative md:min-h-[300px] md:h-[300px] flex flex-col border-[1px] border-gray-200 rounded-[15px] bg-white shadow-sm hover:shadow-xl`,
+  cardBody: `flex-1 text-center m-[20px]`,
+  cardTitle: `font-medium text-gray-700`,
   cardText: `text-gray-500`,
 };
 
-const inlineStyle = {
-  boxShadow: "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
-};
+
 
 function Card({ children }) {
   return (
-    <div className={style.card} style={inlineStyle}>
+    <div className={style.card}>
       {children}
     </div>
   );
@@ -79,11 +77,12 @@ const AvailableIngredients = ({
           });
         }
       }
+      
     }
   };
 
   return (
-    <div className="container mx-auto h-screen w-1/3 text-center justify-around">
+    <div className="flex-1 h-full overflow-y-auto text-center justify-around py-[10px]">
       <h1 className="font-bold">Click below to select</h1>
       <h1 className="font-bold">{category}</h1>
       <div className="flex flex-wrap">
@@ -91,7 +90,7 @@ const AvailableIngredients = ({
           ? ingredientsList[category].map((element, id) => {
               return (
                 <div
-                  className="w-40 m-2"
+                  className="w-40 m-2 button"
                   key={id}
                   onClick={(evt) =>
                     handleCardClick(evt, element.name, element._id, element.img)
@@ -99,7 +98,7 @@ const AvailableIngredients = ({
                 >
                   <Card>
                     <img
-                      className="max-w-full h-auto md:h-48"
+                      className="max-w-full h-auto md:h-[200px]"
                       src={element.img}
                       alt="ingredient"
                     />
@@ -110,7 +109,10 @@ const AvailableIngredients = ({
                 </div>
               );
             })
-          : "Loading"}
+          : 
+          <div className="flex items-center justify-center">
+            <h2 className="text-center text-2xl"> Loading.. </h2>
+          </div> }
       </div>
     </div>
   );

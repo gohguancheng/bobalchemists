@@ -7,7 +7,6 @@ const User = require("../models/userData.js");
 // ROUTES (api/sessions/)
 // get 'api/sessions/authcheck'
 sessions.get("/authcheck", async (req, res) => {
-  console.log(JSON.stringify(req.session))
   if (req.session.currentUser) {
     res.status(200).json({
       isAuthenticated: true,
@@ -15,7 +14,6 @@ sessions.get("/authcheck", async (req, res) => {
     });
   } else {
     res.status(200).json({
-      isAuthenticated: false,
       session: req.session,
     });
   }
@@ -45,7 +43,6 @@ sessions.post("/login", async (req, res) => {
       } else {
         res.status(200).json({
           message: "password does not match",
-          isAuthenticated: false,
           status: "Login Failure",
         });
       }
@@ -58,7 +55,7 @@ sessions.post("/login", async (req, res) => {
 // get 'api/sessions/logout'
 sessions.get("/logout", async (req, res) => {
   req.session.destroy(() => {
-    res.clearCookie("connect.sid");
+    res.clearCookie("boba-sid");
     res.status(200).json({
       message: "logout successful",
     });

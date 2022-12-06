@@ -66,12 +66,11 @@ const Navbar = ({ currentUser, setSession }) => {
             </Link>
           </span>
         ) : (
-          <span className="flex">
+          <span className="flex flex-nowrap gap-[5px] text-white text-xs md:text-xl font-bold font-logo">
             <Link to="/user?form=login">
-              <div className="text-white text-xs md:text-xl font-bold font-logo">
-                Login / Sign Up
-              </div>
+              <div>Login</div>
             </Link>
+            <span>/</span> <Link to="/user?form=sign-up">Sign Up</Link>
           </span>
         )}
       </div>

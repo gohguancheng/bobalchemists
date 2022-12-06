@@ -14,36 +14,35 @@ const User = require("../models/userData.js");
 //get 'api/userdata/creations/:id' ---> to populate and show creations
 
 Router.get("/creations/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const populatedCreations = await User.findById(id)
-          .populate("userCreations")
-        res.status(200).json({
-          status: "ok",
-          message: "populated userData returned",
-          data: populatedCreations,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})
+  const { id } = req.params;
+  try {
+    const populatedCreations = await User.findById(id)
+      .populate("userCreations")
+    res.status(200).json({
+      status: "ok",
+      message: "populated userData returned",
+      data: populatedCreations,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 //get 'api/userdata/liked/:id'---> to populate and show liked
 
-
 Router.get("/liked/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const populatedLikes = await User.findById(id)
-          .populate("likedCreations")
-        res.status(200).json({
-          status: "ok",
-          message: "populated userData returned",
-          data: populatedLikes,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})
+  const { id } = req.params;
+  try {
+    const populatedLikes = await User.findById(id).populate("likedCreations");
+    console.log(populatedLikes)
+    res.status(200).json({
+      status: "ok",
+      message: "populated userData returned",
+      data: populatedLikes,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 //put 'api/userdata/edit/:id' ---> route is called for users to update name and other stuff
 /* Router.put("/edit/:id", async (req, res) => {
