@@ -89,12 +89,14 @@ const Card = ({ info, currentUserData }) => {
     }
   };
 
-  const goToCard = (id) => navigate(`/show/${id}`);
+  const goToCard = (id) => {
+    navigate(`/show/${id}`);
+  };
 
   return (
     <div
       className="flex flex-col bg-white rounded-[20px] px-[20px] py-[40px] hover:shadow-lg relative overflow-hidden cursor-pointer"
-      onClick={() => goToCard(info.id)}
+      onClick={() => goToCard(info._id)}
     >
       <div className={`absolute inset-0 z-10 ${hover ? "" : "hidden"}`}>
         <div className="absolute inset-0 bg-purple opacity-95"></div>
