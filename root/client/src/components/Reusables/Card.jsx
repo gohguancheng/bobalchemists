@@ -101,7 +101,7 @@ const Card = ({ info, currentUserData }) => {
       <div className={`absolute inset-0 z-10 ${hover ? "" : "hidden"}`}>
         <div className="absolute inset-0 bg-purple opacity-95"></div>
         <div className="absolute bottom-0 h-1/2 w-full px-[20px]">
-          <p className="text-md font-semibold text-white">{info.description}</p>
+          <p className="text-md font-semibold text-white text-center">{info.description}</p>
         </div>
       </div>
 
