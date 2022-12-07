@@ -36,16 +36,21 @@ const ShowPage = ({ currentUsername }) => {
   };
 
   return (
-    <div className="flex text-gray-700">
+    <div className="flex flex-col md:flex-row md:justify-center text-gray-700 h-full max-h-full overflow-y-auto md:overflow-hidden px-[20px]">
       <Alert alertOpen={alertOpen} setAlertOpen={setAlertOpen} />
-      <CreatedImage info={card} />
-      <div className="container inline-block w-2/3 h-screen font-normal">
-        <div className="container mx-auto w-5/6 h-screen p-20 text-center justify-around">
-          <div className="bg-white rounded-lg drop-shadow-lg p-3 pb-3">
-            <h1 className="text-2xl py-5">{card?.name}</h1>
-            <p className="py-5">{card?.description}</p>
-            <div className="py-5">
-              <h1>Ingredients</h1>
+      <CreatedImage
+        info={card}
+        containerClass="w-full md:w-1/2 h-[250px] md:h-full"
+      />
+      <div className="container w-full md:w-1/2 md:flex-grow flex items-center justify-center mb-[20px]">
+        <div className="bg-white rounded-[20px] shadow-md px-[30px] py-[20px] min-w-[340px] text-center">
+          <h1 className="text-4xl md:text-5xl font-semibold mb-2">
+            {card?.name}
+          </h1>
+          <p className="text-xs md:text-sm mb-5">{card?.description}</p>
+          <div>
+            <h1 className="md:text-lg font-semibold">Ingredients</h1>
+            <div className="md:text-lg mb-8 flex flex-col items-center gap-[5px]">
               <p>Base: {card?.base?.name}</p>
               <p>Flavouring: {!card?.flavour ? "None" : card?.flavour?.name}</p>
               <p>
@@ -55,11 +60,11 @@ const ShowPage = ({ currentUsername }) => {
                   : card?.toppings?.map((e) => e.name).join(", ")}
               </p>
             </div>
-            <div>
-              <p className="w-1/3 inline-block">👍 {card?.likes} Likes</p>
-              <p className="w-1/3 inline-block">Creator: {card?.createdBy}</p>
+            <div className="text-sm md:text-md">
+              <p className="w-1/2 inline-block">❤️ {card?.likes} Likes</p>
+              <p className="w-1/2 inline-block">Creator: {card?.createdBy}</p>
               {rightsToEdit ? (
-                <div>
+                <div className="flex items-center justify-center gap-[10px] my-[10px]">
                   <Button
                     color="primary"
                     onClick={() => handleEditButtonClick()}
@@ -74,7 +79,7 @@ const ShowPage = ({ currentUsername }) => {
                   </Button>
                 </div>
               ) : !currentUsername ? (
-                <div>
+                <div className="my-[10px]">
                   <span className="text-xs">
                     {" "}
                     For creators, log in for more functions.
