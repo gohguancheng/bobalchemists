@@ -81,128 +81,128 @@ const IngredientSelection = ({
     if (!currentSelection) {
       const response = await postCreation(formData);
       navigate(`/show/${response.data._id}`);
-
     } else if (!!currentSelection) {
       const response = await postEdit(formData);
       navigate(`/show/${response.data._id}`);
-
     }
   };
 
   return (
-    <div className="flex-1 h-full min-w-1/2 w-1/2 text-center justify-around">
-      <div className="w-full bg-white rounded shadow-lg p-8">
-        <h1 className="block w-full text-center text-grey-darkest mb-6">
-          Create a Bubble Tea
-        </h1>
-        <form className="mb-4" action="/" method="post" onSubmit={handleSubmit}>
-          <div className="flex flex-col mb-4">
-            <label
-              className="mb-2 uppercase font-bold text-lg text-grey-darkest"
-              htmlFor="name"
-            >
-              Name
-              <RedAsterisk />
-            </label>
-            <input
-              className="border py-2 px-3 text-grey-darkest"
-              type="text"
-              name="name"
-              id="name"
-              defaultValue={!!currentSelection ? currentSelection.name : null}
-              onChange={handleNameInput}
-            />
+    <div className="w-full bg-white p-[20px] rounded-[20px] lg:shadow-md">
+      <h1 className="block w-full text-center text-grey-darkest mb-[5px]">
+        Create a Bubble Tea
+      </h1>
+      <form
+        className="mb-[10px]"
+        action="/"
+        method="post"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex flex-col mb-[10px]">
+          <label
+            className="mb-1 uppercase font-bold lg:text-lg text-grey-darkest"
+            htmlFor="name"
+          >
+            Name
+            <RedAsterisk />
+          </label>
+          <input
+            className="border py-2 px-3 text-grey-darkest"
+            type="text"
+            name="name"
+            id="name"
+            defaultValue={!!currentSelection ? currentSelection.name : null}
+            onChange={handleNameInput}
+          />
+        </div>
+        <div className="flex flex-col mb-[10px]">
+          <label
+            className="mb-1 uppercase font-bold lg:text-lg text-grey-darkest"
+            htmlFor="description"
+          >
+            Description
+          </label>
+          <textarea
+            className="border py-2 px-3 text-grey-darkest"
+            name="description"
+            id="description"
+            rows="3"
+            defaultValue={
+              !!currentSelection ? currentSelection.description : null
+            }
+            onChange={(e) => setDescriptionInput(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col container mx-auto items-center">
+          <label className="mb-1 uppercase font-bold lg:text-lg text-grey-darkest">
+            Base
+            <RedAsterisk />
+          </label>
+          <div className="p-1 text-sm">
+            {chosenIngredients?.Bases?.name
+              ? chosenIngredients?.Bases.name
+              : null}
           </div>
-          <div className="flex flex-col mb-4">
-            <label
-              className="mb-2 uppercase font-bold text-lg text-grey-darkest"
-              htmlFor="description"
-            >
-              Description
-            </label>
-            <textarea
-              className="border py-2 px-3 text-grey-darkest"
-              name="description"
-              id="description"
-              rows="3"
-              defaultValue={
-                !!currentSelection ? currentSelection.description : null
-              }
-              onChange={(e) => setDescriptionInput(e.target.value)}
-            />
+          <PlusButton id={"Bases"} setCategory={setCategory} />
+          <br />
+          <label className="mb-1 uppercase font-bold lg:text-lg text-grey-darkest">
+            Flavouring
+          </label>
+          <div className="p-1 text-sm">
+            {chosenIngredients?.Flavourings?.name
+              ? chosenIngredients?.Flavourings.name
+              : null}
           </div>
-          <div className="flex flex-col container mx-auto items-center">
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
-              Base
-              <RedAsterisk />
-            </label>
-            <div className="p-1 text-sm">
-              {chosenIngredients?.Bases?.name
-                ? chosenIngredients?.Bases.name
-                : null}
-            </div>
-            <PlusButton id={"Bases"} setCategory={setCategory} />
-            <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
-              Flavouring
-            </label>
-            <div className="p-1 text-sm">
-              {chosenIngredients?.Flavourings?.name
-                ? chosenIngredients?.Flavourings.name
-                : null}
-            </div>
-            <PlusButton id={"Flavourings"} setCategory={setCategory} />
-            <br />
-            <label className="mb-2 uppercase font-bold text-lg text-grey-darkest">
-              Toppings
-            </label>
-            <div className="p-1 text-sm">
-              {chosenIngredients?.Toppings
-                ? chosenIngredients?.Toppings.map((e) => e.name).join(", ")
-                : null}
-            </div>
-            <PlusButton id={"Toppings"} setCategory={setCategory} />
-            <br />
+          <PlusButton id={"Flavourings"} setCategory={setCategory} />
+          <br />
+          <label className="mb-1 uppercase font-bold lg:text-lg text-grey-darkest">
+            Toppings
+          </label>
+          <div className="p-1 text-sm">
+            {chosenIngredients?.Toppings
+              ? chosenIngredients?.Toppings.map((e) => e.name).join(", ")
+              : null}
           </div>
-          {!readyToSubmit ? (
-            <div className="p-1 text-sm">
-              <p className="text-red-700 border-2 border-red-700 rounded-md text-xs">
-                Note: Please fill in 'Name' field and select a minimum of 1 base
-                for 'Submit' button to appear.
-              </p>
-            </div>
-          ) : !!id ? (
-            <div>
-              Warning: The 'like' count will be reset to 0, upon your
-              resubmission.
-              <input
-                type="submit"
-                value="Edit Your Creation"
-                className="bg-red-700 hover:bg-red-500 text-white m-2 p-1 drop-shadow-2xl rounded"
-              />
-            </div>
-          ) : (
+          <PlusButton id={"Toppings"} setCategory={setCategory} />
+          <br />
+        </div>
+
+        {!readyToSubmit ? (
+          <p className="text-red-700 border-2 border-red-700 rounded-md text-xs max-w-[600px] mx-auto">
+            Note: Please fill in 'Name' field and select a minimum of 1 base for
+            'Submit' button to appear.
+          </p>
+        ) : !!id ? (
+          <div>
+            Warning: The 'like' count will be reset to 0, upon your
+            resubmission.
             <input
               type="submit"
-              value="Submit Creation"
-              className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
+              value="Edit Your Creation"
+              className="bg-red-700 hover:bg-red-500 text-white m-2 p-1 drop-shadow-2xl rounded"
             />
-          )}
-        </form>
-        {!!currentSelection ? (
-          <Link to={`/show/${id}`}>
-            <button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">
-              Return to Details Page
-            </button>
-          </Link>
+          </div>
         ) : (
-          <Link to={`/`}>
-            <button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">
-              Return to Home Page
-            </button>
-          </Link>
+          <input
+            type="submit"
+            value="Submit Creation"
+            className="button bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl rounded"
+          />
         )}
-      </div>
+      </form>
+      {!!currentSelection ? (
+        <Link to={`/show/${id}`}>
+          <button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">
+            Return to Details Page
+          </button>
+        </Link>
+      ) : (
+        <Link to={`/`}>
+          <button className="bg-blue-700 hover:bg-blue-500 text-white m-2 p-1 drop-shadow-2xl w-max rounded">
+            Return to Home Page
+          </button>
+        </Link>
+      )}
     </div>
   );
 };

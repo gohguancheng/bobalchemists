@@ -41,23 +41,25 @@ const CreatePage = ({ currentUsername, setNoSessionFound }) => {
   }, []);
 
   return (
-    <div className="flex h-full font-normal">
-      <CustomImage chosenIngredients={chosenIngredients} />
-      <div className="container w-3/4 h-full flex">
+    <div className="flex flex-col lg:flex-row w-full h-full font-normal overflow-y-auto lg:overflow-hidden">
+      <div className="w-full lg:w-1/3 h-1/2 lg:h-full">
+        <CustomImage chosenIngredients={chosenIngredients} />
+      </div>
+      <div className="w-full h-full lg:w-1/3 text-center justify-around px-[20px] lg:px-[10px]">
         <IngredientSelection
           category={category}
           setCategory={setCategory}
           chosenIngredients={chosenIngredients}
           username={currentUsername}
           setNoSessionFound={setNoSessionFound}
-          className="w-1/2"
         />
+      </div>
+      <div className="lg:w-1/3 lg:h-full">
         <AvailableIngredients
           ingredientsList={ingredientsList}
           chosenIngredients={chosenIngredients}
           setChosenIngredients={setChosenIngredients}
           category={category}
-          className="w-1/2"
         />
       </div>
     </div>
