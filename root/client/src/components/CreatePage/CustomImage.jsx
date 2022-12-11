@@ -6,34 +6,40 @@ const displayReadyImg = (imgUrl, element) => {
 
 const CustomImage = ({ chosenIngredients }) => {
   return (
-    <div className="container w-1/4 h-1/3 relative bg-lightblue rounded-full drop-shadow-md">
-      {/* Put BASE here */}
-      {displayReadyImg(
-        chosenIngredients?.Bases?.img,
+    <div className="w-full h-full">
+      <div className="relative inset-0 h-full w-full">
+        {/* Put BASE here */}
+        {chosenIngredients?.Bases?.img ? (
+          <img
+            className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
+            src={chosenIngredients?.Bases?.img}
+            alt="base"
+          />
+        ) : null}
+        {/* Put TOPPING here*/}
+        {chosenIngredients?.Toppings?.map((topping) => {
+          return (
+            <img
+              className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
+              src={topping?.img}
+              alt="topping(s)"
+            />
+          );
+        })}
+        {/* Put FLAVOURING here */}
+        {chosenIngredients?.Flavourings?.img ? (
+          <img
+            className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
+            src={chosenIngredients?.Flavourings?.img}
+            alt="flavouring"
+          />
+        ) : null}
         <img
-          className="absolute"
-          src={chosenIngredients?.Bases?.img}
-          alt="base"
+          src="https://drive.google.com/uc?export=view&id=1DIvoIC4JTWbeTzwiouiikbe81dmu8VcE"
+          alt="cup"
+          className="w-full h-full"
         />
-      )}
-      {/* Put TOPPING here*/}
-      {chosenIngredients?.Toppings?.map((topping) => {
-        return <img className="absolute" src={topping?.img} alt="topping(s)" />;
-      })}
-      {/* Put FLAVOURING here */}
-      {displayReadyImg(
-        chosenIngredients?.Flavourings?.img,
-        <img
-          className="absolute"
-          src={chosenIngredients?.Flavourings?.img}
-          alt="flavouring"
-        />
-      )}
-      <img
-        src="https://drive.google.com/uc?export=view&id=1DIvoIC4JTWbeTzwiouiikbe81dmu8VcE"
-        alt="cup"
-        className="w-full"
-      />
+      </div>
     </div>
   );
 };
