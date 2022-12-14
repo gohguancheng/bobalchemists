@@ -95,6 +95,7 @@ const AvailableIngredients = ({
                       className="w-full max-w-full h-[150px]"
                       src={element.img}
                       alt="ingredient"
+                      loading="lazy"
                     />
                     <CardBody>
                       <CardTitle className="text-lg">{element.name}</CardTitle>
