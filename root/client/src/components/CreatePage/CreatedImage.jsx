@@ -9,6 +9,7 @@ const CreatedImage = ({ info, containerClass }) => {
           className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
           src={info?.base?.img}
           alt="base"
+          loading="lazy"
         />
 
         {/* Put TOPPING here*/}
@@ -19,6 +20,7 @@ const CreatedImage = ({ info, containerClass }) => {
               src={topping?.img}
               alt="topping(s)"
               key={id}
+              loading="lazy"
             />
           );
         })}
@@ -29,6 +31,7 @@ const CreatedImage = ({ info, containerClass }) => {
             className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
             src={info?.flavour?.img}
             alt="flavouring"
+            loading="lazy"
           />
         ) : null}
         {/* Put CUP here */}
@@ -36,6 +39,7 @@ const CreatedImage = ({ info, containerClass }) => {
           className="relative h-full w-full inset-0 object-contain object-center"
           src="https://drive.google.com/uc?export=view&id=1DIvoIC4JTWbeTzwiouiikbe81dmu8VcE"
           alt="cup"
+          loading="lazy"
         />
       </div>
     </div>

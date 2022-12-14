@@ -14,6 +14,7 @@ const CustomImage = ({ chosenIngredients }) => {
             className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
             src={chosenIngredients?.Bases?.img}
             alt="base"
+            loading="lazy"
           />
         ) : null}
         {/* Put TOPPING here*/}
@@ -22,7 +23,8 @@ const CustomImage = ({ chosenIngredients }) => {
             <img
               className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
               src={topping?.img}
-              alt="topping(s)"
+              alt="toppings"
+              loading="lazy"
             />
           );
         })}
@@ -32,12 +34,14 @@ const CustomImage = ({ chosenIngredients }) => {
             className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
             src={chosenIngredients?.Flavourings?.img}
             alt="flavouring"
+            loading="lazy"
           />
         ) : null}
         <img
           src="https://drive.google.com/uc?export=view&id=1DIvoIC4JTWbeTzwiouiikbe81dmu8VcE"
           alt="cup"
           className="w-full h-full"
+          loading="lazy"
         />
       </div>
     </div>
