@@ -110,7 +110,7 @@ const Card = ({ info, currentUserData }) => {
         onMouseEnter={() => setHover(() => true)}
         onMouseLeave={() => setHover(() => false)}
       >
-        <CreatedImage info={info} />
+        <CreatedImage info={info} containerClass={'w-full h-full'} />
       </div>
 
       <div className="flex-1 flex flex-col gap-[10px] justify-evenly w-[200px] relative z-[5]">

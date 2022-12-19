@@ -1,15 +1,45 @@
-import React from "react";
+import ContentLoader from "react-content-loader";
+import { useState, useEffect } from "react";
 
 const CreatedImage = ({ info, containerClass }) => {
+  const [isLoaded, setIsLoaded] = useState(null);
+  const [imgCount, setImgCount] = useState(null);
+  const [loadCount, setLoadCount] = useState(0);
+  useEffect(() => {
+    let count = 1; // initalise with cup
+    if (info?.base) {
+      count++;
+    }
+    if (info?.flavour) {
+      count++;
+    }
+    if (info?.toppings) {
+      count = count + info.toppings.length;
+    }
+    setImgCount(count);
+  }, [info]);
+
+  useEffect(() => {
+    if (loadCount === imgCount) {
+      setIsLoaded(true);
+    }
+  }, [loadCount]);
+
+  const addToLoaded = () => {
+    setLoadCount((prev) => prev + 1);
+  };
+
   return (
-    <div className={`container max-h-full max-w-full ${containerClass}`}>
+    <div className={`container max-h-full max-w-full ${containerClass} `}>
       {/* Put BASE here */}
-      <div className="relative h-full w-full">
+      <div
+        className={`relative h-full w-full ${isLoaded ? "block" : "hidden"}`}
+      >
         <img
           className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
           src={info?.base?.img}
           alt="base"
-          loading="lazy"
+          onLoad={addToLoaded}
         />
 
         {/* Put TOPPING here*/}
@@ -20,7 +50,7 @@ const CreatedImage = ({ info, containerClass }) => {
               src={topping?.img}
               alt="topping(s)"
               key={id}
-              loading="lazy"
+              onLoad={addToLoaded}
             />
           );
         })}
@@ -31,7 +61,7 @@ const CreatedImage = ({ info, containerClass }) => {
             className="absolute h-full w-full inset-0 z-[1] object-contain object-center"
             src={info?.flavour?.img}
             alt="flavouring"
-            loading="lazy"
+            onLoad={addToLoaded}
           />
         ) : null}
         {/* Put CUP here */}
@@ -39,8 +69,24 @@ const CreatedImage = ({ info, containerClass }) => {
           className="relative h-full w-full inset-0 object-contain object-center"
           src="https://drive.google.com/uc?export=view&id=1DIvoIC4JTWbeTzwiouiikbe81dmu8VcE"
           alt="cup"
-          loading="lazy"
+          onLoad={addToLoaded}
         />
+      </div>
+      <div
+        className={`relative h-full w-full flex items-center justify-center ${
+          isLoaded ? "hidden" : "block"
+        }`}
+      >
+        <ContentLoader
+          speed={1}
+          width={100}
+          height={100}
+          viewBox="0 0 100 100"
+          backgroundColor="#f3f3f3"
+          foregroundColor="#ecebeb"
+        >
+          <circle cx="50" cy="50" r="50" />
+        </ContentLoader>
       </div>
     </div>
   );
