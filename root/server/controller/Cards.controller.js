@@ -1,6 +1,8 @@
 const express = require("express");
 const base_seed = require("../models/Ingredients/base_seed");
 const Router = express.Router();
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 //import tea cards info
 const TeaCardsInfo = require("../models/teaCardInfo");
@@ -28,10 +30,24 @@ Router.get("/seed", async (req, res) => {
 //get "api/teacardsinfo"
 Router.get("/", async (req, res) => {
   try {
-    const populatedCards = await TeaCardsInfo.find({})
+    let populatedCards = await TeaCardsInfo.find({})
       .populate("base", ["name", "img"])
       .populate("flavour", ["name", "img"])
-      .populate("toppings", ["name", "img"]);
+      .populate("toppings", ["name", "img"])
+      .then(async (res) => {
+        let newRes = await Promise.all(
+          res.map(async (card) => {
+            let id = card._id.toString();
+
+            let userLikes = await User.find({
+              likedCreations: { $in: id },
+            }).count();
+            return { ...card, userLikes };
+          })
+        );
+        return newRes.map(({ _doc, userLikes }) => ({ ..._doc, userLikes }));
+      });
+
     res.status(200).json({
       status: "ok",
       message: "populated teaCards returned",
@@ -163,7 +179,9 @@ Router.put("/liked/:id", async (req, res) => {
       { likedCreations: 1 }
     );
 
-    let alreadyliked = checkLiked.likedCreations.find((likedId) => (likedId === id));
+    let alreadyliked = checkLiked.likedCreations.find(
+      (likedId) => likedId === id
+    );
 
     if (alreadyliked) {
       res.status(400).json({
