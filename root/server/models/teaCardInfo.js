@@ -7,7 +7,6 @@ const teaCardInfo_Schema = new mongoose.Schema({
     base: {type: mongoose.Schema.Types.ObjectId, ref: 'Bases'},
     flavour: {type: mongoose.Schema.Types.ObjectId, ref: 'Flavours'},
     toppings:[{type: mongoose.Schema.Types.ObjectId, ref: 'Toppings'}],
-    likes: {type: Number, min: 0},
 },
 {
     timestamps: true

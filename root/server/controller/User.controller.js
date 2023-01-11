@@ -47,7 +47,7 @@ router.post("/newUser", async (req, res) => {
 });
 
 // post '/api/registration/seed' index ---> route to create seed users
-router.post("/seed", async (req, res) => {
+router.get("/seed", async (req, res) => {
   try {
     await User.deleteMany({});
     const seeds = seedUsers.map((e) => {

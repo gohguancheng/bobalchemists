@@ -7,27 +7,6 @@ const base_seed = [
     color: "#966835",
     img: "https://i.imgur.com/6i1IAmB.png",
   },
-  /*     {
-        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554ec"),
-        name: "Mocha",
-        baseType: "Coffee",
-        color: "#6b4a26",
-        img: " ",
-    },
-    {
-        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554ed"),
-        name: "Green Tea",
-        baseType: "Plain Tea",
-        color: "#87be76",
-        img: " ",
-    },
-    {
-        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554ee"),
-        name: "Fresh Milk",
-        baseType: "Milk",
-        color: "#ffffff",
-        img: " "
-    }, */
   {
     _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554ef"),
     name: "Chocolate Milk",
@@ -35,13 +14,7 @@ const base_seed = [
     color: "#735b3b",
     img: "https://i.imgur.com/auzcIwt.png",
   },
-  /*     {
-        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554f0"),
-        name:"Passionfruit Tea",
-        baseType: "Fruit Tea",
-        color: "#e8bf2c",
-        img:" "
-    }, */
+
   {
     _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554f4"),
     name: "Matcha",
@@ -63,6 +36,34 @@ const base_seed = [
     color: "#04c424",
     img: "https://i.imgur.com/CheeaDn.png",
   },
+  /*     {
+        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554f0"),
+        name:"Passionfruit Tea",
+        baseType: "Fruit Tea",
+        color: "#e8bf2c",
+        img:" "
+    }, */
+  /*     {
+        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554ec"),
+        name: "Mocha",
+        baseType: "Coffee",
+        color: "#6b4a26",
+        img: " ",
+    },
+    {
+        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554ed"),
+        name: "Green Tea",
+        baseType: "Plain Tea",
+        color: "#87be76",
+        img: " ",
+    },
+    {
+        _id: mongoose.Types.ObjectId("620b29891d0ef89dbe4554ee"),
+        name: "Fresh Milk",
+        baseType: "Milk",
+        color: "#ffffff",
+        img: " "
+    }, */
 ];
 
 module.exports = base_seed;

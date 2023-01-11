@@ -45,7 +45,7 @@ const Card = ({ info, currentUserData }) => {
   useEffect(() => {
     if (!!user) {
       const state = {
-        likes: info?.likes,
+        likes: info?.userLikes,
         likedCreations: user?.likedCreations,
       };
       setLikeState((prev) => {
@@ -101,7 +101,9 @@ const Card = ({ info, currentUserData }) => {
       <div className={`absolute inset-0 z-10 ${hover ? "" : "hidden"}`}>
         <div className="absolute inset-0 bg-purple opacity-95"></div>
         <div className="absolute bottom-0 h-1/2 w-full px-[20px]">
-          <p className="text-md font-semibold text-white text-center">{info.description}</p>
+          <p className="text-md font-semibold text-white text-center">
+            {info.description}
+          </p>
         </div>
       </div>
 
@@ -110,7 +112,7 @@ const Card = ({ info, currentUserData }) => {
         onMouseEnter={() => setHover(() => true)}
         onMouseLeave={() => setHover(() => false)}
       >
-        <CreatedImage info={info} containerClass={'w-full h-full'} />
+        <CreatedImage info={info} containerClass={"w-full h-full"} />
       </div>
 
       <div className="flex-1 flex flex-col gap-[10px] justify-evenly w-[200px] relative z-[5]">
@@ -128,7 +130,7 @@ const Card = ({ info, currentUserData }) => {
           <button className="text-sm">❤️</button>
           <span className="text-sm">
             {" "}
-            {!!currentUserData ? likeState?.likes : info.likes}{" "}
+            {!!currentUserData ? likeState?.likes : info.userLikes}{" "}
           </span>
         </div>
 
