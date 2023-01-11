@@ -41,8 +41,8 @@ const ContentContainer = ({ currentUserData }) => {
           </div>
           <>
             <span className="hidden md:flex justify-center gap-[10px] max-w-full overflow-x-auto text-xs md:text-sm pb-[20px]">
-              <Button color="regular">Popular</Button>
-              <Button color="regular">Recently added</Button>
+              {/* <Button color="regular">Popular</Button>
+              <Button color="regular">Recently added</Button> */}
             </span>
             <span className="md:hidden flex justify-center max-w-full overflow-x-auto text-xs pt-[10px] pb-[20px]">
               <Button color="regular" onClick={() => setShowFilter(true)}>

@@ -9,6 +9,7 @@ import ShowPage from "./Pages/ShowPage";
 import EditPage from "./Pages/EditPage";
 import SearchResultPage from "./Pages/SearchResultPage";
 import AdminPage from "./Pages/AdminPage";
+import { resetDatabase } from "./seeding/seedFunctions";
 //* import pages here and plugin pages as components inside retun below
 
 function App() {
