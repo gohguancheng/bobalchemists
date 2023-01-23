@@ -14,7 +14,7 @@ const ContentContainer = ({ currentUserData }) => {
       <div
         className={`${
           showFilter
-            ? "absolute z-10 inset-0 bg-white overflow-hidden"
+            ? "absolute z-50 inset-0 bg-white overflow-hidden"
             : "hidden"
         } md:relative md:bg-transparent md:block md:max-w-1/4 md:h-full`}
       >
