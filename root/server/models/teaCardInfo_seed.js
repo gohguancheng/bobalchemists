@@ -4,7 +4,7 @@ const teaCards_seed = [
   {
     _id: mongoose.Types.ObjectId("620b65d4a6941bd4c178849b"),
     name: "Matcha with Boba",
-    createdBy: "summer",
+    createdBy: "Toph",
     description: "Great for those who like anything matcha but also like boba.",
     base: "620b29891d0ef89dbe4554f4",
     flavour: "620b2afdb98e26a5d939f8d8",
@@ -13,7 +13,7 @@ const teaCards_seed = [
   {
     _id: mongoose.Types.ObjectId("620b65d4a6941bd4c178849c"),
     name: "Hazelnut Milk Tea With Boba",
-    createdBy: "beth",
+    createdBy: "Katara",
     description: "Classic With a twist of hazelnut. ",
     base: "620b2683d4912d8146ccc251",
     flavour: "620b2afdb98e26a5d939f8d6",
@@ -22,7 +22,7 @@ const teaCards_seed = [
   {
     _id: mongoose.Types.ObjectId("620b65d4a6941bd4c178849d"),
     name: "Durian Chocolate Milk With Grass Jelly and Red Beans",
-    createdBy: "rick",
+    createdBy: "Aang",
     description: "Weird combination for testing",
     base: "620b29891d0ef89dbe4554ef",
     flavour: "620b2afdb98e26a5d939f8d7",
@@ -31,21 +31,21 @@ const teaCards_seed = [
   {
     _id: mongoose.Types.ObjectId("620b65d4a6941bd4c178849e"),
     name: "Ovaltine",
-    createdBy: "rick",
+    createdBy: "Aang",
     description: "Creator was too lazy to put in a description",
     base: "620b49d048ec688f7edaf0e6",
   },
   {
     _id: mongoose.Types.ObjectId("620b65d4a6941bd4c1788491"),
     name: "Coffee",
-    createdBy: "rick",
+    createdBy: "Aang",
     description: "Wait.. this is just coffee..",
     base: "620b49d048ec688f7edaf0e7",
   },
   {
     _id: mongoose.Types.ObjectId("620b65d4a6941bd4c1781491"),
     name: "Chocolate Milk with Red Beans",
-    createdBy: "summer",
+    createdBy: "Toph",
     description: "It just felt right",
     base: "620b29891d0ef89dbe4554ef",
     toppings: ["620b50b59c2072e4dc9ba035"],
@@ -53,7 +53,7 @@ const teaCards_seed = [
   {
     _id: mongoose.Types.ObjectId("520b65d4a6941bd4c1781491"),
     name: "Hazelnut Milk Tea with Pudding",
-    createdBy: "beth",
+    createdBy: "Katara",
     description: "This is what the youngsters like",
     base: "620b2683d4912d8146ccc251",
     flavour: "620b2afdb98e26a5d939f8d6",
@@ -62,7 +62,7 @@ const teaCards_seed = [
   {
     _id: mongoose.Types.ObjectId("520b65d4a6941bd4c1781411"),
     name: "Matcha Caramel with a bunch of black stuff",
-    createdBy: "summer",
+    createdBy: "Toph",
     description: "You can't beat matcha",
     base: "620b29891d0ef89dbe4554f4",
     flavour: "620b2afdb98e26a5d939f8d4",
@@ -71,7 +71,7 @@ const teaCards_seed = [
   {
     _id: mongoose.Types.ObjectId("520b65d4a6941bd4c178141a"),
     name: "Durian Coffee",
-    createdBy: "rick",
+    createdBy: "Aang",
     description: "Don't knock the king of fruits till you try it",
     base: "620b49d048ec688f7edaf0e7",
     flavour: "620b2afdb98e26a5d939f8d7",

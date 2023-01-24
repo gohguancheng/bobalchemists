@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 require("dotenv").config({ path: "./../../../.env" });
 
 const seedUsers = [
   // add in super user
   {
     _id: mongoose.Types.ObjectId("620b3fdb42f6719ba12bfd34"),
-    username: "rick",
+    username: "Aang",
     password: "password123",
     userCreations: [
       "620b65d4a6941bd4c178849d",
@@ -23,7 +22,7 @@ const seedUsers = [
   },
   {
     _id: mongoose.Types.ObjectId("620b3fdb42f6719ba12bfd35"),
-    username: "summer",
+    username: "Toph",
     password: "passwords",
     userCreations: [
       "620b65d4a6941bd4c178849b",
@@ -34,7 +33,7 @@ const seedUsers = [
   },
   {
     _id: mongoose.Types.ObjectId("620b3fdb42f6719ba12bfd36"),
-    username: "beth",
+    username: "Katara",
     password: "passwordclone",
     userCreations: ["620b65d4a6941bd4c178849c", "520b65d4a6941bd4c1781491"],
     likedCreations: [
