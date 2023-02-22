@@ -20,11 +20,15 @@ const FiltersContainer = ({
     <div
       className={`${
         showFilter ? "items-center" : ""
-      } flex flex-col h-full max-h-full overflow-y-auto px-[20px] md:py-[20px] hide-filters-scroll`}
+      } flex flex-col px-[20px]`}
     >
       <div>
-        <div className="text-purple text-lg font-bold"> Ingredients Filter: </div>
-        {filterContainerDisplay}
+        <div className="text-purple text-lg font-bold text-center">
+          Ingredients
+        </div>
+        <div className="flex justify-around max-w-[800px] mx-auto">
+          {filterContainerDisplay}
+        </div>
       </div>
     </div>
   );
