@@ -81,7 +81,7 @@ const FilterSection = ({ category, selectedFilters, setSelectedFilters }) => {
           {displayedFilters || "All"}
         </div>
         <div
-          className={`absolute z-10 mt-[1px] bg-white w-full rounded-[10px] overflow-hidden ${
+          className={`absolute z-10 mt-[2px] bg-white w-full rounded-[10px] overflow-hidden shadow-md ${
             isOpen ? "" : "hidden"
           }`}
         >
