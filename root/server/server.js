@@ -15,6 +15,7 @@ const mongoURI = process.env.MONGODB_URI;
 
 //import express-session
 const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 //import controllers
 const registrationController = require("./controller/User.controller.js");
@@ -30,6 +31,12 @@ mongoose.connection.once("open", () => {
   console.log("connected to mongoose successfully!");
 });
 
+// use mongodb for sessions
+const store = new MongoDBStore({
+  uri: mongoURI,
+  collection: "mySessions",
+});
+
 db.on("error", (err) => console.log(err.message + " is mongod not running?"));
 db.on("connected", () => console.log("mongo database connected successfully!"));
 db.on("disconnected", () => console.log("mongo database disconnected"));
@@ -40,11 +47,12 @@ app.use(express.json()); // new body-parser extracts the entire body portion of 
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    name: 'boba-sid',
+    name: "boba-sid",
     secret: process.env.SECRET, //some random string
     resave: true,
     cookie: { maxAge: 1000 * 60 * 30 }, // 30 mins
     saveUninitialized: false,
+    store: store
   })
 );
 
